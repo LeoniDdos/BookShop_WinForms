@@ -1,6 +1,6 @@
 ﻿namespace DataBase
 {
-    partial class Form2
+    partial class AddForm
     {
         /// <summary>
         /// Required designer variable.
@@ -539,9 +539,9 @@
             this.ClientSize = new System.Drawing.Size(402, 369);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Form2";
+            this.Name = "AddForm";
             this.Text = "Добавление";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.Load += new System.EventHandler(this.AddForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

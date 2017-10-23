@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace DataBase
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
       static public int RowInd;
         /*void ConnectTo() //Нужно ли?
@@ -25,7 +25,7 @@ namespace DataBase
             //conn = new SqlConnection(connStringBuilder.ToString());
         }*/
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -221,7 +221,7 @@ namespace DataBase
             conn.Close();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             this.Size = new System.Drawing.Size(353, 404); //Размер авторизации формы
             this.MaximumSize = new System.Drawing.Size(353, 404);
@@ -468,7 +468,7 @@ namespace DataBase
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
+            AddForm form2 = new AddForm();
             form2.ShowDialog();
         }
 
@@ -505,8 +505,8 @@ namespace DataBase
             //    }
             //}
 
-            Form3 form3 = new Form3();
-            form3.ShowDialog();
+            EditForm editForm = new EditForm();
+            editForm.ShowDialog();
 
         }
 

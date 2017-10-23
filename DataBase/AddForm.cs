@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace DataBase
 {
-    public partial class Form2 : Form
+    public partial class AddForm : Form
     {
-        public Form2()
+        public AddForm()
         {
             InitializeComponent();
         }
 
-        private void Refresh()
+        private void DataRefresh()
         {
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
@@ -64,13 +64,13 @@ namespace DataBase
             conn.Close();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void AddForm_Load(object sender, EventArgs e)
         {
             //this.Size = new System.Drawing.Size(425, 419);
             //this.MaximumSize = new System.Drawing.Size(425, 419);
             //this.MinimumSize = new System.Drawing.Size(425, 419);
 
-            Refresh();
+            DataRefresh();
         }
 
         private void buttonAddBook_Click(object sender, EventArgs e)
@@ -150,7 +150,7 @@ namespace DataBase
                 textBoxAutorsSurname.Text = "";
                 textBoxAutorsName.Text = "";
                 textBoxAutorsPatronymic.Text = "";
-                Refresh();
+                DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -181,7 +181,7 @@ namespace DataBase
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 conn.Close();
                 textBoxGenresName.Text = "";
-                Refresh();
+                DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -212,7 +212,7 @@ namespace DataBase
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 conn.Close();
                 textBoxPublishsName.Text = "";
-                Refresh();
+                DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

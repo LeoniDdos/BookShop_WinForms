@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace DataBase
 {
-    public partial class Form3 : Form
+    public partial class EditForm : Form
     {
-        public Form3()
+        public EditForm()
         {
             InitializeComponent();
         }
 
-        private void Refresh()
+        private void DataRefresh()
         {
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
@@ -66,7 +66,7 @@ namespace DataBase
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            Refresh();   
+            DataRefresh();   
         }
 
         private void buttonAddBook_Click(object sender, EventArgs e)

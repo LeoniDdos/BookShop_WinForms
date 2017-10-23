@@ -1,6 +1,6 @@
 ﻿namespace DataBase
 {
-    partial class Form3
+    partial class EditForm
     {
         /// <summary>
         /// Required designer variable.

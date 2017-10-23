@@ -1,6 +1,6 @@
 ﻿namespace DataBase
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -284,9 +284,9 @@
             this.Controls.Add(this.groupBoxMain);
             this.Controls.Add(this.groupBoxSignIn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "BookShop";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.книгиBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource)).EndInit();
