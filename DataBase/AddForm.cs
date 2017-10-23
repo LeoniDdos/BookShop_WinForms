@@ -78,10 +78,10 @@ namespace DataBase
             if (textBoxBooksName.Text.ToString() != "" && textBoxBooksYear.Text.ToString() != "" && textBoxBooksPrice.Text.ToString() != "" && textBoxBooksCount.Text.ToString() != "")
             {
                 SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-
+               
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand("Insert into Books" +
-                            "(Name,GenreID,AutorID,Year,PublishID,Price,Count) Values (@Name,@GenreID,@AutorID,@Year,@PublishID,@Price,@Count)", conn))
+                            "(Name,GenreID,AutorID,Year,PublishID,Price,Count,Exist) Values (@Name,@GenreID,@AutorID,@Year,@PublishID,@Price,@Count,@Exist)", conn))
                 {
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Name"; param.Value = textBoxBooksName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
@@ -97,6 +97,13 @@ namespace DataBase
                     param.ParameterName = "@Price"; param.Value = Convert.ToInt32(textBoxBooksPrice.Text); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                     param = new SqlParameter();
                     param.ParameterName = "@Count"; param.Value = Convert.ToInt32(textBoxBooksCount.Text); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param = new SqlParameter();
+
+                    int exist;
+                    if (Convert.ToInt32(textBoxBooksCount.Text) > 0) exist = 1;
+                    else exist = 0;
+
+                    param.ParameterName = "@Exist"; param.Value = Convert.ToInt32(exist); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                     Console.WriteLine("Вставляем запись");
                     try
                     {
@@ -108,8 +115,11 @@ namespace DataBase
                         return;
                     }
                 }
+
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 conn.Close();
+
                 textBoxBooksName.Text = "";
                 textBoxBooksYear.Text = "";
                 textBoxBooksPrice.Text = "";
@@ -244,5 +254,32 @@ namespace DataBase
             }
             conn.Close();
     }
+
+        private void textBoxBooksYear_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxBooksPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxBooksCount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

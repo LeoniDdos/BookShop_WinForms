@@ -48,9 +48,9 @@
             this.groupBoxSignIn = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBoxMain = new System.Windows.Forms.GroupBox();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.книгиBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource)).BeginInit();
@@ -67,7 +67,7 @@
             this.OutDataButton.Location = new System.Drawing.Point(663, 343);
             this.OutDataButton.Name = "OutDataButton";
             this.OutDataButton.Size = new System.Drawing.Size(98, 39);
-            this.OutDataButton.TabIndex = 1;
+            this.OutDataButton.TabIndex = 9;
             this.OutDataButton.Text = "Обновить";
             this.OutDataButton.UseVisualStyleBackColor = false;
             this.OutDataButton.Click += new System.EventHandler(this.OutDataButton_Click);
@@ -78,7 +78,7 @@
             this.buttonBuy.Location = new System.Drawing.Point(546, 343);
             this.buttonBuy.Name = "buttonBuy";
             this.buttonBuy.Size = new System.Drawing.Size(95, 38);
-            this.buttonBuy.TabIndex = 3;
+            this.buttonBuy.TabIndex = 8;
             this.buttonBuy.Text = "Купить";
             this.buttonBuy.UseVisualStyleBackColor = false;
             this.buttonBuy.Click += new System.EventHandler(this.buttonBuy_Click);
@@ -139,7 +139,7 @@
             this.buttonGoToBasket.Location = new System.Drawing.Point(40, 342);
             this.buttonGoToBasket.Name = "buttonGoToBasket";
             this.buttonGoToBasket.Size = new System.Drawing.Size(173, 38);
-            this.buttonGoToBasket.TabIndex = 0;
+            this.buttonGoToBasket.TabIndex = 10;
             this.buttonGoToBasket.Text = "Перейти к корзине";
             this.buttonGoToBasket.UseVisualStyleBackColor = false;
             // 
@@ -168,14 +168,14 @@
             this.textBoxLogin.Location = new System.Drawing.Point(163, 115);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(100, 22);
-            this.textBoxLogin.TabIndex = 7;
+            this.textBoxLogin.TabIndex = 1;
             // 
             // textBoxPass
             // 
             this.textBoxPass.Location = new System.Drawing.Point(163, 163);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.Size = new System.Drawing.Size(100, 22);
-            this.textBoxPass.TabIndex = 8;
+            this.textBoxPass.TabIndex = 2;
             // 
             // ButtonSignIn
             // 
@@ -184,7 +184,7 @@
             this.ButtonSignIn.Location = new System.Drawing.Point(74, 215);
             this.ButtonSignIn.Name = "ButtonSignIn";
             this.ButtonSignIn.Size = new System.Drawing.Size(174, 41);
-            this.ButtonSignIn.TabIndex = 4;
+            this.ButtonSignIn.TabIndex = 3;
             this.ButtonSignIn.Text = "Авторизация";
             this.ButtonSignIn.UseVisualStyleBackColor = false;
             this.ButtonSignIn.Click += new System.EventHandler(this.ButtonSignIn_Click);
@@ -196,7 +196,7 @@
             this.ButtonSignUp.Location = new System.Drawing.Point(74, 272);
             this.ButtonSignUp.Name = "ButtonSignUp";
             this.ButtonSignUp.Size = new System.Drawing.Size(174, 41);
-            this.ButtonSignUp.TabIndex = 10;
+            this.ButtonSignUp.TabIndex = 4;
             this.ButtonSignUp.Text = "Регистрация";
             this.ButtonSignUp.UseVisualStyleBackColor = false;
             this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
@@ -243,16 +243,16 @@
             this.groupBoxMain.TabStop = false;
             this.groupBoxMain.Text = "Магазин";
             // 
-            // buttonAdd
+            // buttonDelete
             // 
-            this.buttonAdd.BackColor = System.Drawing.Color.Silver;
-            this.buttonAdd.Location = new System.Drawing.Point(6, 343);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(119, 38);
-            this.buttonAdd.TabIndex = 4;
-            this.buttonAdd.Text = "Добавить";
-            this.buttonAdd.UseVisualStyleBackColor = false;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonDelete.BackColor = System.Drawing.Color.Silver;
+            this.buttonDelete.Location = new System.Drawing.Point(283, 344);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(119, 38);
+            this.buttonDelete.TabIndex = 7;
+            this.buttonDelete.Text = "Удаление";
+            this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonEdit
             // 
@@ -260,23 +260,23 @@
             this.buttonEdit.Location = new System.Drawing.Point(145, 343);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(119, 38);
-            this.buttonEdit.TabIndex = 5;
+            this.buttonEdit.TabIndex = 6;
             this.buttonEdit.Text = "Изменение";
             this.buttonEdit.UseVisualStyleBackColor = false;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
-            // buttonDelete
+            // buttonAdd
             // 
-            this.buttonDelete.BackColor = System.Drawing.Color.Silver;
-            this.buttonDelete.Location = new System.Drawing.Point(283, 344);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(119, 38);
-            this.buttonDelete.TabIndex = 6;
-            this.buttonDelete.Text = "Удаление";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonAdd.BackColor = System.Drawing.Color.Silver;
+            this.buttonAdd.Location = new System.Drawing.Point(6, 343);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(119, 38);
+            this.buttonAdd.TabIndex = 5;
+            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.UseVisualStyleBackColor = false;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;

@@ -32,7 +32,18 @@ namespace DataBase
 
         private static void InsertToTable(SqlConnection conn, string tbl)
         {
-            conn.Open();
+            //conn.Open();
+
+            try
+            {
+                conn.Open();
+            }
+            catch (SqlException se)
+            {
+                Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                return;
+            }
+
             switch (tbl)
             {
                 case "start":
@@ -205,7 +216,8 @@ namespace DataBase
          "  Year int not null," +
          "  PublishID int FOREIGN KEY REFERENCES Publishs(PublishID)," +
          "  Price int not null," +
-         "  Count int not null)", conn))
+         "  Count int not null," +
+         "  Exist int not null)", conn))
             {
                 try
                 {
@@ -280,6 +292,9 @@ namespace DataBase
 
                     SqlConnection connection2 = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
                     CreateNewTable(connection2);
+
+                    connection2.Close();
+
                     InsertToTable(connection2, "start");
 
                     connection = new SqlConnection(connStr);
@@ -288,84 +303,18 @@ namespace DataBase
             }
             finally
             {
-                Console.WriteLine("Соедение успешно произведено");
+                Console.WriteLine("Соединение успешно произведено");
                 connection.Close();
                 //connection.Dispose();
             }
-
-            //connection.Open();
-
-            //connection = new SqlConnection(@"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;Integrated Security=True");
-
-            //connection.Open();
-
-            //CreateNewTable(connection);
-
-            //connection.Close();
-
-            //var selectBooks = "SELECT * FROM Books";
-            //using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
-            //selectBooks, connection))
-            //{
-            //    DataTable dt = new DataTable();
-            //    dataAdapter.Fill(dt);
-
-            //    dataGridView1.DataSource = dt.DefaultView;
-            //}
-            //connection.Close();
-
         }
-    // TODO: данная строка кода позволяет загрузить данные в таблицу "bookShopDataSet.Книги". При необходимости она может быть перемещена или удалена.
-    //this.книгиTableAdapter.Fill(this.bookShopDataSet.Книги);
-
-
-    //private void EnterDataButton_Click(object sender, EventArgs e)
-    //    {
-    //        if (textBox1.Text.ToString() != "" && textBox2.Text.ToString() != "" && textBox3.Text.ToString() != "" && textBox4.Text.ToString() != "" && textBox5.Text.ToString() != "" && textBox6.Text.ToString() != "")
-    //        {   
-
-    //            SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-    //            connection.Open();
-
-    //            SqlCommand cmd = new SqlCommand("INSERT INTO " +
-    //        "Books (название,автор,издательство,жанр,дата_выхода,цена) " +
-    //        "VALUES (@название,@автор,@издательство,@жанр,@дата_выхода,@цена)", connection);
-
-
-    //            cmd.Parameters.AddWithValue("@название", textBox1.Text);
-    //            cmd.Parameters.AddWithValue("@автор", textBox2.Text);
-    //            cmd.Parameters.AddWithValue("@издательство", textBox3.Text);
-    //            cmd.Parameters.AddWithValue("@жанр", textBox4.Text);
-    //            cmd.Parameters.AddWithValue("@дата_выхода", textBox5.Text);
-    //            cmd.Parameters.AddWithValue("@цена", textBox6.Text);
-
-
-    //            try //Как проверить на ошибки?
-    //            {
-    //                //cmd.ExecuteNonQuery();
-    //                MessageBox.Show("Данные успешно добавлены!", "Запрос выполнен", MessageBoxButtons.OK, MessageBoxIcon.Information);
-    //            }
-    //            catch (Exception se)
-    //            {
-    //                MessageBox.Show("Ошибка, при выполнении запроса на добавление записи " + se.Message + "", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //                return;
-    //            }
-
-    //            connection.Close();
-    //            connection.Dispose();
-    //        }
-    //        else
-    //        {
-    //            MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //        }
-    //    }
 
         private void OutDataButton_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             connection.Open();
-
-            var selectBooks = "SELECT * FROM Books";
+            
+            var selectBooks = "SELECT BookID as Номер, Name as Название, Year as Год FROM Books";
             //var selectBooks = "SELECT Name as Название, CONCAT (Surname, Left (Name,1), Left (Patronymic,1)) AS Автор, Price as Цена FROM Books";
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
             selectBooks, connection))
@@ -468,8 +417,8 @@ namespace DataBase
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            AddForm form2 = new AddForm();
-            form2.ShowDialog();
+            AddForm addForm = new AddForm();
+            addForm.ShowDialog();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -510,7 +459,7 @@ namespace DataBase
 
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void buttonDelete_Click(object sender, EventArgs e) //Убрать удаление и поставить изменение Exist
         {
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();

@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonAddBook = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBoxAutorsPatronymic = new System.Windows.Forms.TextBox();
             this.textBoxAutorsName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,19 +58,17 @@
             this.label12 = new System.Windows.Forms.Label();
             this.buttonAddAutor = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxGenresName = new System.Windows.Forms.TextBox();
             this.buttonAddGenre = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxPublishsName = new System.Windows.Forms.TextBox();
             this.buttonAddPublish = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -115,6 +115,14 @@
             this.tabPage1.Text = "Книги";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(312, 290);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(62, 22);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.Text = "ID";
+            // 
             // buttonAddBook
             // 
             this.buttonAddBook.BackColor = System.Drawing.Color.MediumTurquoise;
@@ -152,6 +160,7 @@
             this.textBoxBooksCount.Name = "textBoxBooksCount";
             this.textBoxBooksCount.Size = new System.Drawing.Size(121, 22);
             this.textBoxBooksCount.TabIndex = 11;
+            this.textBoxBooksCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBooksCount_KeyPress);
             // 
             // comboBoxBooksPublish
             // 
@@ -168,6 +177,7 @@
             this.textBoxBooksPrice.Name = "textBoxBooksPrice";
             this.textBoxBooksPrice.Size = new System.Drawing.Size(121, 22);
             this.textBoxBooksPrice.TabIndex = 10;
+            this.textBoxBooksPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBooksPrice_KeyPress);
             // 
             // label6
             // 
@@ -221,6 +231,7 @@
             this.textBoxBooksYear.Name = "textBoxBooksYear";
             this.textBoxBooksYear.Size = new System.Drawing.Size(121, 22);
             this.textBoxBooksYear.TabIndex = 9;
+            this.textBoxBooksYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBooksYear_KeyPress);
             // 
             // label2
             // 
@@ -279,6 +290,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Авторы";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(312, 261);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(62, 22);
+            this.textBox2.TabIndex = 26;
+            this.textBox2.Text = "ID";
             // 
             // textBoxAutorsPatronymic
             // 
@@ -366,6 +385,14 @@
             this.tabPage3.Text = "Жанры";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(312, 275);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(62, 22);
+            this.textBox3.TabIndex = 32;
+            this.textBox3.Text = "ID";
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -418,6 +445,14 @@
             this.tabPage4.Text = "Издательства";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(316, 273);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(62, 22);
+            this.textBox4.TabIndex = 36;
+            this.textBox4.Text = "ID";
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -455,45 +490,13 @@
             this.buttonAddPublish.Text = "Изменить";
             this.buttonAddPublish.UseVisualStyleBackColor = false;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(312, 290);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(62, 22);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.Text = "ID";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(312, 261);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(62, 22);
-            this.textBox2.TabIndex = 26;
-            this.textBox2.Text = "ID";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(312, 275);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(62, 22);
-            this.textBox3.TabIndex = 32;
-            this.textBox3.Text = "ID";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(316, 273);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(62, 22);
-            this.textBox4.TabIndex = 36;
-            this.textBox4.Text = "ID";
-            // 
-            // Form3
+            // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(405, 369);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Form3";
+            this.Name = "EditForm";
             this.Text = "Редактирование";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.tabControl1.ResumeLayout(false);

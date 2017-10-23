@@ -177,6 +177,7 @@
             this.textBoxBooksYear.Name = "textBoxBooksYear";
             this.textBoxBooksYear.Size = new System.Drawing.Size(121, 22);
             this.textBoxBooksYear.TabIndex = 9;
+            this.textBoxBooksYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBooksYear_KeyPress);
             // 
             // textBoxBooksPrice
             // 
@@ -184,6 +185,7 @@
             this.textBoxBooksPrice.Name = "textBoxBooksPrice";
             this.textBoxBooksPrice.Size = new System.Drawing.Size(121, 22);
             this.textBoxBooksPrice.TabIndex = 10;
+            this.textBoxBooksPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBooksPrice_KeyPress);
             // 
             // textBoxBooksCount
             // 
@@ -191,6 +193,7 @@
             this.textBoxBooksCount.Name = "textBoxBooksCount";
             this.textBoxBooksCount.Size = new System.Drawing.Size(121, 22);
             this.textBoxBooksCount.TabIndex = 11;
+            this.textBoxBooksCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBooksCount_KeyPress);
             // 
             // comboBoxBooksAutor
             // 
@@ -531,7 +534,7 @@
             this.label17.TabIndex = 1;
             this.label17.Text = "Возможности";
             // 
-            // Form2
+            // AddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
