@@ -32,17 +32,7 @@ namespace DataBase
 
         private static void InsertToTable(SqlConnection conn, string tbl)
         {
-            //conn.Open();
-
-            try
-            {
-                conn.Open();
-            }
-            catch (SqlException se)
-            {
-                Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                return;
-            }
+            conn.Open();
 
             switch (tbl)
             {
@@ -132,13 +122,13 @@ namespace DataBase
                                 return;
                             }
                         }
-                        break; }
+                        break;
+                    }
                         default:
                     break;
-                    }
-
-                    conn.Close();
             }
+                    conn.Close();
+        }
 
         private static void CreateNewTable(SqlConnection conn)
         {
@@ -255,21 +245,6 @@ namespace DataBase
 
             //this.SizeToContent = SizeToContent.WidthAndHeight; //Для автоизменения размеров окна под элементы
 
-            // LAST
-            //SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-            //connection.Open();
-
-            //var selectBooks = "SELECT * FROM Books";
-            //using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
-            //selectBooks, connection))
-            //{
-            //    DataTable dt = new DataTable();
-            //    dataAdapter.Fill(dt);
-
-            //    dataGridView1.DataSource = dt.DefaultView;
-            //}
-            //connection.Close();
-
             string connStr = @"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;
                             Initial Catalog=BookShop;
                             Integrated Security=True";
@@ -314,8 +289,8 @@ namespace DataBase
             SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             connection.Open();
             
-            var selectBooks = "SELECT BookID as Номер, Name as Название, Year as Год FROM Books";
-            //var selectBooks = "SELECT Name as Название, CONCAT (Surname, Left (Name,1), Left (Patronymic,1)) AS Автор, Price as Цена FROM Books";
+            var selectBooks = "SELECT BookID as Номер, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Exist as Наличие FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
+            
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
             selectBooks, connection))
             {
@@ -336,7 +311,7 @@ namespace DataBase
                 string Name = textBoxLogin.Text.ToString();
                 string pass = "";
                 string Level = "";
-                string getP = "SELECT Password, Level FROM Users where Name = @Name";
+                string getP = "SELECT Password, Level FROM Users WHERE Name = @Name";
 
                 SqlCommand commandBrands = new SqlCommand(getP, conn);
 
@@ -377,7 +352,7 @@ namespace DataBase
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
             if (textBoxLogin.Text.ToString() != "" && textBoxPass.Text.ToString() != "")
-            using (SqlCommand cmd = new SqlCommand("Insert into Users" +
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Users" +
                 "(Name,Password,Level) Values (@Name,@Password,@Level)", conn))
             {
                 SqlParameter param = new SqlParameter();
@@ -395,9 +370,9 @@ namespace DataBase
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch
+                catch (Exception se)
                 {
-                    Console.WriteLine("Ошибка, при выполнении запроса на добавление записи");
+                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
                     return;
                 }
             }
@@ -423,74 +398,54 @@ namespace DataBase
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-            //conn.Open();
-            //using (SqlCommand cmd = new SqlCommand("Update Students" +
-            //       " Set ID = @ID where FIO = @FIO", conn))
-            //{
-            //    SqlParameter param = new SqlParameter();
-            //    param.ParameterName = "@ID";
-            //    param.Value = dataGridView1.CurrentCell.RowIndex;
-            //    param.SqlDbType = SqlDbType.Int;
-            //    cmd.Parameters.Add(param);
-            //    param = new SqlParameter();
-            //    param.ParameterName = "@FIO";
-            //    param.Value = "Иванов Иван";
-            //    param.SqlDbType = SqlDbType.Text;
-            //    cmd.Parameters.Add(param);
-
-            //    Console.WriteLine("Изменяем запись(и)");
-            //    {
-            //        try
-            //        {
-            //            cmd.ExecuteNonQuery();
-            //        }
-            //        catch
-            //        {
-            //            Console.WriteLine("Ошибка, при выполнении запроса на изменение записи(ей)");
-
-            //            return;
-            //        }
-            //    }
-            //}
-
-            EditForm editForm = new EditForm();
-            editForm.ShowDialog();
+            try
+            {
+                EditForm editForm = new EditForm(dataGridView1.CurrentCell.RowIndex + 1);
+                editForm.ShowDialog();
+            }
+            catch (Exception se)
+            {
+                Console.WriteLine("Ошибка: {0}", se.Message);
+                MessageBox.Show("Выберите строку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e) //Убрать удаление и поставить изменение Exist
+        private void buttonDelete_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("Delete From Books" +
-                 " where BookID = @BookID", conn))
+            using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
+                   " SET Exist = @Exist, Count = @Count WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
-                param.ParameterName = "@BookID";
-                param.Value = dataGridView1.CurrentCell.RowIndex; //Обработать
-                MessageBox.Show(param.Value.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                param.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(param);
+                param.ParameterName = "@Exist"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@Count"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
-                Console.WriteLine("Удаляем запись");
-                try
+                Console.WriteLine("Изменяем запись");
                 {
-                    cmd.ExecuteNonQuery();
-                }
-                catch
-                {
-                    Console.WriteLine("Ошибка, при выполнении запроса на удаление записи");
-                    Console.WriteLine("Возможно запись уже удалена");
-                    return;
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception se)
+                    {
+                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        return;
+                    }
                 }
             }
             conn.Close();
+            MessageBox.Show("Книга успешно удалена", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonBuy_Click(object sender, EventArgs e)
         {
-            //param.Value = dataGridView1.CurrentCell.RowIndex;
+            //param.Value = dataGridView1.CurrentCell.RowIndex + 1;
         }
     }
 }

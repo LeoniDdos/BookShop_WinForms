@@ -13,9 +13,11 @@ namespace DataBase
 {
     public partial class EditForm : Form
     {
-        public EditForm()
+        int BookID;
+        public EditForm(int BookID)
         {
             InitializeComponent();
+            this.BookID = BookID;
         }
 
         private void DataRefresh()
@@ -35,7 +37,7 @@ namespace DataBase
             comboBoxBooksGenre.DisplayMember = "Name";
             comboBoxBooksGenre.DataSource = dt;
 
-            SqlCommand sc2 = new SqlCommand("SELECT AutorID, CONCAT (Surname, Left (Name,1), Left (Patronymic,1)) AS FIO FROM Autors", conn);
+            SqlCommand sc2 = new SqlCommand("SELECT AutorID, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') AS FIO FROM Autors", conn);
             SqlDataReader reader2;
 
             reader2 = sc2.ExecuteReader();
@@ -73,11 +75,10 @@ namespace DataBase
         {
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("Update Students" +
-                   " Set Name = @Name, GenreID = @GenreID, AutorID = @AutorID, YearID = @Year, PublishID = @PublishID, Price = @Price, Count = @Count where BookID = @BookID", conn))
+            using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
+                   " SET Name = @Name, GenreID = @GenreID, AutorID = @AutorID, Year = @Year, PublishID = @PublishID, Price = @Price, Count = @Count, Exist = @Exist WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
-
                 param.ParameterName = "@Name"; param.Value = textBoxBooksName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();
                 param.ParameterName = "@GenreID"; param.Value = comboBoxBooksGenre.SelectedIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
@@ -92,32 +93,37 @@ namespace DataBase
                 param = new SqlParameter();
                 param.ParameterName = "@Count"; param.Value = Convert.ToInt32(textBoxBooksCount.Text); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@BookID";
-                param.Value = Convert.ToInt32(textBox1.Text);
-                param.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(param);
+                param.ParameterName = "@BookID"; param.Value = BookID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param = new SqlParameter();
 
-                Console.WriteLine("Изменяем запись(и)");
+                int exist;
+                if (Convert.ToInt32(textBoxBooksCount.Text) > 0) exist = 1;
+                else exist = 0;
+
+                param.ParameterName = "@Exist"; param.Value = Convert.ToInt32(exist); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+
+                Console.WriteLine("Изменяем запись");
                 {
                     try
                     {
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show("Данные успешно изменены", "Редактирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    catch
+                    catch (Exception se)
                     {
-                        Console.WriteLine("Ошибка, при выполнении запроса на изменение записи(ей)");
-
+                        Console.WriteLine("Ошибка: {0}", se.Message);
                         return;
                     }
                 }
             }
             conn.Close();
+            Close();
         }
 
         private void textBoxBooksYear_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
-            if (!Char.IsDigit(number))
+            if (!Char.IsDigit(number) && number != 8)
             {
                 e.Handled = true;
             }
@@ -126,7 +132,7 @@ namespace DataBase
         private void textBoxBooksPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
-            if (!Char.IsDigit(number))
+            if (!Char.IsDigit(number) && number != 8)
             {
                 e.Handled = true;
             }
@@ -135,7 +141,129 @@ namespace DataBase
         private void textBoxBooksCount_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
-            if (!Char.IsDigit(number))
+            if (!Char.IsDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void buttonAddAutor_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand("UPDATE Autors" +
+                   " SET Name = @Name, Surname = @Surname, Patronymic = @Patronymic WHERE AutorID = @AutorID", conn))
+            {
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@Name"; param.Value = textBoxAutorsName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@Surname"; param.Value = textBoxAutorsSurname.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@Patronymic"; param.Value = textBoxAutorsPatronymic.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@AutorID"; param.Value = textBoxAutorID.Text.ToString(); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                
+                Console.WriteLine("Изменяем запись");
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Данные успешно изменены", "Редактирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception se)
+                    {
+                        Console.WriteLine("Ошибка: {0}", se.Message);
+                        return;
+                    }
+                }
+            }
+            conn.Close();
+            Close();
+        }
+
+        private void buttonAddGenre_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand("UPDATE Genres" +
+                   " SET Name = @Name WHERE GenreID = @GenreID", conn))
+            {
+                SqlParameter param = new SqlParameter();
+
+                param.ParameterName = "@Name"; param.Value = textBoxGenresName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@GenreID"; param.Value = textBoxGenreID.Text.ToString(); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+
+                Console.WriteLine("Изменяем запись");
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Данные успешно изменены", "Редактирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception se)
+                    {
+                        Console.WriteLine("Ошибка: {0}", se.Message);
+                        return;
+                    }
+                }
+            }
+            conn.Close();
+            Close();
+        }
+
+        private void buttonAddPublish_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand("UPDATE Publishs" +
+                   " SET Name = @Name WHERE PublishID = @PublishID", conn))
+            {
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@Name"; param.Value = textBoxPublishsName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@PublishID"; param.Value = textBoxPublishID.Text.ToString(); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+
+                Console.WriteLine("Изменяем запись");
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Данные успешно изменены", "Редактирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception se)
+                    {
+                        Console.WriteLine("Ошибка: {0}", se.Message);
+                        return;
+                    }
+                }
+            }
+            conn.Close();
+            Close();
+        }
+
+        private void textBoxAutorID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxGenreID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxPublishID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8)
             {
                 e.Handled = true;
             }

@@ -35,7 +35,7 @@ namespace DataBase
             comboBoxBooksGenre.DisplayMember = "Name";
             comboBoxBooksGenre.DataSource = dt;
 
-            SqlCommand sc2 = new SqlCommand("SELECT AutorID, CONCAT (Surname, Left (Name,1), Left (Patronymic,1)) AS FIO FROM Autors", conn);
+            SqlCommand sc2 = new SqlCommand("SELECT AutorID, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') AS FIO FROM Autors", conn);
             SqlDataReader reader2;
 
             reader2 = sc2.ExecuteReader();
@@ -104,6 +104,7 @@ namespace DataBase
                     else exist = 0;
 
                     param.ParameterName = "@Exist"; param.Value = Convert.ToInt32(exist); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+
                     Console.WriteLine("Вставляем запись");
                     try
                     {
@@ -245,10 +246,9 @@ namespace DataBase
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch
+                catch (Exception se)
                 {
-                    Console.WriteLine("Ошибка, при выполнении запроса на удаление записи");
-                    Console.WriteLine("Возможно запись уже удалена");
+                    Console.WriteLine("Ошибка: {0}", se.Message);
                     return;
                 }
             }
@@ -258,7 +258,7 @@ namespace DataBase
         private void textBoxBooksYear_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
-            if (!Char.IsDigit(number))
+            if (!Char.IsDigit(number) && number != 8)
             {
                 e.Handled = true;
             }
@@ -267,7 +267,7 @@ namespace DataBase
         private void textBoxBooksPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
-            if (!Char.IsDigit(number))
+            if (!Char.IsDigit(number) && number != 8)
             {
                 e.Handled = true;
             }
@@ -276,7 +276,7 @@ namespace DataBase
         private void textBoxBooksCount_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
-            if (!Char.IsDigit(number))
+            if (!Char.IsDigit(number) && number != 8)
             {
                 e.Handled = true;
             }

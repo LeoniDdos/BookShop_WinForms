@@ -30,7 +30,6 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonAddBook = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,7 +47,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBoxAutorID = new System.Windows.Forms.TextBox();
             this.textBoxAutorsPatronymic = new System.Windows.Forms.TextBox();
             this.textBoxAutorsName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -58,13 +58,15 @@
             this.label12 = new System.Windows.Forms.Label();
             this.buttonAddAutor = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxGenreID = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxGenresName = new System.Windows.Forms.TextBox();
             this.buttonAddGenre = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBoxPublishID = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxPublishsName = new System.Windows.Forms.TextBox();
@@ -90,7 +92,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.buttonAddBook);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
@@ -114,14 +115,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Книги";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(312, 290);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(62, 22);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.Text = "ID";
             // 
             // buttonAddBook
             // 
@@ -274,7 +267,8 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.textBoxAutorID);
             this.tabPage2.Controls.Add(this.textBoxAutorsPatronymic);
             this.tabPage2.Controls.Add(this.textBoxAutorsName);
             this.tabPage2.Controls.Add(this.label9);
@@ -291,13 +285,23 @@
             this.tabPage2.Text = "Авторы";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // label17
             // 
-            this.textBox2.Location = new System.Drawing.Point(312, 261);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(62, 22);
-            this.textBox2.TabIndex = 26;
-            this.textBox2.Text = "ID";
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Location = new System.Drawing.Point(312, 238);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(29, 18);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "ID:";
+            // 
+            // textBoxAutorID
+            // 
+            this.textBoxAutorID.Location = new System.Drawing.Point(312, 261);
+            this.textBoxAutorID.Name = "textBoxAutorID";
+            this.textBoxAutorID.Size = new System.Drawing.Size(62, 22);
+            this.textBoxAutorID.TabIndex = 26;
+            this.textBoxAutorID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAutorID_KeyPress);
             // 
             // textBoxAutorsPatronymic
             // 
@@ -369,10 +373,12 @@
             this.buttonAddAutor.TabIndex = 16;
             this.buttonAddAutor.Text = "Изменить";
             this.buttonAddAutor.UseVisualStyleBackColor = false;
+            this.buttonAddAutor.Click += new System.EventHandler(this.buttonAddAutor_Click);
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.textBox3);
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.textBoxGenreID);
             this.tabPage3.Controls.Add(this.label13);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.textBoxGenresName);
@@ -385,13 +391,23 @@
             this.tabPage3.Text = "Жанры";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // label18
             // 
-            this.textBox3.Location = new System.Drawing.Point(312, 275);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(62, 22);
-            this.textBox3.TabIndex = 32;
-            this.textBox3.Text = "ID";
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.Location = new System.Drawing.Point(309, 254);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 18);
+            this.label18.TabIndex = 33;
+            this.label18.Text = "ID:";
+            // 
+            // textBoxGenreID
+            // 
+            this.textBoxGenreID.Location = new System.Drawing.Point(312, 275);
+            this.textBoxGenreID.Name = "textBoxGenreID";
+            this.textBoxGenreID.Size = new System.Drawing.Size(62, 22);
+            this.textBoxGenreID.TabIndex = 32;
+            this.textBoxGenreID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxGenreID_KeyPress);
             // 
             // label13
             // 
@@ -429,10 +445,12 @@
             this.buttonAddGenre.TabIndex = 26;
             this.buttonAddGenre.Text = "Изменить";
             this.buttonAddGenre.UseVisualStyleBackColor = false;
+            this.buttonAddGenre.Click += new System.EventHandler(this.buttonAddGenre_Click);
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.textBox4);
+            this.tabPage4.Controls.Add(this.label19);
+            this.tabPage4.Controls.Add(this.textBoxPublishID);
             this.tabPage4.Controls.Add(this.label15);
             this.tabPage4.Controls.Add(this.label16);
             this.tabPage4.Controls.Add(this.textBoxPublishsName);
@@ -445,13 +463,23 @@
             this.tabPage4.Text = "Издательства";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // label19
             // 
-            this.textBox4.Location = new System.Drawing.Point(316, 273);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(62, 22);
-            this.textBox4.TabIndex = 36;
-            this.textBox4.Text = "ID";
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.Location = new System.Drawing.Point(313, 252);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(29, 18);
+            this.label19.TabIndex = 37;
+            this.label19.Text = "ID:";
+            // 
+            // textBoxPublishID
+            // 
+            this.textBoxPublishID.Location = new System.Drawing.Point(316, 273);
+            this.textBoxPublishID.Name = "textBoxPublishID";
+            this.textBoxPublishID.Size = new System.Drawing.Size(62, 22);
+            this.textBoxPublishID.TabIndex = 36;
+            this.textBoxPublishID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPublishID_KeyPress);
             // 
             // label15
             // 
@@ -489,6 +517,7 @@
             this.buttonAddPublish.TabIndex = 32;
             this.buttonAddPublish.Text = "Изменить";
             this.buttonAddPublish.UseVisualStyleBackColor = false;
+            this.buttonAddPublish.Click += new System.EventHandler(this.buttonAddPublish_Click);
             // 
             // EditForm
             // 
@@ -551,9 +580,11 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBoxPublishsName;
         private System.Windows.Forms.Button buttonAddPublish;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxAutorID;
+        private System.Windows.Forms.TextBox textBoxGenreID;
+        private System.Windows.Forms.TextBox textBoxPublishID;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
     }
 }
