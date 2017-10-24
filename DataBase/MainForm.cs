@@ -38,7 +38,7 @@ namespace DataBase
             {
                 case "start":
                     {
-                        using (SqlCommand cmd = new SqlCommand("Insert into Users" +
+                        using (SqlCommand cmd = new SqlCommand("INSERT INTO Users" +
                         "(Name,Password,Level) Values (@Name,@Password,@Level)", conn))
                         {
                             SqlParameter param = new SqlParameter();
@@ -62,7 +62,7 @@ namespace DataBase
                                 return;
                             }
                         }
-                            using (SqlCommand cmd2 = new SqlCommand("Insert into Genres" +
+                            using (SqlCommand cmd2 = new SqlCommand("INSERT INTO Genres" +
                         "(Name) Values (@Name)", conn))
                             {
                                 SqlParameter param2 = new SqlParameter();
@@ -80,7 +80,7 @@ namespace DataBase
                                     return;
                                 }
                             }
-                        using (SqlCommand cmd3 = new SqlCommand("Insert into Publishs" +
+                        using (SqlCommand cmd3 = new SqlCommand("INSERT INTO Publishs" +
                     "(Name) Values (@Name)", conn))
                         {
                             SqlParameter param3 = new SqlParameter();
@@ -98,7 +98,7 @@ namespace DataBase
                                 return;
                             }
                         }
-                        using (SqlCommand cmd4 = new SqlCommand("Insert into Autors" +
+                        using (SqlCommand cmd4 = new SqlCommand("INSERT INTO Autors" +
                         "(Surname,Name,Patronymic) Values (@Surname,@Name,@Patronymic)", conn))
                         {
                             SqlParameter param4 = new SqlParameter();
@@ -443,9 +443,35 @@ namespace DataBase
             MessageBox.Show("Книга успешно удалена", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void buttonBuy_Click(object sender, EventArgs e)
+        private void buttonBuy_Click(object sender, EventArgs e) //Дописать уменьшение значения и проверки на существование
         {
-            //param.Value = dataGridView1.CurrentCell.RowIndex + 1;
+            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
+                   " SET Exist = @Exist, Count = @Count WHERE BookID = @BookID", conn))
+            {
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@Exist"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@Count"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+
+                Console.WriteLine("Изменяем запись");
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception se)
+                    {
+                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        return;
+                    }
+                }
+            }
+            conn.Close();
+
         }
     }
 }

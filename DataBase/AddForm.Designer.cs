@@ -69,11 +69,6 @@
             this.bookShopDataSet = new DataBase.BookShopDataSet();
             this.bookShopDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookShopDataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -82,7 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -481,66 +475,12 @@
             this.bookShopDataSetBindingSource1.DataSource = this.bookShopDataSet;
             this.bookShopDataSetBindingSource1.Position = 0;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Location = new System.Drawing.Point(427, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 355);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Silver;
-            this.button3.Location = new System.Drawing.Point(51, 203);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 36);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "Удаление";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Silver;
-            this.button2.Location = new System.Drawing.Point(51, 146);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 36);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Изменение";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Silver;
-            this.button1.Location = new System.Drawing.Point(51, 89);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 36);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Добавление";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(41, 32);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(117, 18);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Возможности";
-            // 
             // AddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(402, 369);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(405, 369);
             this.Controls.Add(this.tabControl1);
             this.Name = "AddForm";
             this.Text = "Добавление";
@@ -557,8 +497,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -605,10 +543,5 @@
         private System.Windows.Forms.BindingSource bookShopDataSetBindingSource;
         private BookShopDataSet bookShopDataSet;
         private System.Windows.Forms.BindingSource bookShopDataSetBindingSource1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label17;
     }
 }

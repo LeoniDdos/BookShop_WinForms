@@ -228,33 +228,6 @@ namespace DataBase
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-            conn.Open();
-            using (SqlCommand cmd = new SqlCommand("Delete From Books" +
-                 " where BookID = @BookID", conn))
-            {
-                SqlParameter param = new SqlParameter();
-                param.ParameterName = "@BookID";
-                param.Value = 100;
-                param.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(param);
-
-                Console.WriteLine("Удаляем запись");
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception se)
-                {
-                    Console.WriteLine("Ошибка: {0}", se.Message);
-                    return;
-                }
-            }
-            conn.Close();
-    }
-
         private void textBoxBooksYear_KeyPress(object sender, KeyPressEventArgs e)
         {
             char number = e.KeyChar;
