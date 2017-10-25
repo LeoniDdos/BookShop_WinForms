@@ -382,7 +382,7 @@ namespace DataBase
                         buttonDelete.Enabled = false;
                     }
 
-                    MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else MessageBox.Show("Что-то введено не так!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -443,7 +443,7 @@ namespace DataBase
 
                     UserID = (int)sqlout.ExecuteScalar();
 
-                    MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             conn.Close();
@@ -511,8 +511,6 @@ namespace DataBase
             conn.Close();
             MessageBox.Show("Книга успешно удалена", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        //private void ()
 
         private void buttonBuy_Click(object sender, EventArgs e) //Может отказаться от exist?? Обновлять после покупки?
         { 
@@ -587,6 +585,12 @@ namespace DataBase
             }
             else MessageBox.Show("Книги в наличии нет", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             conn.Close();
+        }
+
+        private void buttonGoToBasket_Click(object sender, EventArgs e)
+        {
+            BasketForm basketForm = new BasketForm(UserID);
+            basketForm.ShowDialog();
         }
     }
 }

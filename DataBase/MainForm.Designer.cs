@@ -142,6 +142,7 @@
             this.buttonGoToBasket.TabIndex = 10;
             this.buttonGoToBasket.Text = "Перейти к корзине";
             this.buttonGoToBasket.UseVisualStyleBackColor = false;
+            this.buttonGoToBasket.Click += new System.EventHandler(this.buttonGoToBasket_Click);
             // 
             // label1
             // 
