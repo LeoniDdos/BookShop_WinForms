@@ -25,12 +25,39 @@ namespace DataBase
             //conn = new SqlConnection(connStringBuilder.ToString());
         }*/
 
+        int UserID;
+        
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private static void InsertToTable(SqlConnection conn, string tbl)
+        private void LoadToList()
+        {
+
+            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            conn.Open();
+            SqlCommand sc = new SqlCommand("SELECT Books.Name FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID", conn);
+
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; sc.Parameters.Add(param);
+
+            SqlDataReader reader;
+
+            reader = sc.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("GenreID", typeof(string));
+            dt.Columns.Add("Name", typeof(string));
+            dt.Load(reader);
+
+            listBox1.ValueMember = "GenreID";
+            listBox1.DisplayMember = "Name";
+            listBox1.DataSource = dt;
+
+            conn.Close();
+        }
+
+        private static void InsertToTable(SqlConnection conn, string tbl) //Убрать старт?
         {
             conn.Open();
 
@@ -219,6 +246,20 @@ namespace DataBase
                     return;
                 }
             }
+                using (SqlCommand cmdCreateTable = new SqlCommand("CREATE TABLE " +
+         " Baskets (UserID int FOREIGN KEY REFERENCES Users(UserID)," +
+         " BookID int FOREIGN KEY REFERENCES Books(BookID))", conn))
+                {
+                    try
+                    {
+                        cmdCreateTable.ExecuteNonQuery();
+                    }
+                    catch (SqlException se)
+                    {
+                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        return;
+                    }
+                }
 
             conn.Close();
         }
@@ -239,7 +280,6 @@ namespace DataBase
             groupBoxMain.Location = new Point(1, 2);
 
             /*this.tabControl1.Size = new System.Drawing.Size(799, 487); //Размер окна с элементами
-
             this.dataGridView1.Size = new System.Drawing.Size(720, 220); //Размер dataGridView
             */
 
@@ -289,7 +329,7 @@ namespace DataBase
             SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             connection.Open();
             
-            var selectBooks = "SELECT BookID as Номер, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Exist as Наличие FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
+            var selectBooks = "SELECT BookID as Номер, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Exist as Наличие FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
             
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
             selectBooks, connection))
@@ -311,7 +351,7 @@ namespace DataBase
                 string Name = textBoxLogin.Text.ToString();
                 string pass = "";
                 string Level = "";
-                string getP = "SELECT Password, Level FROM Users WHERE Name = @Name";
+                string getP = "SELECT Password, Level, UserID FROM Users WHERE Name = @Name";
 
                 SqlCommand commandBrands = new SqlCommand(getP, conn);
 
@@ -323,6 +363,7 @@ namespace DataBase
                     {
                         pass = reader["Password"].ToString();
                         Level = reader["Level"].ToString();
+                        UserID = Convert.ToInt32(reader["UserID"]);
                     }
                 }
                 if (pass == textBoxPass.Text.ToString())
@@ -340,6 +381,8 @@ namespace DataBase
                         buttonEdit.Enabled = false;
                         buttonDelete.Enabled = false;
                     }
+
+                    MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else MessageBox.Show("Что-то введено не так!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -350,6 +393,9 @@ namespace DataBase
         private void ButtonSignUp_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+
+            bool flag = false;
+
             conn.Open();
             if (textBoxLogin.Text.ToString() != "" && textBoxPass.Text.ToString() != "")
             using (SqlCommand cmd = new SqlCommand("INSERT INTO Users" +
@@ -369,6 +415,7 @@ namespace DataBase
                 try
                 {
                     cmd.ExecuteNonQuery();
+                    flag = true;       
                 }
                 catch (Exception se)
                 {
@@ -377,6 +424,28 @@ namespace DataBase
                 }
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            if (flag == true)
+                using (SqlCommand sqlout = new SqlCommand("SELECT UserID FROM Users WHERE Name = @Name", conn))
+                {
+                    SqlParameter param2 = new SqlParameter();
+                    param2.ParameterName = "@Name"; param2.Value = textBoxLogin.Text.ToString(); param2.SqlDbType = SqlDbType.VarChar; sqlout.Parameters.Add(param2);
+
+                    try
+                    {
+                        sqlout.ExecuteNonQuery();
+                    }
+                    catch (Exception se)
+                    {
+                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        return;
+                    }
+
+                    UserID = (int)sqlout.ExecuteScalar();
+
+                    MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             conn.Close();
             groupBoxSignIn.Visible = false;
             groupBoxMain.Visible = true;
@@ -443,22 +512,66 @@ namespace DataBase
             MessageBox.Show("Книга успешно удалена", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void buttonBuy_Click(object sender, EventArgs e) //Дописать уменьшение значения и проверки на существование
-        {
+        //private void ()
+
+        private void buttonBuy_Click(object sender, EventArgs e) //Может отказаться от exist?? Обновлять после покупки?
+        { 
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
-                   " SET Exist = @Exist, Count = @Count WHERE BookID = @BookID", conn))
+
+            int count;
+
+            using (SqlCommand sqlout = new SqlCommand("SELECT Count FROM Books WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
-                param.ParameterName = "@Exist"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                param = new SqlParameter();
-                param.ParameterName = "@Count"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                param = new SqlParameter();
-                param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; sqlout.Parameters.Add(param);
 
-                Console.WriteLine("Изменяем запись");
+                try
                 {
+                    sqlout.ExecuteNonQuery();
+                }
+                catch (Exception se)
+                {
+                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    return;
+                }
+
+                count = (int)sqlout.ExecuteScalar();
+            }
+            if (count > 0)
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
+                     " SET Exist = @Exist, Count = Count - 1 WHERE BookID = @BookID", conn))
+                {
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@Exist"; param.Value = (count - 1) > 0 ? 1 : 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param = new SqlParameter();
+                    param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+
+                    Console.WriteLine("Изменяем запись");
+                    {
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Книга добавлена в корзину", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception se)
+                        {
+                            Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                            return;
+                        }
+                    }
+                }
+
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Baskets" +
+                  "(UserID, BookID) Values (@UserID, @BookID)", conn))
+                {
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param = new SqlParameter();
+                    param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+
+                    Console.WriteLine("Вставляем запись");
                     try
                     {
                         cmd.ExecuteNonQuery();
@@ -469,9 +582,11 @@ namespace DataBase
                         return;
                     }
                 }
+                LoadToList();
+                //conn.Close();
             }
+            else MessageBox.Show("Книги в наличии нет", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             conn.Close();
-
         }
     }
 }
