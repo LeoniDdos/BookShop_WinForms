@@ -64,6 +64,7 @@
             this.buttonBuyBooks.TabIndex = 2;
             this.buttonBuyBooks.Text = "Купить";
             this.buttonBuyBooks.UseVisualStyleBackColor = true;
+            this.buttonBuyBooks.Click += new System.EventHandler(this.buttonBuyBooks_Click);
             // 
             // buttonRemoveBook
             // 

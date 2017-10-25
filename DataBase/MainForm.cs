@@ -26,6 +26,7 @@ namespace DataBase
         }*/
 
         int UserID;
+        string Login;
         
         public MainForm()
         {
@@ -324,13 +325,13 @@ namespace DataBase
             }
         }
 
-        private void OutDataButton_Click(object sender, EventArgs e)
+        private void RefreshData()
         {
             SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             connection.Open();
-            
+
             var selectBooks = "SELECT BookID as Номер, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Exist as Наличие FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
-            
+
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
             selectBooks, connection))
             {
@@ -339,6 +340,11 @@ namespace DataBase
                 dataGridView1.DataSource = dt.DefaultView;
             }
             connection.Close();
+        } 
+
+        private void OutDataButton_Click(object sender, EventArgs e)
+        {
+            RefreshData();
         }
 
         private void ButtonSignIn_Click(object sender, EventArgs e)
@@ -368,6 +374,8 @@ namespace DataBase
                 }
                 if (pass == textBoxPass.Text.ToString())
                 {
+                    Login = textBoxLogin.Text;
+
                     groupBoxSignIn.Visible = false;
                     groupBoxMain.Visible = true;
 
@@ -415,7 +423,9 @@ namespace DataBase
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    flag = true;       
+                    flag = true;
+
+                    Login = textBoxLogin.Text;
                 }
                 catch (Exception se)
                 {
@@ -580,6 +590,7 @@ namespace DataBase
                         return;
                     }
                 }
+                RefreshData();
                 LoadToList();
                 //conn.Close();
             }
@@ -589,7 +600,7 @@ namespace DataBase
 
         private void buttonGoToBasket_Click(object sender, EventArgs e)
         {
-            BasketForm basketForm = new BasketForm(UserID);
+            BasketForm basketForm = new BasketForm(UserID, Login);
             basketForm.ShowDialog();
         }
     }

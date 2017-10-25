@@ -14,18 +14,20 @@ namespace DataBase
     public partial class BasketForm : Form
     {
         int UserID;
-        public BasketForm(int UserID)
+        int FullPrice = 0;
+        string Login;
+
+        public BasketForm(int UserID, string Login)
         {
             InitializeComponent();
             this.UserID = UserID;
+            this.Login = Login;
         }
 
         public void RefreshData()
         {
             SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             connection.Open();
-
-            //var selectBooks = "SELECT Books.Name as Название, Books.Price as Стоимость FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID";
 
             SqlCommand sc = new SqlCommand("SELECT Books.BookID as ID, Books.Name as Название, Books.Price as Стоимость FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID", connection);
 
@@ -38,8 +40,6 @@ namespace DataBase
             DataTable dt = new DataTable();
             dt.Load(reader);
 
-            //dataGridViewBasket.ValueMember = "GenreID";
-            //dataGridViewBasket.DisplayMember = "Name";
             dataGridViewBasket.DataSource = dt;
 
             connection.Close();
@@ -66,9 +66,7 @@ namespace DataBase
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
                     return;
-                }
-
-                int FullPrice = 0;
+                } 
 
                 FullPrice = (int)sqlout.ExecuteScalar();
 
@@ -112,6 +110,12 @@ namespace DataBase
 
             RefreshData();
             RefreshLabel();
+        }
+
+        private void buttonBuyBooks_Click(object sender, EventArgs e)
+        {
+            CheckForm checkForm = new CheckForm(UserID, Login, FullPrice, dataGridViewBasket.Rows.Count-1);
+            checkForm.ShowDialog();
         }
     }
 }
