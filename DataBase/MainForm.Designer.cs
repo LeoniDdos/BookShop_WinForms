@@ -91,6 +91,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(755, 292);
             this.dataGridView1.TabIndex = 2;
             // 
@@ -175,6 +176,7 @@
             // 
             this.textBoxPass.Location = new System.Drawing.Point(163, 163);
             this.textBoxPass.Name = "textBoxPass";
+            this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(100, 22);
             this.textBoxPass.TabIndex = 2;
             // 

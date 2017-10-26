@@ -292,9 +292,9 @@ namespace DataBase
 
                     if (Level == "0")
                     {
-                        buttonAdd.Enabled = false;
-                        buttonEdit.Enabled = false;
-                        buttonDelete.Enabled = false;
+                        buttonAdd.Visible = false;
+                        buttonEdit.Visible = false;
+                        buttonDelete.Visible = false;
                     }
 
                     //MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -368,9 +368,9 @@ namespace DataBase
             this.MaximumSize = new System.Drawing.Size(1105, 469);
             this.MinimumSize = new System.Drawing.Size(1105, 469);
 
-            buttonAdd.Enabled = false;
-            buttonEdit.Enabled = false;
-            buttonDelete.Enabled = false;
+            buttonAdd.Visible = false;
+            buttonEdit.Visible = false;
+            buttonDelete.Visible = false;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

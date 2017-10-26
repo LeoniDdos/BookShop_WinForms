@@ -52,6 +52,7 @@
             this.dataGridViewBasket.Location = new System.Drawing.Point(34, 82);
             this.dataGridViewBasket.Name = "dataGridViewBasket";
             this.dataGridViewBasket.RowTemplate.Height = 24;
+            this.dataGridViewBasket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewBasket.Size = new System.Drawing.Size(349, 181);
             this.dataGridViewBasket.TabIndex = 1;
             // 
