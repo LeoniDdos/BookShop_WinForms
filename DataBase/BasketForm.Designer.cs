@@ -97,6 +97,8 @@
             this.Controls.Add(this.buttonBuyBooks);
             this.Controls.Add(this.dataGridViewBasket);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "BasketForm";
             this.Text = "Корзина";
             this.Load += new System.EventHandler(this.BasketForm_Load);

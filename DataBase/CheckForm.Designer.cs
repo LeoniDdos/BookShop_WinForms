@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckForm));
             this.groupBoxCheck = new System.Windows.Forms.GroupBox();
-            this.buttonPrintCheck = new System.Windows.Forms.Button();
-            this.labelCheck = new System.Windows.Forms.Label();
-            this.labelLogin = new System.Windows.Forms.Label();
-            this.labelBookCount = new System.Windows.Forms.Label();
-            this.labelFullPrice = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.labelFullPrice = new System.Windows.Forms.Label();
+            this.labelBookCount = new System.Windows.Forms.Label();
+            this.labelLogin = new System.Windows.Forms.Label();
+            this.labelCheck = new System.Windows.Forms.Label();
+            this.buttonPrintCheck = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.groupBoxCheck.SuspendLayout();
@@ -55,46 +55,14 @@
             this.groupBoxCheck.TabIndex = 0;
             this.groupBoxCheck.TabStop = false;
             // 
-            // buttonPrintCheck
+            // label5
             // 
-            this.buttonPrintCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonPrintCheck.Location = new System.Drawing.Point(98, 314);
-            this.buttonPrintCheck.Name = "buttonPrintCheck";
-            this.buttonPrintCheck.Size = new System.Drawing.Size(133, 38);
-            this.buttonPrintCheck.TabIndex = 1;
-            this.buttonPrintCheck.Text = "Напечатать";
-            this.buttonPrintCheck.UseVisualStyleBackColor = true;
-            this.buttonPrintCheck.Click += new System.EventHandler(this.buttonPrintCheck_Click);
-            // 
-            // labelCheck
-            // 
-            this.labelCheck.AutoSize = true;
-            this.labelCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCheck.Location = new System.Drawing.Point(133, 31);
-            this.labelCheck.Name = "labelCheck";
-            this.labelCheck.Size = new System.Drawing.Size(59, 29);
-            this.labelCheck.TabIndex = 0;
-            this.labelCheck.Text = "Чек";
-            // 
-            // labelLogin
-            // 
-            this.labelLogin.AutoSize = true;
-            this.labelLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelLogin.Location = new System.Drawing.Point(116, 112);
-            this.labelLogin.Name = "labelLogin";
-            this.labelLogin.Size = new System.Drawing.Size(76, 20);
-            this.labelLogin.TabIndex = 1;
-            this.labelLogin.Text = "Логин: ";
-            // 
-            // labelBookCount
-            // 
-            this.labelBookCount.AutoSize = true;
-            this.labelBookCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelBookCount.Location = new System.Drawing.Point(69, 145);
-            this.labelBookCount.Name = "labelBookCount";
-            this.labelBookCount.Size = new System.Drawing.Size(125, 20);
-            this.labelBookCount.TabIndex = 2;
-            this.labelBookCount.Text = "Число книг: ";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(5, 257);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(313, 17);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Предъявите данный чек в пункте самовывоза";
             // 
             // labelFullPrice
             // 
@@ -106,14 +74,46 @@
             this.labelFullPrice.TabIndex = 3;
             this.labelFullPrice.Text = "Стоимость: ";
             // 
-            // label5
+            // labelBookCount
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(5, 257);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(313, 17);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Предъявите данный чек в пункте самовывоза";
+            this.labelBookCount.AutoSize = true;
+            this.labelBookCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelBookCount.Location = new System.Drawing.Point(69, 145);
+            this.labelBookCount.Name = "labelBookCount";
+            this.labelBookCount.Size = new System.Drawing.Size(125, 20);
+            this.labelBookCount.TabIndex = 2;
+            this.labelBookCount.Text = "Число книг: ";
+            // 
+            // labelLogin
+            // 
+            this.labelLogin.AutoSize = true;
+            this.labelLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelLogin.Location = new System.Drawing.Point(116, 112);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(76, 20);
+            this.labelLogin.TabIndex = 1;
+            this.labelLogin.Text = "Логин: ";
+            // 
+            // labelCheck
+            // 
+            this.labelCheck.AutoSize = true;
+            this.labelCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCheck.Location = new System.Drawing.Point(133, 31);
+            this.labelCheck.Name = "labelCheck";
+            this.labelCheck.Size = new System.Drawing.Size(59, 29);
+            this.labelCheck.TabIndex = 0;
+            this.labelCheck.Text = "Чек";
+            // 
+            // buttonPrintCheck
+            // 
+            this.buttonPrintCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonPrintCheck.Location = new System.Drawing.Point(98, 314);
+            this.buttonPrintCheck.Name = "buttonPrintCheck";
+            this.buttonPrintCheck.Size = new System.Drawing.Size(133, 38);
+            this.buttonPrintCheck.TabIndex = 1;
+            this.buttonPrintCheck.Text = "Напечатать";
+            this.buttonPrintCheck.UseVisualStyleBackColor = true;
+            this.buttonPrintCheck.Click += new System.EventHandler(this.buttonPrintCheck_Click);
             // 
             // printDocument1
             // 
@@ -137,6 +137,8 @@
             this.ClientSize = new System.Drawing.Size(326, 377);
             this.Controls.Add(this.buttonPrintCheck);
             this.Controls.Add(this.groupBoxCheck);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "CheckForm";
             this.Text = "Чек";
             this.Load += new System.EventHandler(this.CheckForm_Load);

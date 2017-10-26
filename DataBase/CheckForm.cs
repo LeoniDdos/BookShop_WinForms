@@ -12,7 +12,6 @@ using System.Windows.Forms;
 
 namespace DataBase
 {
-    //запретить изменение размеров экранов
     public partial class CheckForm : Form
     {
         int UserID;

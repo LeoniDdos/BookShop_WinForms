@@ -285,6 +285,7 @@
             this.Controls.Add(this.groupBoxMain);
             this.Controls.Add(this.groupBoxSignIn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "BookShop";
             this.Load += new System.EventHandler(this.MainForm_Load);

@@ -482,6 +482,8 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(405, 369);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "AddForm";
             this.Text = "Добавление";
             this.Load += new System.EventHandler(this.AddForm_Load);

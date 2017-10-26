@@ -318,14 +318,11 @@ namespace DataBase
                 "(Name,Password,Level) Values (@Name,@Password,@Level)", conn))
             {
                 SqlParameter param = new SqlParameter();
-                param.ParameterName = "@Name"; param.Value = textBoxLogin.Text.ToString(); param.SqlDbType = SqlDbType.Text;
-                cmd.Parameters.Add(param);
+                param.ParameterName = "@Name"; param.Value = textBoxLogin.Text.ToString(); param.SqlDbType = SqlDbType.Text; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@Password"; param.Value = textBoxPass.Text.ToString(); param.SqlDbType = SqlDbType.Text;
-                cmd.Parameters.Add(param);
+                param.ParameterName = "@Password"; param.Value = textBoxPass.Text.ToString(); param.SqlDbType = SqlDbType.Text; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@Level"; param.Value = 0; param.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(param);
+                param.ParameterName = "@Level"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                 Console.WriteLine("Вставляем запись");
                 try
