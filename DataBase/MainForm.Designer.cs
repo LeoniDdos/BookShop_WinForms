@@ -63,10 +63,10 @@
             // 
             // OutDataButton
             // 
-            this.OutDataButton.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.OutDataButton.Location = new System.Drawing.Point(663, 343);
+            this.OutDataButton.BackColor = System.Drawing.Color.Silver;
+            this.OutDataButton.Location = new System.Drawing.Point(553, 344);
             this.OutDataButton.Name = "OutDataButton";
-            this.OutDataButton.Size = new System.Drawing.Size(98, 39);
+            this.OutDataButton.Size = new System.Drawing.Size(94, 38);
             this.OutDataButton.TabIndex = 9;
             this.OutDataButton.Text = "Обновить";
             this.OutDataButton.UseVisualStyleBackColor = false;
@@ -75,7 +75,8 @@
             // buttonBuy
             // 
             this.buttonBuy.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.buttonBuy.Location = new System.Drawing.Point(546, 343);
+            this.buttonBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonBuy.Location = new System.Drawing.Point(666, 344);
             this.buttonBuy.Name = "buttonBuy";
             this.buttonBuy.Size = new System.Drawing.Size(95, 38);
             this.buttonBuy.TabIndex = 8;
@@ -137,6 +138,7 @@
             // buttonGoToBasket
             // 
             this.buttonGoToBasket.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.buttonGoToBasket.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonGoToBasket.Location = new System.Drawing.Point(40, 342);
             this.buttonGoToBasket.Name = "buttonGoToBasket";
             this.buttonGoToBasket.Size = new System.Drawing.Size(173, 38);
@@ -232,13 +234,13 @@
             // 
             // groupBoxMain
             // 
+            this.groupBoxMain.Controls.Add(this.OutDataButton);
             this.groupBoxMain.Controls.Add(this.buttonDelete);
             this.groupBoxMain.Controls.Add(this.buttonEdit);
             this.groupBoxMain.Controls.Add(this.buttonAdd);
             this.groupBoxMain.Controls.Add(this.groupBoxBasket);
             this.groupBoxMain.Controls.Add(this.dataGridView1);
             this.groupBoxMain.Controls.Add(this.buttonBuy);
-            this.groupBoxMain.Controls.Add(this.OutDataButton);
             this.groupBoxMain.Location = new System.Drawing.Point(1, 2);
             this.groupBoxMain.Name = "groupBoxMain";
             this.groupBoxMain.Size = new System.Drawing.Size(1079, 415);
@@ -249,31 +251,34 @@
             // buttonDelete
             // 
             this.buttonDelete.BackColor = System.Drawing.Color.Silver;
-            this.buttonDelete.Location = new System.Drawing.Point(283, 344);
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDelete.Location = new System.Drawing.Point(206, 344);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(119, 38);
+            this.buttonDelete.Size = new System.Drawing.Size(94, 38);
             this.buttonDelete.TabIndex = 7;
-            this.buttonDelete.Text = "Удаление";
+            this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = false;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonEdit
             // 
             this.buttonEdit.BackColor = System.Drawing.Color.Silver;
-            this.buttonEdit.Location = new System.Drawing.Point(145, 343);
+            this.buttonEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonEdit.Location = new System.Drawing.Point(106, 344);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(119, 38);
+            this.buttonEdit.Size = new System.Drawing.Size(94, 38);
             this.buttonEdit.TabIndex = 6;
-            this.buttonEdit.Text = "Изменение";
+            this.buttonEdit.Text = "Изменить";
             this.buttonEdit.UseVisualStyleBackColor = false;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonAdd
             // 
             this.buttonAdd.BackColor = System.Drawing.Color.Silver;
-            this.buttonAdd.Location = new System.Drawing.Point(6, 343);
+            this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAdd.Location = new System.Drawing.Point(6, 344);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(119, 38);
+            this.buttonAdd.Size = new System.Drawing.Size(94, 38);
             this.buttonAdd.TabIndex = 5;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = false;

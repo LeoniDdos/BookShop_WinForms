@@ -106,13 +106,14 @@
             // 
             // buttonPrintCheck
             // 
-            this.buttonPrintCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonPrintCheck.Location = new System.Drawing.Point(98, 314);
+            this.buttonPrintCheck.BackColor = System.Drawing.Color.YellowGreen;
+            this.buttonPrintCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonPrintCheck.Location = new System.Drawing.Point(90, 301);
             this.buttonPrintCheck.Name = "buttonPrintCheck";
-            this.buttonPrintCheck.Size = new System.Drawing.Size(133, 38);
+            this.buttonPrintCheck.Size = new System.Drawing.Size(140, 51);
             this.buttonPrintCheck.TabIndex = 1;
             this.buttonPrintCheck.Text = "Напечатать";
-            this.buttonPrintCheck.UseVisualStyleBackColor = true;
+            this.buttonPrintCheck.UseVisualStyleBackColor = false;
             this.buttonPrintCheck.Click += new System.EventHandler(this.buttonPrintCheck_Click);
             // 
             // printDocument1

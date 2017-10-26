@@ -58,31 +58,33 @@
             // 
             // buttonBuyBooks
             // 
-            this.buttonBuyBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonBuyBooks.BackColor = System.Drawing.Color.YellowGreen;
+            this.buttonBuyBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonBuyBooks.Location = new System.Drawing.Point(245, 335);
             this.buttonBuyBooks.Name = "buttonBuyBooks";
             this.buttonBuyBooks.Size = new System.Drawing.Size(138, 51);
             this.buttonBuyBooks.TabIndex = 2;
             this.buttonBuyBooks.Text = "Купить";
-            this.buttonBuyBooks.UseVisualStyleBackColor = true;
+            this.buttonBuyBooks.UseVisualStyleBackColor = false;
             this.buttonBuyBooks.Click += new System.EventHandler(this.buttonBuyBooks_Click);
             // 
             // buttonRemoveBook
             // 
-            this.buttonRemoveBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonRemoveBook.BackColor = System.Drawing.Color.Crimson;
+            this.buttonRemoveBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonRemoveBook.Location = new System.Drawing.Point(34, 335);
             this.buttonRemoveBook.Name = "buttonRemoveBook";
             this.buttonRemoveBook.Size = new System.Drawing.Size(138, 51);
             this.buttonRemoveBook.TabIndex = 3;
             this.buttonRemoveBook.Text = "Убрать";
-            this.buttonRemoveBook.UseVisualStyleBackColor = true;
+            this.buttonRemoveBook.UseVisualStyleBackColor = false;
             this.buttonRemoveBook.Click += new System.EventHandler(this.buttonRemoveBook_Click);
             // 
             // labelFullPrice
             // 
             this.labelFullPrice.AutoSize = true;
             this.labelFullPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelFullPrice.Location = new System.Drawing.Point(90, 288);
+            this.labelFullPrice.Location = new System.Drawing.Point(81, 288);
             this.labelFullPrice.Name = "labelFullPrice";
             this.labelFullPrice.Size = new System.Drawing.Size(195, 20);
             this.labelFullPrice.TabIndex = 4;
