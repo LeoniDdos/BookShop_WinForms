@@ -149,7 +149,7 @@ namespace DataBase
             string CreateUsers = "CREATE TABLE Users (UserID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null, Password VarChar(30) not null, Level int not null); ";
             string CreateAutors = "CREATE TABLE Autors (AutorID int IDENTITY(1,1) PRIMARY KEY, Surname VarChar(30) not null, Name VarChar(30) not null, Patronymic VarChar(30)); ";
             string CreateBooks = "CREATE TABLE Books (BookID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null, GenreID int FOREIGN KEY REFERENCES Genres(GenreID)," +
-         "  AutorID int FOREIGN KEY REFERENCES Autors(AutorID), Year int not null, PublishID int FOREIGN KEY REFERENCES Publishs(PublishID), Price int not null, Count int not null, Exist int not null); ";
+         "  AutorID int FOREIGN KEY REFERENCES Autors(AutorID), Year int not null, PublishID int FOREIGN KEY REFERENCES Publishs(PublishID), Price int not null, Count int not null); ";
             string CreateBaskets = "CREATE TABLE Baskets (UserID int FOREIGN KEY REFERENCES Users(UserID), BookID int FOREIGN KEY REFERENCES Books(BookID))";
 
 
@@ -172,7 +172,7 @@ namespace DataBase
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.Size = new System.Drawing.Size(353, 404); //Размер авторизации формы
+            this.Size = new System.Drawing.Size(353, 404);
             this.MaximumSize = new System.Drawing.Size(353, 404);
             this.MinimumSize = new System.Drawing.Size(353, 404);
 
@@ -184,12 +184,6 @@ namespace DataBase
 
             groupBoxSignIn.Location = new Point(1, 2);
             groupBoxMain.Location = new Point(1, 2);
-
-            /*this.tabControl1.Size = new System.Drawing.Size(799, 487); //Размер окна с элементами
-            this.dataGridView1.Size = new System.Drawing.Size(720, 220); //Размер dataGridView
-            */
-
-            //this.SizeToContent = SizeToContent.WidthAndHeight; //Для автоизменения размеров окна под элементы
 
             string connStr = @"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;
                             Initial Catalog=BookShop;
@@ -229,6 +223,9 @@ namespace DataBase
                 connection.Close();
                 //connection.Dispose();
             }
+
+            RefreshData();
+            LoadToList();
         }
 
         private void RefreshData()
@@ -236,7 +233,7 @@ namespace DataBase
             SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             connection.Open();
 
-            var selectBooks = "SELECT BookID as Номер, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Exist as Наличие FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
+            var selectBooks = "SELECT BookID as ID, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Count as Количество FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
 
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
             selectBooks, connection))
@@ -246,12 +243,14 @@ namespace DataBase
                 dataGridView1.DataSource = dt.DefaultView;
             }
             connection.Close();
+
+            DataGridViewColumn column = dataGridView1.Columns[0];
+            column.Width = 25;
         } 
 
         private void OutDataButton_Click(object sender, EventArgs e)
         {
             RefreshData();
-
             LoadToList();
         }
 
@@ -401,11 +400,9 @@ namespace DataBase
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
             using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
-                   " SET Exist = @Exist, Count = @Count WHERE BookID = @BookID", conn))
+                   " SET Count = @Count WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
-                param.ParameterName = "@Exist"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                param = new SqlParameter();
                 param.ParameterName = "@Count"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                 param = new SqlParameter();
                 param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
@@ -427,7 +424,7 @@ namespace DataBase
             MessageBox.Show("Книга успешно удалена", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void buttonBuy_Click(object sender, EventArgs e) //Может отказаться от exist??
+        private void buttonBuy_Click(object sender, EventArgs e)
         { 
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
@@ -454,11 +451,9 @@ namespace DataBase
             if (count > 0)
             {
                 using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
-                     " SET Exist = @Exist, Count = Count - 1 WHERE BookID = @BookID", conn))
+                     " SET Count = Count - 1 WHERE BookID = @BookID", conn))
                 {
                     SqlParameter param = new SqlParameter();
-                    param.ParameterName = "@Exist"; param.Value = (count - 1) > 0 ? 1 : 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                    param = new SqlParameter();
                     param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                     Console.WriteLine("Изменяем запись");

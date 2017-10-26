@@ -87,7 +87,8 @@ namespace DataBase
             conn.Open();
 
             using (SqlCommand cmd = new SqlCommand("DELETE TOP (1) FROM Baskets" +
-                  " WHERE UserID = @UserID AND BookID = @BookID", conn))
+                  " WHERE UserID = @UserID AND BookID = @BookID; UPDATE Books" +
+                   " SET Count = Count + 1 WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);

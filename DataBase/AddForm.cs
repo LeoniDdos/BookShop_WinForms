@@ -66,10 +66,6 @@ namespace DataBase
 
         private void AddForm_Load(object sender, EventArgs e)
         {
-            //this.Size = new System.Drawing.Size(425, 419);
-            //this.MaximumSize = new System.Drawing.Size(425, 419);
-            //this.MinimumSize = new System.Drawing.Size(425, 419);
-
             DataRefresh();
         }
 
@@ -81,7 +77,7 @@ namespace DataBase
                
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand("Insert into Books" +
-                            "(Name,GenreID,AutorID,Year,PublishID,Price,Count,Exist) Values (@Name,@GenreID,@AutorID,@Year,@PublishID,@Price,@Count,@Exist)", conn))
+                            "(Name,GenreID,AutorID,Year,PublishID,Price,Count) Values (@Name,@GenreID,@AutorID,@Year,@PublishID,@Price,@Count)", conn))
                 {
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Name"; param.Value = textBoxBooksName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
@@ -97,14 +93,7 @@ namespace DataBase
                     param.ParameterName = "@Price"; param.Value = Convert.ToInt32(textBoxBooksPrice.Text); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                     param = new SqlParameter();
                     param.ParameterName = "@Count"; param.Value = Convert.ToInt32(textBoxBooksCount.Text); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                    param = new SqlParameter();
-
-                    int exist;
-                    if (Convert.ToInt32(textBoxBooksCount.Text) > 0) exist = 1;
-                    else exist = 0;
-
-                    param.ParameterName = "@Exist"; param.Value = Convert.ToInt32(exist); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-
+                    
                     Console.WriteLine("Вставляем запись");
                     try
                     {

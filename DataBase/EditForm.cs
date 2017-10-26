@@ -76,7 +76,7 @@ namespace DataBase
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
             using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
-                   " SET Name = @Name, GenreID = @GenreID, AutorID = @AutorID, Year = @Year, PublishID = @PublishID, Price = @Price, Count = @Count, Exist = @Exist WHERE BookID = @BookID", conn))
+                   " SET Name = @Name, GenreID = @GenreID, AutorID = @AutorID, Year = @Year, PublishID = @PublishID, Price = @Price, Count = @Count WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Name"; param.Value = textBoxBooksName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
@@ -94,14 +94,7 @@ namespace DataBase
                 param.ParameterName = "@Count"; param.Value = Convert.ToInt32(textBoxBooksCount.Text); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                 param = new SqlParameter();
                 param.ParameterName = "@BookID"; param.Value = BookID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                param = new SqlParameter();
-
-                int exist;
-                if (Convert.ToInt32(textBoxBooksCount.Text) > 0) exist = 1;
-                else exist = 0;
-
-                param.ParameterName = "@Exist"; param.Value = Convert.ToInt32(exist); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-
+                
                 Console.WriteLine("Изменяем запись");
                 {
                     try
