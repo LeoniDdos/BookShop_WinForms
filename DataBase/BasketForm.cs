@@ -114,8 +114,10 @@ namespace DataBase
 
         private void buttonBuyBooks_Click(object sender, EventArgs e)
         {
+            Hide();
             CheckForm checkForm = new CheckForm(UserID, Login, FullPrice, dataGridViewBasket.Rows.Count-1);
             checkForm.ShowDialog();
+            this.Close();
         }
     }
 }

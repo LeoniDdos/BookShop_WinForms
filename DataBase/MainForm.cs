@@ -44,7 +44,6 @@ namespace DataBase
             param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; sc.Parameters.Add(param);
 
             SqlDataReader reader;
-
             reader = sc.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Columns.Add("GenreID", typeof(string));
@@ -58,114 +57,114 @@ namespace DataBase
             conn.Close();
         }
 
-        private static void InsertToTable(SqlConnection conn, string tbl) //Убрать старт?
+        private static void InsertToTable(SqlConnection conn)
         {
             conn.Open();
 
-            switch (tbl)
-            {
-                case "start":
-                    {
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO Users" +
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Users" +
                         "(Name,Password,Level) Values (@Name,@Password,@Level)", conn))
-                        {
-                            SqlParameter param = new SqlParameter();
-                            param.ParameterName = "@Name"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar;
-                            cmd.Parameters.Add(param);
-                            param = new SqlParameter();
-                            param.ParameterName = "@Password"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar;
-                            cmd.Parameters.Add(param);
-                            param = new SqlParameter();
-                            param.ParameterName = "@Level"; param.Value = 1; param.SqlDbType = SqlDbType.Int;
-                            cmd.Parameters.Add(param);
+            {
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@Name"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar;
+                cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@Password"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar;
+                cmd.Parameters.Add(param);
+                param = new SqlParameter();
+                param.ParameterName = "@Level"; param.Value = 1; param.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(param);
 
-                            Console.WriteLine("Вставляем запись");
-                            try
-                            {
-                                cmd.ExecuteNonQuery();
-                            }
-                            catch (SqlException se)
-                            {
-                                Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                                return;
-                            }
-                        }
-                            using (SqlCommand cmd2 = new SqlCommand("INSERT INTO Genres" +
-                        "(Name) Values (@Name)", conn))
-                            {
-                                SqlParameter param2 = new SqlParameter();
-                                param2.ParameterName = "@Name"; param2.Value = "Фантастика"; param2.SqlDbType = SqlDbType.VarChar;
-                                cmd2.Parameters.Add(param2);
-
-                                Console.WriteLine("Вставляем запись");
-                                try
-                                {
-                                    cmd2.ExecuteNonQuery();
-                                }
-                                catch (SqlException se)
-                                {
-                                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                                    return;
-                                }
-                            }
-                        using (SqlCommand cmd3 = new SqlCommand("INSERT INTO Publishs" +
-                    "(Name) Values (@Name)", conn))
-                        {
-                            SqlParameter param3 = new SqlParameter();
-                            param3.ParameterName = "@Name"; param3.Value = "Миф"; param3.SqlDbType = SqlDbType.VarChar;
-                            cmd3.Parameters.Add(param3);
-
-                            Console.WriteLine("Вставляем запись");
-                            try
-                            {
-                                cmd3.ExecuteNonQuery();
-                            }
-                            catch (SqlException se)
-                            {
-                                Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                                return;
-                            }
-                        }
-                        using (SqlCommand cmd4 = new SqlCommand("INSERT INTO Autors" +
-                        "(Surname,Name,Patronymic) Values (@Surname,@Name,@Patronymic)", conn))
-                        {
-                            SqlParameter param4 = new SqlParameter();
-                            param4.ParameterName = "@SurName"; param4.Value = "Пушкин"; param4.SqlDbType = SqlDbType.VarChar;
-                            cmd4.Parameters.Add(param4);
-                            param4 = new SqlParameter();
-                            param4.ParameterName = "@Name"; param4.Value = "Александр"; param4.SqlDbType = SqlDbType.VarChar;
-                            cmd4.Parameters.Add(param4);
-                            param4 = new SqlParameter();
-                            param4.ParameterName = "@Patronymic"; param4.Value = "Сергеевич"; param4.SqlDbType = SqlDbType.VarChar;
-                            cmd4.Parameters.Add(param4);
-
-                            Console.WriteLine("Вставляем запись");
-                            try
-                            {
-                                cmd4.ExecuteNonQuery();
-                            }
-                            catch (SqlException se)
-                            {
-                                Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                                return;
-                            }
-                        }
-                        break;
-                    }
-                        default:
-                    break;
+                Console.WriteLine("Вставляем запись");
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (SqlException se)
+                {
+                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    return;
+                }
             }
-                    conn.Close();
+            using (SqlCommand cmd2 = new SqlCommand("INSERT INTO Genres" +
+        "(Name) Values (@Name)", conn))
+            {
+                SqlParameter param2 = new SqlParameter();
+                param2.ParameterName = "@Name"; param2.Value = "Фантастика"; param2.SqlDbType = SqlDbType.VarChar;
+                cmd2.Parameters.Add(param2);
+
+                Console.WriteLine("Вставляем запись");
+                try
+                {
+                    cmd2.ExecuteNonQuery();
+                }
+                catch (SqlException se)
+                {
+                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    return;
+                }
+            }
+            using (SqlCommand cmd3 = new SqlCommand("INSERT INTO Publishs" +
+        "(Name) Values (@Name)", conn))
+            {
+                SqlParameter param3 = new SqlParameter();
+                param3.ParameterName = "@Name"; param3.Value = "Миф"; param3.SqlDbType = SqlDbType.VarChar;
+                cmd3.Parameters.Add(param3);
+
+                Console.WriteLine("Вставляем запись");
+                try
+                {
+                    cmd3.ExecuteNonQuery();
+                }
+                catch (SqlException se)
+                {
+                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    return;
+                }
+            }
+            using (SqlCommand cmd4 = new SqlCommand("INSERT INTO Autors" +
+            "(Surname,Name,Patronymic) Values (@Surname,@Name,@Patronymic)", conn))
+            {
+                SqlParameter param4 = new SqlParameter();
+                param4.ParameterName = "@SurName"; param4.Value = "Пушкин"; param4.SqlDbType = SqlDbType.VarChar;
+                cmd4.Parameters.Add(param4);
+                param4 = new SqlParameter();
+                param4.ParameterName = "@Name"; param4.Value = "Александр"; param4.SqlDbType = SqlDbType.VarChar;
+                cmd4.Parameters.Add(param4);
+                param4 = new SqlParameter();
+                param4.ParameterName = "@Patronymic"; param4.Value = "Сергеевич"; param4.SqlDbType = SqlDbType.VarChar;
+                cmd4.Parameters.Add(param4);
+
+                Console.WriteLine("Вставляем запись");
+                try
+                {
+                    cmd4.ExecuteNonQuery();
+                }
+                catch (SqlException se)
+                {
+                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    return;
+                }
+            }
+
+            conn.Close();
         }
 
         private static void CreateNewTable(SqlConnection conn)
         {
             conn.Open();
 
-            using (SqlCommand cmdCreateTable = new SqlCommand("CREATE TABLE " +
-         " Publishs (PublishID int IDENTITY(1,1) PRIMARY KEY" +
-         ", Name VarChar(30) not null)", conn))
+            string CreatePublishs = "CREATE TABLE Publishs (PublishID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null)";
+            string CreateGenres = "CREATE TABLE Genres (GenreID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null); ";
+            string CreateUsers = "CREATE TABLE Users (UserID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null, Password VarChar(30) not null, Level int not null); ";
+            string CreateAutors = "CREATE TABLE Autors (AutorID int IDENTITY(1,1) PRIMARY KEY, Surname VarChar(30) not null, Name VarChar(30) not null, Patronymic VarChar(30)); ";
+            string CreateBooks = "CREATE TABLE Books (BookID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null, GenreID int FOREIGN KEY REFERENCES Genres(GenreID)," +
+         "  AutorID int FOREIGN KEY REFERENCES Autors(AutorID), Year int not null, PublishID int FOREIGN KEY REFERENCES Publishs(PublishID), Price int not null, Count int not null, Exist int not null); ";
+            string CreateBaskets = "CREATE TABLE Baskets (UserID int FOREIGN KEY REFERENCES Users(UserID), BookID int FOREIGN KEY REFERENCES Books(BookID))";
+
+
+            using (SqlCommand cmdCreateTable = new SqlCommand(CreatePublishs + CreateGenres + CreateUsers + CreateAutors + CreateBooks + CreateBaskets, conn))
             {
+                Console.WriteLine("Создаем таблицы");
                 try
                 {
                     cmdCreateTable.ExecuteNonQuery();
@@ -176,92 +175,7 @@ namespace DataBase
                     return;
                 }
             }
-
-            using (SqlCommand cmdCreateTable = new SqlCommand("CREATE TABLE " +
-         " Genres (GenreID int IDENTITY(1,1) PRIMARY KEY" +
-         ", Name VarChar(30) not null)", conn))
-            {
-                try
-                {
-                    cmdCreateTable.ExecuteNonQuery();
-                }
-                catch (SqlException se)
-                {
-                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                    return;
-                }
-            }
-
-            using (SqlCommand cmdCreateTable = new SqlCommand("CREATE TABLE " +
-         " Users (UserID int IDENTITY(1,1) PRIMARY KEY" +
-         ", Name VarChar(30) not null," +
-         "  Password VarChar(30) not null," +
-         "  Level int not null)", conn))
-            {
-                try
-                {
-                    cmdCreateTable.ExecuteNonQuery();
-                }
-                catch (SqlException se)
-                {
-                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                    return;
-                }
-            }
-
-            using (SqlCommand cmdCreateTable = new SqlCommand("CREATE TABLE " +
-         " Autors (AutorID int IDENTITY(1,1) PRIMARY KEY" +
-         ", Surname VarChar(30) not null," +
-         "  Name VarChar(30) not null," +
-         "  Patronymic VarChar(30))", conn))
-            {
-                try
-                {
-                    cmdCreateTable.ExecuteNonQuery();
-                }
-                catch (SqlException se)
-                {
-                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                    return;
-                }
-            }
-
-            using (SqlCommand cmdCreateTable = new SqlCommand("CREATE TABLE " +
-         " Books (BookID int IDENTITY(1,1) PRIMARY KEY" +
-         ", Name VarChar(30) not null," +
-         "  GenreID int FOREIGN KEY REFERENCES Genres(GenreID)," +
-         "  AutorID int FOREIGN KEY REFERENCES Autors(AutorID)," +
-         "  Year int not null," +
-         "  PublishID int FOREIGN KEY REFERENCES Publishs(PublishID)," +
-         "  Price int not null," +
-         "  Count int not null," +
-         "  Exist int not null)", conn))
-            {
-                try
-                {
-                    cmdCreateTable.ExecuteNonQuery();
-                }
-                catch (SqlException se)
-                {
-                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                    return;
-                }
-            }
-                using (SqlCommand cmdCreateTable = new SqlCommand("CREATE TABLE " +
-         " Baskets (UserID int FOREIGN KEY REFERENCES Users(UserID)," +
-         " BookID int FOREIGN KEY REFERENCES Books(BookID))", conn))
-                {
-                    try
-                    {
-                        cmdCreateTable.ExecuteNonQuery();
-                    }
-                    catch (SqlException se)
-                    {
-                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                        return;
-                    }
-                }
-
+            
             conn.Close();
         }
 
@@ -302,6 +216,7 @@ namespace DataBase
                     connection = new SqlConnection(@"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;Integrated Security=True");
                     SqlCommand cmdCreateDataBase = new SqlCommand(string.Format("CREATE DATABASE [{0}]", "BookShop"), connection);
                     connection.Open();
+                    Console.WriteLine("Создаем Базу Данных");
                     cmdCreateDataBase.ExecuteNonQuery();
                     connection.Close();
                     Thread.Sleep(10000);
@@ -311,7 +226,7 @@ namespace DataBase
 
                     connection2.Close();
 
-                    InsertToTable(connection2, "start");
+                    InsertToTable(connection2);
 
                     connection = new SqlConnection(connStr);
                     connection.Open();
@@ -592,7 +507,6 @@ namespace DataBase
                 }
                 RefreshData();
                 LoadToList();
-                //conn.Close();
             }
             else MessageBox.Show("Книги в наличии нет", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             conn.Close();

@@ -12,7 +12,6 @@ using System.Windows.Forms;
 
 namespace DataBase
 {
-    //закрывать прошлое окно?
     //проверить наличие строк в баскете и запретить изменение размеров экрана
     public partial class CheckForm : Form
     {
