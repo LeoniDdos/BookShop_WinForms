@@ -14,7 +14,7 @@ namespace DataBase
 {
     public partial class MainForm : Form
     {
-      static public int RowInd;
+      //static public int RowInd;
         /*void ConnectTo() //Нужно ли?
         {
             //connStringBuilder = new SqlConnectionStringBuilder();
@@ -65,14 +65,11 @@ namespace DataBase
                         "(Name,Password,Level) Values (@Name,@Password,@Level)", conn))
             {
                 SqlParameter param = new SqlParameter();
-                param.ParameterName = "@Name"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar;
-                cmd.Parameters.Add(param);
+                param.ParameterName = "@Name"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@Password"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar;
-                cmd.Parameters.Add(param);
+                param.ParameterName = "@Password"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@Level"; param.Value = 1; param.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(param);
+                param.ParameterName = "@Level"; param.Value = 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                 Console.WriteLine("Вставляем запись");
                 try
@@ -89,8 +86,7 @@ namespace DataBase
         "(Name) Values (@Name)", conn))
             {
                 SqlParameter param2 = new SqlParameter();
-                param2.ParameterName = "@Name"; param2.Value = "Фантастика"; param2.SqlDbType = SqlDbType.VarChar;
-                cmd2.Parameters.Add(param2);
+                param2.ParameterName = "@Name"; param2.Value = "Фантастика"; param2.SqlDbType = SqlDbType.VarChar; cmd2.Parameters.Add(param2);
 
                 Console.WriteLine("Вставляем запись");
                 try
@@ -107,8 +103,7 @@ namespace DataBase
         "(Name) Values (@Name)", conn))
             {
                 SqlParameter param3 = new SqlParameter();
-                param3.ParameterName = "@Name"; param3.Value = "Миф"; param3.SqlDbType = SqlDbType.VarChar;
-                cmd3.Parameters.Add(param3);
+                param3.ParameterName = "@Name"; param3.Value = "Миф"; param3.SqlDbType = SqlDbType.VarChar; cmd3.Parameters.Add(param3);
 
                 Console.WriteLine("Вставляем запись");
                 try
@@ -125,14 +120,11 @@ namespace DataBase
             "(Surname,Name,Patronymic) Values (@Surname,@Name,@Patronymic)", conn))
             {
                 SqlParameter param4 = new SqlParameter();
-                param4.ParameterName = "@SurName"; param4.Value = "Пушкин"; param4.SqlDbType = SqlDbType.VarChar;
-                cmd4.Parameters.Add(param4);
+                param4.ParameterName = "@SurName"; param4.Value = "Пушкин"; param4.SqlDbType = SqlDbType.VarChar; cmd4.Parameters.Add(param4);
                 param4 = new SqlParameter();
-                param4.ParameterName = "@Name"; param4.Value = "Александр"; param4.SqlDbType = SqlDbType.VarChar;
-                cmd4.Parameters.Add(param4);
+                param4.ParameterName = "@Name"; param4.Value = "Александр"; param4.SqlDbType = SqlDbType.VarChar; cmd4.Parameters.Add(param4);
                 param4 = new SqlParameter();
-                param4.ParameterName = "@Patronymic"; param4.Value = "Сергеевич"; param4.SqlDbType = SqlDbType.VarChar;
-                cmd4.Parameters.Add(param4);
+                param4.ParameterName = "@Patronymic"; param4.Value = "Сергеевич"; param4.SqlDbType = SqlDbType.VarChar; cmd4.Parameters.Add(param4);
 
                 Console.WriteLine("Вставляем запись");
                 try
@@ -145,7 +137,6 @@ namespace DataBase
                     return;
                 }
             }
-
             conn.Close();
         }
 
@@ -212,7 +203,7 @@ namespace DataBase
             {
                 if (se.Number == 4060)
                 {
-                    connection.Close();
+                    //connection.Close(); //Видимо нету смысла это делать
                     connection = new SqlConnection(@"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;Integrated Security=True");
                     SqlCommand cmdCreateDataBase = new SqlCommand(string.Format("CREATE DATABASE [{0}]", "BookShop"), connection);
                     connection.Open();
@@ -260,6 +251,8 @@ namespace DataBase
         private void OutDataButton_Click(object sender, EventArgs e)
         {
             RefreshData();
+
+            LoadToList();
         }
 
         private void ButtonSignIn_Click(object sender, EventArgs e)
@@ -437,7 +430,7 @@ namespace DataBase
             MessageBox.Show("Книга успешно удалена", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void buttonBuy_Click(object sender, EventArgs e) //Может отказаться от exist?? Обновлять после покупки?
+        private void buttonBuy_Click(object sender, EventArgs e) //Может отказаться от exist??
         { 
             SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
@@ -505,6 +498,7 @@ namespace DataBase
                         return;
                     }
                 }
+
                 RefreshData();
                 LoadToList();
             }

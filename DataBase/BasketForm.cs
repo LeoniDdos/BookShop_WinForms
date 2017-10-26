@@ -61,16 +61,15 @@ namespace DataBase
                 try
                 {
                     sqlout.ExecuteNonQuery();
+                    FullPrice = (int)sqlout.ExecuteScalar();
                 }
                 catch (Exception se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
                     return;
                 } 
-
-                FullPrice = (int)sqlout.ExecuteScalar();
-
-                labelFullPrice.Text = "Полная стоимость: " + FullPrice.ToString();
+                
+                labelFullPrice.Text = labelFullPrice.Text + FullPrice.ToString();
             }
             conn.Close();
         }
@@ -114,10 +113,14 @@ namespace DataBase
 
         private void buttonBuyBooks_Click(object sender, EventArgs e)
         {
-            Hide();
-            CheckForm checkForm = new CheckForm(UserID, Login, FullPrice, dataGridViewBasket.Rows.Count-1);
-            checkForm.ShowDialog();
-            this.Close();
+            if (dataGridViewBasket.Rows.Count > 1)
+            {
+                Hide();
+                CheckForm checkForm = new CheckForm(UserID, Login, FullPrice, dataGridViewBasket.Rows.Count - 1);
+                checkForm.ShowDialog();
+                this.Close();
+            }
+            else MessageBox.Show("В корзине нет книг", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

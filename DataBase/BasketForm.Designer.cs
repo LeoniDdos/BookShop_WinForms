@@ -83,9 +83,9 @@
             this.labelFullPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelFullPrice.Location = new System.Drawing.Point(90, 288);
             this.labelFullPrice.Name = "labelFullPrice";
-            this.labelFullPrice.Size = new System.Drawing.Size(59, 20);
+            this.labelFullPrice.Size = new System.Drawing.Size(195, 20);
             this.labelFullPrice.TabIndex = 4;
-            this.labelFullPrice.Text = "label2";
+            this.labelFullPrice.Text = "Полная стоимость: ";
             // 
             // BasketForm
             // 

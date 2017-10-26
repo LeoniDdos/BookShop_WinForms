@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace DataBase
 {
-    //проверить наличие строк в баскете и запретить изменение размеров экрана
+    //запретить изменение размеров экранов
     public partial class CheckForm : Form
     {
         int UserID;
