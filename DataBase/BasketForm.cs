@@ -116,6 +116,29 @@ namespace DataBase
         {
             if (dataGridViewBasket.Rows.Count > 1)
             {
+                SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM Baskets" +
+                      " WHERE UserID = @UserID", conn))
+                {
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    
+                    Console.WriteLine("Удаляем запись");
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception se)
+                    {
+                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        return;
+                    }
+                }
+                conn.Close();
+
                 Hide();
                 CheckForm checkForm = new CheckForm(UserID, Login, FullPrice, dataGridViewBasket.Rows.Count - 1);
                 checkForm.ShowDialog();

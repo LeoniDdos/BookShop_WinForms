@@ -15,7 +15,7 @@ namespace DataBase
     public partial class MainForm : Form
     {
       //static public int RowInd;
-        /*void ConnectTo() //Нужно ли?
+        /*void ConnectTo() //Может всё таки использовать?
         {
             //connStringBuilder = new SqlConnectionStringBuilder();
             //connStringBuilder.DataSource = "LAPTOP-8BSFAANR\\SQLEXPRESS";
@@ -149,7 +149,7 @@ namespace DataBase
             string CreateUsers = "CREATE TABLE Users (UserID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null, Password VarChar(30) not null, Level int not null); ";
             string CreateAutors = "CREATE TABLE Autors (AutorID int IDENTITY(1,1) PRIMARY KEY, Surname VarChar(30) not null, Name VarChar(30) not null, Patronymic VarChar(30)); ";
             string CreateBooks = "CREATE TABLE Books (BookID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null, GenreID int FOREIGN KEY REFERENCES Genres(GenreID)," +
-         "  AutorID int FOREIGN KEY REFERENCES Autors(AutorID), Year int not null, PublishID int FOREIGN KEY REFERENCES Publishs(PublishID), Price int not null, Count int not null); ";
+         "  AutorID int FOREIGN KEY REFERENCES Autors(AutorID), PublishID int FOREIGN KEY REFERENCES Publishs(PublishID), Year int not null, Price int not null, Count int not null); ";
             string CreateBaskets = "CREATE TABLE Baskets (UserID int FOREIGN KEY REFERENCES Users(UserID), BookID int FOREIGN KEY REFERENCES Books(BookID))";
 
 
@@ -322,7 +322,7 @@ namespace DataBase
                 param.ParameterName = "@Password"; param.Value = textBoxPass.Text.ToString(); param.SqlDbType = SqlDbType.Text; cmd.Parameters.Add(param);
                 param = new SqlParameter();
                 param.ParameterName = "@Level"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-
+                
                 Console.WriteLine("Вставляем запись");
                 try
                 {
@@ -446,7 +446,7 @@ namespace DataBase
                     return;
                 }
 
-                count = (int)sqlout.ExecuteScalar();
+                count = (int)sqlout.ExecuteScalar(); //Без переменной можно
             }
             if (count > 0)
             {
