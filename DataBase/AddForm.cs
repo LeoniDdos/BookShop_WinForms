@@ -13,14 +13,16 @@ namespace DataBase
 {
     public partial class AddForm : Form
     {
-        public AddForm()
+        SqlConnection conn;
+        public AddForm(SqlConnection conn)
         {
             InitializeComponent();
+            this.conn = conn;
         }
 
         private void DataRefresh()
         {
-            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
             SqlCommand sc = new SqlCommand("SELECT GenreID, Name FROM Genres", conn);
             SqlDataReader reader;
@@ -73,7 +75,7 @@ namespace DataBase
         {
             if (textBoxBooksName.Text.ToString() != "" && textBoxBooksYear.Text.ToString() != "" && textBoxBooksPrice.Text.ToString() != "" && textBoxBooksCount.Text.ToString() != "")
             {
-                SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
                
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand("Insert into Books" +
@@ -122,7 +124,7 @@ namespace DataBase
         {
             if (textBoxAutorsSurname.Text.ToString() != "" && textBoxAutorsName.Text.ToString() != "" && textBoxAutorsPatronymic.Text.ToString() != "")
             {
-                SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
 
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand("Insert into Autors" +
@@ -159,7 +161,7 @@ namespace DataBase
         {
             if (textBoxGenresName.Text.ToString() != "")
             {
-                SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
 
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand("Insert into Genres" +
@@ -190,7 +192,7 @@ namespace DataBase
         {
             if (textBoxPublishsName.Text.ToString() != "")
             {
-                SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
 
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand("Insert into Publishs" +

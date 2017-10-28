@@ -27,7 +27,9 @@ namespace DataBase
 
         int UserID;
         string Login;
-        
+
+        SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+
         public MainForm()
         {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace DataBase
         private void LoadToList()
         {
 
-            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
             SqlCommand sc = new SqlCommand("SELECT Books.Name FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID", conn);
 
@@ -185,42 +187,35 @@ namespace DataBase
             groupBoxSignIn.Location = new Point(1, 2);
             groupBoxMain.Location = new Point(1, 2);
 
-            string connStr = @"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;
-                            Initial Catalog=BookShop;
-                            Integrated Security=True";
-            SqlConnection connection = new SqlConnection(connStr);
+            //string connStr = @"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS; Initial Catalog=BookShop; Integrated Security=True";
+            //SqlConnection conn = new SqlConnection(connStr);
             try
             {
-                connection.Open();
+                conn.Open();
             }
             catch (SqlException se)
             {
                 if (se.Number == 4060)
                 {
                     //connection.Close(); //Видимо нету смысла это делать
-                    connection = new SqlConnection(@"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;Integrated Security=True");
+                    SqlConnection connection = new SqlConnection(@"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;Integrated Security=True");
                     SqlCommand cmdCreateDataBase = new SqlCommand(string.Format("CREATE DATABASE [{0}]", "BookShop"), connection);
                     connection.Open();
                     Console.WriteLine("Создаем Базу Данных");
                     cmdCreateDataBase.ExecuteNonQuery();
+                    Thread.Sleep(5000);
                     connection.Close();
-                    Thread.Sleep(10000);
+                    connection.Dispose();
 
-                    SqlConnection connection2 = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-                    CreateNewTable(connection2);
-
-                    connection2.Close();
-
-                    InsertToTable(connection2);
-
-                    connection = new SqlConnection(connStr);
-                    connection.Open();
+                    //SqlConnection connection2 = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+                    CreateNewTable(conn);
+                    InsertToTable(conn);
                 }
             }
             finally
             {
                 Console.WriteLine("Соединение успешно произведено");
-                connection.Close();
+                conn.Close();
                 //connection.Dispose();
             }
 
@@ -230,19 +225,19 @@ namespace DataBase
 
         private void RefreshData()
         {
-            SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-            connection.Open();
+            //SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            conn.Open();
 
             var selectBooks = "SELECT BookID as ID, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Count as Количество FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
 
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
-            selectBooks, connection))
+            selectBooks, conn))
             {
                 DataTable dt = new DataTable();
                 dataAdapter.Fill(dt);
                 dataGridView1.DataSource = dt.DefaultView;
             }
-            connection.Close();
+            conn.Close();
 
             DataGridViewColumn column = dataGridView1.Columns[0];
             column.Width = 25;
@@ -257,7 +252,7 @@ namespace DataBase
         private void ButtonSignIn_Click(object sender, EventArgs e)
         {
 
-            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
             if (textBoxLogin.Text.ToString() != "" && textBoxPass.Text.ToString() != "")
             {
@@ -307,7 +302,7 @@ namespace DataBase
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
 
             bool flag = false;
 
@@ -375,7 +370,7 @@ namespace DataBase
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            AddForm addForm = new AddForm();
+            AddForm addForm = new AddForm(conn);
             addForm.ShowDialog();
         }
 
@@ -383,7 +378,7 @@ namespace DataBase
         {
             try
             {
-                EditForm editForm = new EditForm(dataGridView1.CurrentCell.RowIndex + 1);
+                EditForm editForm = new EditForm(dataGridView1.CurrentCell.RowIndex + 1, conn);
                 editForm.ShowDialog();
             }
             catch (Exception se)
@@ -397,7 +392,7 @@ namespace DataBase
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
             using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
                    " SET Count = @Count WHERE BookID = @BookID", conn))
@@ -426,7 +421,7 @@ namespace DataBase
 
         private void buttonBuy_Click(object sender, EventArgs e)
         { 
-            SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
 
             int count;
@@ -490,17 +485,16 @@ namespace DataBase
                         return;
                     }
                 }
-
-                RefreshData();
-                LoadToList();
             }
             else MessageBox.Show("Книги в наличии нет", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             conn.Close();
+            RefreshData();
+            LoadToList();
         }
 
         private void buttonGoToBasket_Click(object sender, EventArgs e)
         {
-            BasketForm basketForm = new BasketForm(UserID, Login);
+            BasketForm basketForm = new BasketForm(UserID, Login, conn);
             basketForm.ShowDialog();
         }
     }
