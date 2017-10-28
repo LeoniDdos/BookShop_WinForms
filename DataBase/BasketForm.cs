@@ -71,7 +71,7 @@ namespace DataBase
                     return;
                 } 
                 
-                labelFullPrice.Text = labelFullPrice.Text + FullPrice.ToString();
+                labelFullPrice.Text = "Полная стоимость: " + FullPrice.ToString();
             }
             conn.Close();
         }
