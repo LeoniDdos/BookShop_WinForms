@@ -163,7 +163,7 @@
             this.comboBoxBooksGenre.Location = new System.Drawing.Point(174, 73);
             this.comboBoxBooksGenre.Name = "comboBoxBooksGenre";
             this.comboBoxBooksGenre.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxBooksGenre.TabIndex = 8;
+            this.comboBoxBooksGenre.TabIndex = 8;  
             // 
             // textBoxBooksYear
             // 

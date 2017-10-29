@@ -28,7 +28,6 @@ namespace DataBase
 
         public void RefreshData()
         {
-            //SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
 
             SqlCommand sc = new SqlCommand("SELECT Books.BookID as ID, Books.Name as Название, Books.Price as Стоимость FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID", conn);
@@ -52,9 +51,8 @@ namespace DataBase
 
         public void RefreshLabel()
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-            
             conn.Open();
+
             using (SqlCommand sqlout = new SqlCommand("SELECT SUM(Books.Price) FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID", conn))
             {
                 SqlParameter param2 = new SqlParameter();
@@ -68,6 +66,7 @@ namespace DataBase
                 catch (Exception se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    conn.Close();
                     return;
                 } 
                 
@@ -84,8 +83,6 @@ namespace DataBase
 
         private void buttonRemoveBook_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-
             conn.Open();
 
             using (SqlCommand cmd = new SqlCommand("DELETE TOP (1) FROM Baskets" +
@@ -105,6 +102,7 @@ namespace DataBase
                 catch (Exception se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    conn.Close();
                     return;
                 }
             }
@@ -118,12 +116,9 @@ namespace DataBase
         {
             if (dataGridViewBasket.Rows.Count > 1)
             {
-                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("DELETE FROM Baskets" +
-                      " WHERE UserID = @UserID", conn))
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM Baskets WHERE UserID = @UserID", conn))
                 {
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
@@ -136,6 +131,7 @@ namespace DataBase
                     catch (Exception se)
                     {
                         Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }

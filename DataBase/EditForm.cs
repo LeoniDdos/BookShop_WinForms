@@ -25,8 +25,8 @@ namespace DataBase
 
         private void DataRefresh()
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
+
             SqlCommand sc = new SqlCommand("SELECT GenreID, Name FROM Genres", conn);
             SqlDataReader reader;
 
@@ -76,8 +76,8 @@ namespace DataBase
 
         private void buttonAddBook_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
+
             using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
                    " SET Name = @Name, GenreID = @GenreID, AutorID = @AutorID, Year = @Year, PublishID = @PublishID, Price = @Price, Count = @Count WHERE BookID = @BookID", conn))
             {
@@ -108,6 +108,7 @@ namespace DataBase
                     catch (Exception se)
                     {
                         Console.WriteLine("Ошибка: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
@@ -145,8 +146,8 @@ namespace DataBase
 
         private void buttonAddAutor_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
+
             using (SqlCommand cmd = new SqlCommand("UPDATE Autors" +
                    " SET Name = @Name, Surname = @Surname, Patronymic = @Patronymic WHERE AutorID = @AutorID", conn))
             {
@@ -169,6 +170,7 @@ namespace DataBase
                     catch (Exception se)
                     {
                         Console.WriteLine("Ошибка: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
@@ -179,10 +181,9 @@ namespace DataBase
 
         private void buttonAddGenre_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("UPDATE Genres" +
-                   " SET Name = @Name WHERE GenreID = @GenreID", conn))
+
+            using (SqlCommand cmd = new SqlCommand("UPDATE Genres SET Name = @Name WHERE GenreID = @GenreID", conn))
             {
                 SqlParameter param = new SqlParameter();
 
@@ -200,6 +201,7 @@ namespace DataBase
                     catch (Exception se)
                     {
                         Console.WriteLine("Ошибка: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
@@ -210,10 +212,9 @@ namespace DataBase
 
         private void buttonAddPublish_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("UPDATE Publishs" +
-                   " SET Name = @Name WHERE PublishID = @PublishID", conn))
+
+            using (SqlCommand cmd = new SqlCommand("UPDATE Publishs SET Name = @Name WHERE PublishID = @PublishID", conn))
             {
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Name"; param.Value = textBoxPublishsName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
@@ -230,6 +231,7 @@ namespace DataBase
                     catch (Exception se)
                     {
                         Console.WriteLine("Ошибка: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }

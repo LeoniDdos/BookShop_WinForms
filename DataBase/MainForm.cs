@@ -14,17 +14,6 @@ namespace DataBase
 {
     public partial class MainForm : Form
     {
-      //static public int RowInd;
-        /*void ConnectTo() //Может всё таки использовать?
-        {
-            //connStringBuilder = new SqlConnectionStringBuilder();
-            //connStringBuilder.DataSource = "LAPTOP-8BSFAANR\\SQLEXPRESS";
-            //connStringBuilder.InitialCatalog = "Книги";
-            //connStringBuilder.IntegratedSecurity = true;
-
-            //conn = new SqlConnection(connStringBuilder.ToString());
-        }*/
-
         int UserID;
         string Login;
 
@@ -37,9 +26,8 @@ namespace DataBase
 
         private void LoadToList()
         {
-
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
+
             SqlCommand sc = new SqlCommand("SELECT Books.Name FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID", conn);
 
             SqlParameter param = new SqlParameter();
@@ -81,6 +69,7 @@ namespace DataBase
                 catch (SqlException se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    conn.Close();
                     return;
                 }
             }
@@ -98,6 +87,7 @@ namespace DataBase
                 catch (SqlException se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    conn.Close();
                     return;
                 }
             }
@@ -136,6 +126,7 @@ namespace DataBase
                 catch (SqlException se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    conn.Close();
                     return;
                 }
             }
@@ -152,10 +143,10 @@ namespace DataBase
             string CreateAutors = "CREATE TABLE Autors (AutorID int IDENTITY(1,1) PRIMARY KEY, Surname VarChar(30) not null, Name VarChar(30) not null, Patronymic VarChar(30)); ";
             string CreateBooks = "CREATE TABLE Books (BookID int IDENTITY(1,1) PRIMARY KEY, Name VarChar(30) not null, GenreID int FOREIGN KEY REFERENCES Genres(GenreID)," +
          "  AutorID int FOREIGN KEY REFERENCES Autors(AutorID), PublishID int FOREIGN KEY REFERENCES Publishs(PublishID), Year int not null, Price int not null, Count int not null); ";
-            string CreateBaskets = "CREATE TABLE Baskets (UserID int FOREIGN KEY REFERENCES Users(UserID), BookID int FOREIGN KEY REFERENCES Books(BookID))";
+            string CreateBaskets = "CREATE TABLE Baskets (UserID int FOREIGN KEY REFERENCES Users(UserID), BookID int FOREIGN KEY REFERENCES Books(BookID)); ";
+            string CreateOrders = "CREATE TABLE Orders (OrderID int IDENTITY(1,1) PRIMARY KEY, UserID int FOREIGN KEY REFERENCES Users(UserID))";
 
-
-            using (SqlCommand cmdCreateTable = new SqlCommand(CreatePublishs + CreateGenres + CreateUsers + CreateAutors + CreateBooks + CreateBaskets, conn))
+            using (SqlCommand cmdCreateTable = new SqlCommand(CreatePublishs + CreateGenres + CreateUsers + CreateAutors + CreateBooks + CreateBaskets + CreateOrders, conn))
             {
                 Console.WriteLine("Создаем таблицы");
                 try
@@ -165,6 +156,7 @@ namespace DataBase
                 catch (SqlException se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    conn.Close();
                     return;
                 }
             }
@@ -187,8 +179,6 @@ namespace DataBase
             groupBoxSignIn.Location = new Point(1, 2);
             groupBoxMain.Location = new Point(1, 2);
 
-            //string connStr = @"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS; Initial Catalog=BookShop; Integrated Security=True";
-            //SqlConnection conn = new SqlConnection(connStr);
             try
             {
                 conn.Open();
@@ -197,7 +187,6 @@ namespace DataBase
             {
                 if (se.Number == 4060)
                 {
-                    //connection.Close(); //Видимо нету смысла это делать
                     SqlConnection connection = new SqlConnection(@"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;Integrated Security=True");
                     SqlCommand cmdCreateDataBase = new SqlCommand(string.Format("CREATE DATABASE [{0}]", "BookShop"), connection);
                     connection.Open();
@@ -207,7 +196,6 @@ namespace DataBase
                     connection.Close();
                     connection.Dispose();
 
-                    //SqlConnection connection2 = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
                     CreateNewTable(conn);
                     InsertToTable(conn);
                 }
@@ -216,7 +204,6 @@ namespace DataBase
             {
                 Console.WriteLine("Соединение успешно произведено");
                 conn.Close();
-                //connection.Dispose();
             }
 
             RefreshData();
@@ -225,18 +212,17 @@ namespace DataBase
 
         private void RefreshData()
         {
-            //SqlConnection connection = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
 
             var selectBooks = "SELECT BookID as ID, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Count as Количество FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
 
-            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(
-            selectBooks, conn))
+            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(selectBooks, conn))
             {
                 DataTable dt = new DataTable();
                 dataAdapter.Fill(dt);
                 dataGridView1.DataSource = dt.DefaultView;
             }
+
             conn.Close();
 
             DataGridViewColumn column = dataGridView1.Columns[0];
@@ -251,9 +237,8 @@ namespace DataBase
 
         private void ButtonSignIn_Click(object sender, EventArgs e)
         {
-
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
+
             if (textBoxLogin.Text.ToString() != "" && textBoxPass.Text.ToString() != "")
             {
                 string Name = textBoxLogin.Text.ToString();
@@ -291,8 +276,6 @@ namespace DataBase
                         buttonEdit.Visible = false;
                         buttonDelete.Visible = false;
                     }
-
-                    //MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else MessageBox.Show("Что-то введено не так!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -302,8 +285,6 @@ namespace DataBase
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-
             bool flag = false;
 
             conn.Open();
@@ -322,6 +303,7 @@ namespace DataBase
                 try
                 {
                     cmd.ExecuteNonQuery();
+
                     flag = true;
 
                     Login = textBoxLogin.Text;
@@ -329,6 +311,7 @@ namespace DataBase
                 catch (Exception se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    conn.Close();
                     return;
                 }
             }
@@ -347,12 +330,11 @@ namespace DataBase
                     catch (Exception se)
                     {
                         Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
 
                     UserID = (int)sqlout.ExecuteScalar();
-
-                    //MessageBox.Show(UserID.ToString(), "UserID", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             conn.Close();
@@ -387,15 +369,13 @@ namespace DataBase
                 MessageBox.Show("Выберите строку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
-                   " SET Count = @Count WHERE BookID = @BookID", conn))
+
+            using (SqlCommand cmd = new SqlCommand("UPDATE Books SET Count = @Count WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Count"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
@@ -411,17 +391,19 @@ namespace DataBase
                     catch (Exception se)
                     {
                         Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
             }
+
             conn.Close();
+
             MessageBox.Show("Книга успешно удалена", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonBuy_Click(object sender, EventArgs e)
         { 
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
 
             int count;
@@ -438,15 +420,15 @@ namespace DataBase
                 catch (Exception se)
                 {
                     Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                    conn.Close();
                     return;
                 }
 
-                count = (int)sqlout.ExecuteScalar(); //Без переменной можно
+                count = (int)sqlout.ExecuteScalar();
             }
             if (count > 0)
             {
-                using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
-                     " SET Count = Count - 1 WHERE BookID = @BookID", conn))
+                using (SqlCommand cmd = new SqlCommand("UPDATE Books SET Count = Count - 1 WHERE BookID = @BookID", conn))
                 {
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
@@ -461,13 +443,13 @@ namespace DataBase
                         catch (Exception se)
                         {
                             Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                            conn.Close();
                             return;
                         }
                     }
                 }
 
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Baskets" +
-                  "(UserID, BookID) Values (@UserID, @BookID)", conn))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Baskets (UserID, BookID) Values (@UserID, @BookID)", conn))
                 {
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
@@ -482,12 +464,15 @@ namespace DataBase
                     catch (Exception se)
                     {
                         Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
             }
             else MessageBox.Show("Книги в наличии нет", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             conn.Close();
+
             RefreshData();
             LoadToList();
         }

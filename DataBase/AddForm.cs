@@ -22,8 +22,8 @@ namespace DataBase
 
         private void DataRefresh()
         {
-            //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
             conn.Open();
+
             SqlCommand sc = new SqlCommand("SELECT GenreID, Name FROM Genres", conn);
             SqlDataReader reader;
 
@@ -75,9 +75,8 @@ namespace DataBase
         {
             if (textBoxBooksName.Text.ToString() != "" && textBoxBooksYear.Text.ToString() != "" && textBoxBooksPrice.Text.ToString() != "" && textBoxBooksCount.Text.ToString() != "")
             {
-                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-               
                 conn.Open();
+
                 using (SqlCommand cmd = new SqlCommand("Insert into Books" +
                             "(Name,GenreID,AutorID,Year,PublishID,Price,Count) Values (@Name,@GenreID,@AutorID,@Year,@PublishID,@Price,@Count)", conn))
                 {
@@ -104,6 +103,7 @@ namespace DataBase
                     catch (SqlException se)
                     {
                         Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
@@ -124,11 +124,9 @@ namespace DataBase
         {
             if (textBoxAutorsSurname.Text.ToString() != "" && textBoxAutorsName.Text.ToString() != "" && textBoxAutorsPatronymic.Text.ToString() != "")
             {
-                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("Insert into Autors" +
-                            "(Surname,Name,Patronymic) Values (@Surname,@Name,@Patronymic)", conn))
+
+                using (SqlCommand cmd = new SqlCommand("Insert into Autors (Surname,Name,Patronymic) Values (@Surname,@Name,@Patronymic)", conn))
                 {
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Surname"; param.Value = textBoxAutorsSurname.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
@@ -144,14 +142,18 @@ namespace DataBase
                     catch (SqlException se)
                     {
                         Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                conn.Close();
+
                 textBoxAutorsSurname.Text = "";
                 textBoxAutorsName.Text = "";
                 textBoxAutorsPatronymic.Text = "";
+
+                conn.Close();
+
                 DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -161,11 +163,9 @@ namespace DataBase
         {
             if (textBoxGenresName.Text.ToString() != "")
             {
-                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("Insert into Genres" +
-                            "(Name) Values (@Name)", conn))
+
+                using (SqlCommand cmd = new SqlCommand("Insert into Genres (Name) Values (@Name)", conn))
                 {
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Name"; param.Value = textBoxGenresName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
@@ -177,12 +177,16 @@ namespace DataBase
                     catch (SqlException se)
                     {
                         Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                conn.Close();
+                
                 textBoxGenresName.Text = "";
+
+                conn.Close();
+
                 DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -192,11 +196,9 @@ namespace DataBase
         {
             if (textBoxPublishsName.Text.ToString() != "")
             {
-                //SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
-
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("Insert into Publishs" +
-                            "(Name) Values (@Name)", conn))
+
+                using (SqlCommand cmd = new SqlCommand("Insert into Publishs (Name) Values (@Name)", conn))
                 {
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Name"; param.Value = textBoxPublishsName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
@@ -208,12 +210,16 @@ namespace DataBase
                     catch (SqlException se)
                     {
                         Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
                         return;
                     }
                 }
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                conn.Close();
+                
                 textBoxPublishsName.Text = "";
+
+                conn.Close();
+
                 DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
