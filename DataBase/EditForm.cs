@@ -66,6 +66,27 @@ namespace DataBase
             comboBoxBooksPublish.DisplayMember = "Name";
             comboBoxBooksPublish.DataSource = dt3;
 
+            string getP = "SELECT Name, GenreID, AutorID, Year, PublishID, Price, Count FROM Books WHERE BookID = @BookID";
+
+            SqlCommand commandBrands = new SqlCommand(getP, conn);
+
+            commandBrands.Parameters.AddWithValue("@BookID", BookID);
+
+            using (SqlDataReader reader4 = commandBrands.ExecuteReader())
+            {
+                while (reader4.Read())
+                {
+                    textBoxBooksName.Text = reader4["Name"].ToString();
+                    textBoxBooksYear.Text = reader4["Year"].ToString();
+                    textBoxBooksPrice.Text = reader4["Price"].ToString();
+                    textBoxBooksCount.Text = reader4["Year"].ToString();
+                    
+                    comboBoxBooksGenre.SelectedIndex = Convert.ToInt32(reader4["GenreID"]) - 1;
+                    comboBoxBooksAutor.SelectedIndex = Convert.ToInt32(reader4["AutorID"]) - 1;
+                    comboBoxBooksPublish.SelectedIndex = Convert.ToInt32(reader4["PublishID"]) - 1;
+                }
+            }
+
             conn.Close();
         }
 
