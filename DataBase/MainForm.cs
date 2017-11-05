@@ -267,6 +267,10 @@ namespace DataBase
 
             RefreshData();
             LoadToList();
+
+            comboBoxSearch.Items.Add("Название");
+            comboBoxSearch.Items.Add("Автор");
+            comboBoxSearch.SelectedIndex = 0;
         }
 
         private void RefreshData()
@@ -540,6 +544,40 @@ namespace DataBase
         {
             BasketForm basketForm = new BasketForm(UserID, Login, conn);
             basketForm.ShowDialog();
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            if (textBoxSearch.Text.ToString() != "")
+            {
+                SqlCommand sc = new SqlCommand();
+                conn.Open();
+
+                if (comboBoxSearch.SelectedIndex == 0)
+                {
+                    sc = new SqlCommand("SELECT BookID as ID, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Count as Количество FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID = Books.PublishID WHERE Books.Name = @Name", conn);
+
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@Name"; param.Value = textBoxSearch.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; sc.Parameters.Add(param);
+                }
+                else if (comboBoxSearch.SelectedIndex == 1)
+                {
+                    sc = new SqlCommand("SELECT BookID as ID, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Count as Количество FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID = Books.PublishID WHERE Autors.Surname = @Autor", conn);
+
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@Autor"; param.Value = textBoxSearch.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; sc.Parameters.Add(param);
+                }
+
+                SqlDataReader reader;
+
+                reader = sc.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                dataGridView1.DataSource = dt;
+
+                conn.Close();
+            }
+            else MessageBox.Show("Заполните поле поиска", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

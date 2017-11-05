@@ -51,6 +51,9 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.книгиBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource)).BeginInit();
@@ -64,7 +67,7 @@
             // OutDataButton
             // 
             this.OutDataButton.BackColor = System.Drawing.Color.Silver;
-            this.OutDataButton.Location = new System.Drawing.Point(553, 344);
+            this.OutDataButton.Location = new System.Drawing.Point(566, 344);
             this.OutDataButton.Name = "OutDataButton";
             this.OutDataButton.Size = new System.Drawing.Size(94, 38);
             this.OutDataButton.TabIndex = 9;
@@ -234,6 +237,9 @@
             // 
             // groupBoxMain
             // 
+            this.groupBoxMain.Controls.Add(this.comboBoxSearch);
+            this.groupBoxMain.Controls.Add(this.textBoxSearch);
+            this.groupBoxMain.Controls.Add(this.buttonSearch);
             this.groupBoxMain.Controls.Add(this.OutDataButton);
             this.groupBoxMain.Controls.Add(this.buttonDelete);
             this.groupBoxMain.Controls.Add(this.buttonEdit);
@@ -252,11 +258,11 @@
             // 
             this.buttonDelete.BackColor = System.Drawing.Color.Silver;
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelete.Location = new System.Drawing.Point(206, 344);
+            this.buttonDelete.Location = new System.Drawing.Point(172, 344);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(94, 38);
+            this.buttonDelete.Size = new System.Drawing.Size(77, 38);
             this.buttonDelete.TabIndex = 7;
-            this.buttonDelete.Text = "Удалить";
+            this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = false;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
@@ -264,11 +270,11 @@
             // 
             this.buttonEdit.BackColor = System.Drawing.Color.Silver;
             this.buttonEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonEdit.Location = new System.Drawing.Point(106, 344);
+            this.buttonEdit.Location = new System.Drawing.Point(89, 344);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(94, 38);
+            this.buttonEdit.Size = new System.Drawing.Size(77, 38);
             this.buttonEdit.TabIndex = 6;
-            this.buttonEdit.Text = "Изменить";
+            this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = false;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
@@ -278,11 +284,38 @@
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonAdd.Location = new System.Drawing.Point(6, 344);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(94, 38);
+            this.buttonAdd.Size = new System.Drawing.Size(77, 38);
             this.buttonAdd.TabIndex = 5;
-            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSearch.Location = new System.Drawing.Point(485, 344);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 38);
+            this.buttonSearch.TabIndex = 10;
+            this.buttonSearch.Text = "Искать";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(377, 352);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(102, 22);
+            this.textBoxSearch.TabIndex = 11;
+            // 
+            // comboBoxSearch
+            // 
+            this.comboBoxSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSearch.FormattingEnabled = true;
+            this.comboBoxSearch.Location = new System.Drawing.Point(261, 352);
+            this.comboBoxSearch.Name = "comboBoxSearch";
+            this.comboBoxSearch.Size = new System.Drawing.Size(103, 24);
+            this.comboBoxSearch.TabIndex = 12;
             // 
             // MainForm
             // 
@@ -305,6 +338,7 @@
             this.groupBoxSignIn.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBoxMain.ResumeLayout(false);
+            this.groupBoxMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -332,6 +366,9 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.ComboBox comboBoxSearch;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }
 
