@@ -79,13 +79,52 @@ namespace DataBase
                     textBoxBooksName.Text = reader4["Name"].ToString();
                     textBoxBooksYear.Text = reader4["Year"].ToString();
                     textBoxBooksPrice.Text = reader4["Price"].ToString();
-                    textBoxBooksCount.Text = reader4["Year"].ToString();
+                    textBoxBooksCount.Text = reader4["Count"].ToString();
                     
                     comboBoxBooksGenre.SelectedIndex = Convert.ToInt32(reader4["GenreID"]) - 1;
                     comboBoxBooksAutor.SelectedIndex = Convert.ToInt32(reader4["AutorID"]) - 1;
                     comboBoxBooksPublish.SelectedIndex = Convert.ToInt32(reader4["PublishID"]) - 1;
                 }
             }
+
+            SqlCommand sc5 = new SqlCommand("SELECT AutorID, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') AS FIO FROM Autors", conn);
+            SqlDataReader reader5;
+
+            reader5 = sc5.ExecuteReader();
+            DataTable dt5 = new DataTable();
+            dt5.Columns.Add("GenreID", typeof(string));
+            dt5.Columns.Add("Name", typeof(string));
+            dt5.Load(reader5);
+
+            comboBoxEditAutor.ValueMember = "AutorID";
+            comboBoxEditAutor.DisplayMember = "FIO";
+            comboBoxEditAutor.DataSource = dt5;
+
+            SqlCommand sc6 = new SqlCommand("SELECT GenreID, Name FROM Genres", conn);
+            SqlDataReader reader6;
+
+            reader6 = sc6.ExecuteReader();
+            DataTable dt6 = new DataTable();
+            dt6.Columns.Add("GenreID", typeof(string));
+            dt6.Columns.Add("Name", typeof(string));
+            dt6.Load(reader6);
+
+            comboBoxEditGenre.ValueMember = "GenreID";
+            comboBoxEditGenre.DisplayMember = "Name";
+            comboBoxEditGenre.DataSource = dt6;
+
+            SqlCommand sc7 = new SqlCommand("SELECT PublishID, Name FROM Publishs", conn);
+            SqlDataReader reader7;
+
+            reader7 = sc7.ExecuteReader();
+            DataTable dt7 = new DataTable();
+            dt7.Columns.Add("PublishID", typeof(string));
+            dt7.Columns.Add("Name", typeof(string));
+            dt7.Load(reader7);
+
+            comboBoxEditPublish.ValueMember = "PublishID";
+            comboBoxEditPublish.DisplayMember = "Name";
+            comboBoxEditPublish.DataSource = dt7;
 
             conn.Close();
         }
@@ -95,7 +134,7 @@ namespace DataBase
             DataRefresh();   
         }
 
-        private void buttonAddBook_Click(object sender, EventArgs e)
+        private void buttonEditBook_Click(object sender, EventArgs e)
         {
             conn.Open();
 
@@ -165,7 +204,7 @@ namespace DataBase
             }
         }
 
-        private void buttonAddAutor_Click(object sender, EventArgs e)
+        private void buttonEditAutor_Click(object sender, EventArgs e)
         {
             conn.Open();
 
@@ -179,7 +218,7 @@ namespace DataBase
                 param = new SqlParameter();
                 param.ParameterName = "@Patronymic"; param.Value = textBoxAutorsPatronymic.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@AutorID"; param.Value = textBoxAutorID.Text.ToString(); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param.ParameterName = "@AutorID"; param.Value = comboBoxEditAutor.SelectedIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                 
                 Console.WriteLine("Изменяем запись");
                 {
@@ -200,7 +239,7 @@ namespace DataBase
             Close();
         }
 
-        private void buttonAddGenre_Click(object sender, EventArgs e)
+        private void buttonEditGenre_Click(object sender, EventArgs e)
         {
             conn.Open();
 
@@ -210,7 +249,7 @@ namespace DataBase
 
                 param.ParameterName = "@Name"; param.Value = textBoxGenresName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@GenreID"; param.Value = textBoxGenreID.Text.ToString(); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param.ParameterName = "@GenreID"; param.Value = comboBoxEditGenre.SelectedIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                 Console.WriteLine("Изменяем запись");
                 {
@@ -231,7 +270,7 @@ namespace DataBase
             Close();
         }
 
-        private void buttonAddPublish_Click(object sender, EventArgs e)
+        private void buttonEditPublish_Click(object sender, EventArgs e)
         {
             conn.Open();
 
@@ -240,7 +279,7 @@ namespace DataBase
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Name"; param.Value = textBoxPublishsName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@PublishID"; param.Value = textBoxPublishID.Text.ToString(); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param.ParameterName = "@PublishID"; param.Value = comboBoxEditPublish.SelectedIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                 Console.WriteLine("Изменяем запись");
                 {
@@ -259,33 +298,6 @@ namespace DataBase
             }
             conn.Close();
             Close();
-        }
-
-        private void textBoxAutorID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBoxGenreID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBoxPublishID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
-            {
-                e.Handled = true;
-            }
         }
     }
 }

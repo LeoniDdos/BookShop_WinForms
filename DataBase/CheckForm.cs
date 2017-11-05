@@ -18,6 +18,7 @@ namespace DataBase
         string Login;
         int FullPrice;
         int BookCount;
+        DateTime thisDay = DateTime.Today;
 
         public CheckForm(int UserID, string Login, int FullPrice, int BookCount)
         {
@@ -50,6 +51,7 @@ namespace DataBase
             labelLogin.Text = labelLogin.Text + Login;
             labelBookCount.Text = labelBookCount.Text + BookCount;
             labelFullPrice.Text = labelFullPrice.Text + FullPrice;
+            labelDate.Text = labelDate.Text + " " + thisDay.ToString("d");
         }
 
         private void buttonPrintCheck_Click(object sender, EventArgs e)

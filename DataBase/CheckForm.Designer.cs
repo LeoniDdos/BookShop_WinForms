@@ -34,21 +34,25 @@
             this.labelFullPrice = new System.Windows.Forms.Label();
             this.labelBookCount = new System.Windows.Forms.Label();
             this.labelLogin = new System.Windows.Forms.Label();
-            this.labelCheck = new System.Windows.Forms.Label();
+            this.labelBookShop = new System.Windows.Forms.Label();
             this.buttonPrintCheck = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.labelOrderNum = new System.Windows.Forms.Label();
+            this.labelDate = new System.Windows.Forms.Label();
             this.groupBoxCheck.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxCheck
             // 
             this.groupBoxCheck.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBoxCheck.Controls.Add(this.labelDate);
+            this.groupBoxCheck.Controls.Add(this.labelOrderNum);
             this.groupBoxCheck.Controls.Add(this.label5);
             this.groupBoxCheck.Controls.Add(this.labelFullPrice);
             this.groupBoxCheck.Controls.Add(this.labelBookCount);
             this.groupBoxCheck.Controls.Add(this.labelLogin);
-            this.groupBoxCheck.Controls.Add(this.labelCheck);
+            this.groupBoxCheck.Controls.Add(this.labelBookShop);
             this.groupBoxCheck.Location = new System.Drawing.Point(0, -22);
             this.groupBoxCheck.Name = "groupBoxCheck";
             this.groupBoxCheck.Size = new System.Drawing.Size(326, 302);
@@ -94,15 +98,15 @@
             this.labelLogin.TabIndex = 1;
             this.labelLogin.Text = "Логин: ";
             // 
-            // labelCheck
+            // labelBookShop
             // 
-            this.labelCheck.AutoSize = true;
-            this.labelCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCheck.Location = new System.Drawing.Point(133, 31);
-            this.labelCheck.Name = "labelCheck";
-            this.labelCheck.Size = new System.Drawing.Size(59, 29);
-            this.labelCheck.TabIndex = 0;
-            this.labelCheck.Text = "Чек";
+            this.labelBookShop.AutoSize = true;
+            this.labelBookShop.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelBookShop.Location = new System.Drawing.Point(96, 31);
+            this.labelBookShop.Name = "labelBookShop";
+            this.labelBookShop.Size = new System.Drawing.Size(134, 29);
+            this.labelBookShop.TabIndex = 0;
+            this.labelBookShop.Text = "BookShop";
             // 
             // buttonPrintCheck
             // 
@@ -131,6 +135,26 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
+            // labelOrderNum
+            // 
+            this.labelOrderNum.AutoSize = true;
+            this.labelOrderNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelOrderNum.Location = new System.Drawing.Point(43, 82);
+            this.labelOrderNum.Name = "labelOrderNum";
+            this.labelOrderNum.Size = new System.Drawing.Size(144, 20);
+            this.labelOrderNum.TabIndex = 5;
+            this.labelOrderNum.Text = "Номер заказа:";
+            // 
+            // labelDate
+            // 
+            this.labelDate.AutoSize = true;
+            this.labelDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDate.Location = new System.Drawing.Point(63, 224);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(120, 18);
+            this.labelDate.TabIndex = 6;
+            this.labelDate.Text = "Дата покупки:";
+            // 
             // CheckForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -156,9 +180,11 @@
         private System.Windows.Forms.Label labelFullPrice;
         private System.Windows.Forms.Label labelBookCount;
         private System.Windows.Forms.Label labelLogin;
-        private System.Windows.Forms.Label labelCheck;
+        private System.Windows.Forms.Label labelBookShop;
         private System.Windows.Forms.Button buttonPrintCheck;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.Label labelOrderNum;
+        private System.Windows.Forms.Label labelDate;
     }
 }

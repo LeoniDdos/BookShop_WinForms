@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonAddBook = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
+            this.tabPageEditBook = new System.Windows.Forms.TabPage();
+            this.buttonEditBook = new System.Windows.Forms.Button();
+            this.labelEditBook = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxBooksCount = new System.Windows.Forms.TextBox();
             this.comboBoxBooksPublish = new System.Windows.Forms.ComboBox();
@@ -46,96 +46,96 @@
             this.comboBoxBooksGenre = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
-            this.textBoxAutorID = new System.Windows.Forms.TextBox();
+            this.tabPageEditAutor = new System.Windows.Forms.TabPage();
+            this.labelSelectAutor = new System.Windows.Forms.Label();
+            this.comboBoxEditAutor = new System.Windows.Forms.ComboBox();
             this.textBoxAutorsPatronymic = new System.Windows.Forms.TextBox();
             this.textBoxAutorsName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.labelEditAutor = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxAutorsSurname = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.buttonAddAutor = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label18 = new System.Windows.Forms.Label();
-            this.textBoxGenreID = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.buttonEditAutor = new System.Windows.Forms.Button();
+            this.tabPageEditGenre = new System.Windows.Forms.TabPage();
+            this.labelSelectGenre = new System.Windows.Forms.Label();
+            this.comboBoxEditGenre = new System.Windows.Forms.ComboBox();
+            this.labelEditGenre = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxGenresName = new System.Windows.Forms.TextBox();
-            this.buttonAddGenre = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textBoxPublishID = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.buttonEditGenre = new System.Windows.Forms.Button();
+            this.tabPageEditPublish = new System.Windows.Forms.TabPage();
+            this.labelSelectPublish = new System.Windows.Forms.Label();
+            this.comboBoxEditPublish = new System.Windows.Forms.ComboBox();
+            this.labelEditPublish = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxPublishsName = new System.Windows.Forms.TextBox();
-            this.buttonAddPublish = new System.Windows.Forms.Button();
+            this.buttonEditPublish = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabPageEditBook.SuspendLayout();
+            this.tabPageEditAutor.SuspendLayout();
+            this.tabPageEditGenre.SuspendLayout();
+            this.tabPageEditPublish.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPageEditBook);
+            this.tabControl1.Controls.Add(this.tabPageEditAutor);
+            this.tabControl1.Controls.Add(this.tabPageEditGenre);
+            this.tabControl1.Controls.Add(this.tabPageEditPublish);
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(408, 372);
             this.tabControl1.TabIndex = 16;
             // 
-            // tabPage1
+            // tabPageEditBook
             // 
-            this.tabPage1.Controls.Add(this.buttonAddBook);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.textBoxBooksCount);
-            this.tabPage1.Controls.Add(this.comboBoxBooksPublish);
-            this.tabPage1.Controls.Add(this.textBoxBooksPrice);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.comboBoxBooksAutor);
-            this.tabPage1.Controls.Add(this.textBoxBooksName);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.textBoxBooksYear);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.comboBoxBooksGenre);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(400, 343);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Книги";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageEditBook.Controls.Add(this.buttonEditBook);
+            this.tabPageEditBook.Controls.Add(this.labelEditBook);
+            this.tabPageEditBook.Controls.Add(this.label7);
+            this.tabPageEditBook.Controls.Add(this.textBoxBooksCount);
+            this.tabPageEditBook.Controls.Add(this.comboBoxBooksPublish);
+            this.tabPageEditBook.Controls.Add(this.textBoxBooksPrice);
+            this.tabPageEditBook.Controls.Add(this.label6);
+            this.tabPageEditBook.Controls.Add(this.label1);
+            this.tabPageEditBook.Controls.Add(this.comboBoxBooksAutor);
+            this.tabPageEditBook.Controls.Add(this.textBoxBooksName);
+            this.tabPageEditBook.Controls.Add(this.label5);
+            this.tabPageEditBook.Controls.Add(this.textBoxBooksYear);
+            this.tabPageEditBook.Controls.Add(this.label2);
+            this.tabPageEditBook.Controls.Add(this.comboBoxBooksGenre);
+            this.tabPageEditBook.Controls.Add(this.label4);
+            this.tabPageEditBook.Controls.Add(this.label3);
+            this.tabPageEditBook.Location = new System.Drawing.Point(4, 25);
+            this.tabPageEditBook.Name = "tabPageEditBook";
+            this.tabPageEditBook.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEditBook.Size = new System.Drawing.Size(400, 343);
+            this.tabPageEditBook.TabIndex = 0;
+            this.tabPageEditBook.Text = "Книги";
+            this.tabPageEditBook.UseVisualStyleBackColor = true;
             // 
-            // buttonAddBook
+            // buttonEditBook
             // 
-            this.buttonAddBook.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.buttonAddBook.Location = new System.Drawing.Point(130, 283);
-            this.buttonAddBook.Name = "buttonAddBook";
-            this.buttonAddBook.Size = new System.Drawing.Size(107, 36);
-            this.buttonAddBook.TabIndex = 15;
-            this.buttonAddBook.Text = "Изменить";
-            this.buttonAddBook.UseVisualStyleBackColor = false;
-            this.buttonAddBook.Click += new System.EventHandler(this.buttonAddBook_Click);
+            this.buttonEditBook.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.buttonEditBook.Location = new System.Drawing.Point(130, 283);
+            this.buttonEditBook.Name = "buttonEditBook";
+            this.buttonEditBook.Size = new System.Drawing.Size(107, 36);
+            this.buttonEditBook.TabIndex = 15;
+            this.buttonEditBook.Text = "Изменить";
+            this.buttonEditBook.UseVisualStyleBackColor = false;
+            this.buttonEditBook.Click += new System.EventHandler(this.buttonEditBook_Click);
             // 
-            // label8
+            // labelEditBook
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(106, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(185, 18);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Редактирование книги";
+            this.labelEditBook.AutoSize = true;
+            this.labelEditBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelEditBook.Location = new System.Drawing.Point(106, 3);
+            this.labelEditBook.Name = "labelEditBook";
+            this.labelEditBook.Size = new System.Drawing.Size(185, 18);
+            this.labelEditBook.TabIndex = 14;
+            this.labelEditBook.Text = "Редактирование книги";
             // 
             // label7
             // 
@@ -265,73 +265,74 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Автор:";
             // 
-            // tabPage2
+            // tabPageEditAutor
             // 
-            this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.textBoxAutorID);
-            this.tabPage2.Controls.Add(this.textBoxAutorsPatronymic);
-            this.tabPage2.Controls.Add(this.textBoxAutorsName);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.textBoxAutorsSurname);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.buttonAddAutor);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(400, 343);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Авторы";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageEditAutor.Controls.Add(this.labelSelectAutor);
+            this.tabPageEditAutor.Controls.Add(this.comboBoxEditAutor);
+            this.tabPageEditAutor.Controls.Add(this.textBoxAutorsPatronymic);
+            this.tabPageEditAutor.Controls.Add(this.textBoxAutorsName);
+            this.tabPageEditAutor.Controls.Add(this.labelEditAutor);
+            this.tabPageEditAutor.Controls.Add(this.label10);
+            this.tabPageEditAutor.Controls.Add(this.textBoxAutorsSurname);
+            this.tabPageEditAutor.Controls.Add(this.label11);
+            this.tabPageEditAutor.Controls.Add(this.label12);
+            this.tabPageEditAutor.Controls.Add(this.buttonEditAutor);
+            this.tabPageEditAutor.Location = new System.Drawing.Point(4, 25);
+            this.tabPageEditAutor.Name = "tabPageEditAutor";
+            this.tabPageEditAutor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEditAutor.Size = new System.Drawing.Size(400, 343);
+            this.tabPageEditAutor.TabIndex = 1;
+            this.tabPageEditAutor.Text = "Авторы";
+            this.tabPageEditAutor.UseVisualStyleBackColor = true;
             // 
-            // label17
+            // labelSelectAutor
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(312, 238);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(29, 18);
-            this.label17.TabIndex = 27;
-            this.label17.Text = "ID:";
+            this.labelSelectAutor.AutoSize = true;
+            this.labelSelectAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSelectAutor.Location = new System.Drawing.Point(29, 69);
+            this.labelSelectAutor.Name = "labelSelectAutor";
+            this.labelSelectAutor.Size = new System.Drawing.Size(190, 18);
+            this.labelSelectAutor.TabIndex = 29;
+            this.labelSelectAutor.Text = "Выберите для изменения:";
             // 
-            // textBoxAutorID
+            // comboBoxEditAutor
             // 
-            this.textBoxAutorID.Location = new System.Drawing.Point(312, 261);
-            this.textBoxAutorID.Name = "textBoxAutorID";
-            this.textBoxAutorID.Size = new System.Drawing.Size(62, 22);
-            this.textBoxAutorID.TabIndex = 26;
-            this.textBoxAutorID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAutorID_KeyPress);
+            this.comboBoxEditAutor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEditAutor.FormattingEnabled = true;
+            this.comboBoxEditAutor.Location = new System.Drawing.Point(248, 67);
+            this.comboBoxEditAutor.Name = "comboBoxEditAutor";
+            this.comboBoxEditAutor.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxEditAutor.TabIndex = 28;
             // 
             // textBoxAutorsPatronymic
             // 
-            this.textBoxAutorsPatronymic.Location = new System.Drawing.Point(188, 166);
+            this.textBoxAutorsPatronymic.Location = new System.Drawing.Point(188, 211);
             this.textBoxAutorsPatronymic.Name = "textBoxAutorsPatronymic";
             this.textBoxAutorsPatronymic.Size = new System.Drawing.Size(121, 22);
             this.textBoxAutorsPatronymic.TabIndex = 25;
             // 
             // textBoxAutorsName
             // 
-            this.textBoxAutorsName.Location = new System.Drawing.Point(188, 121);
+            this.textBoxAutorsName.Location = new System.Drawing.Point(188, 169);
             this.textBoxAutorsName.Name = "textBoxAutorsName";
             this.textBoxAutorsName.Size = new System.Drawing.Size(121, 22);
             this.textBoxAutorsName.TabIndex = 24;
             // 
-            // label9
+            // labelEditAutor
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(120, 24);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(196, 18);
-            this.label9.TabIndex = 23;
-            this.label9.Text = "Редактирование автора";
+            this.labelEditAutor.AutoSize = true;
+            this.labelEditAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelEditAutor.Location = new System.Drawing.Point(120, 24);
+            this.labelEditAutor.Name = "labelEditAutor";
+            this.labelEditAutor.Size = new System.Drawing.Size(196, 18);
+            this.labelEditAutor.TabIndex = 23;
+            this.labelEditAutor.Text = "Редактирование автора";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(74, 81);
+            this.label10.Location = new System.Drawing.Point(74, 124);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(85, 18);
             this.label10.TabIndex = 17;
@@ -339,7 +340,7 @@
             // 
             // textBoxAutorsSurname
             // 
-            this.textBoxAutorsSurname.Location = new System.Drawing.Point(188, 77);
+            this.textBoxAutorsSurname.Location = new System.Drawing.Point(188, 124);
             this.textBoxAutorsSurname.Name = "textBoxAutorsSurname";
             this.textBoxAutorsSurname.Size = new System.Drawing.Size(121, 22);
             this.textBoxAutorsSurname.TabIndex = 20;
@@ -348,7 +349,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(113, 121);
+            this.label11.Location = new System.Drawing.Point(113, 173);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(46, 18);
             this.label11.TabIndex = 18;
@@ -358,72 +359,73 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(71, 166);
+            this.label12.Location = new System.Drawing.Point(71, 214);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(88, 18);
             this.label12.TabIndex = 19;
             this.label12.Text = "Отчество:";
             // 
-            // buttonAddAutor
+            // buttonEditAutor
             // 
-            this.buttonAddAutor.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.buttonAddAutor.Location = new System.Drawing.Point(143, 254);
-            this.buttonAddAutor.Name = "buttonAddAutor";
-            this.buttonAddAutor.Size = new System.Drawing.Size(107, 36);
-            this.buttonAddAutor.TabIndex = 16;
-            this.buttonAddAutor.Text = "Изменить";
-            this.buttonAddAutor.UseVisualStyleBackColor = false;
-            this.buttonAddAutor.Click += new System.EventHandler(this.buttonAddAutor_Click);
+            this.buttonEditAutor.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.buttonEditAutor.Location = new System.Drawing.Point(144, 272);
+            this.buttonEditAutor.Name = "buttonEditAutor";
+            this.buttonEditAutor.Size = new System.Drawing.Size(107, 36);
+            this.buttonEditAutor.TabIndex = 16;
+            this.buttonEditAutor.Text = "Изменить";
+            this.buttonEditAutor.UseVisualStyleBackColor = false;
+            this.buttonEditAutor.Click += new System.EventHandler(this.buttonEditAutor_Click);
             // 
-            // tabPage3
+            // tabPageEditGenre
             // 
-            this.tabPage3.Controls.Add(this.label18);
-            this.tabPage3.Controls.Add(this.textBoxGenreID);
-            this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.label14);
-            this.tabPage3.Controls.Add(this.textBoxGenresName);
-            this.tabPage3.Controls.Add(this.buttonAddGenre);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(400, 343);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Жанры";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPageEditGenre.Controls.Add(this.labelSelectGenre);
+            this.tabPageEditGenre.Controls.Add(this.comboBoxEditGenre);
+            this.tabPageEditGenre.Controls.Add(this.labelEditGenre);
+            this.tabPageEditGenre.Controls.Add(this.label14);
+            this.tabPageEditGenre.Controls.Add(this.textBoxGenresName);
+            this.tabPageEditGenre.Controls.Add(this.buttonEditGenre);
+            this.tabPageEditGenre.Location = new System.Drawing.Point(4, 25);
+            this.tabPageEditGenre.Name = "tabPageEditGenre";
+            this.tabPageEditGenre.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEditGenre.Size = new System.Drawing.Size(400, 343);
+            this.tabPageEditGenre.TabIndex = 2;
+            this.tabPageEditGenre.Text = "Жанры";
+            this.tabPageEditGenre.UseVisualStyleBackColor = true;
             // 
-            // label18
+            // labelSelectGenre
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(309, 254);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(29, 18);
-            this.label18.TabIndex = 33;
-            this.label18.Text = "ID:";
+            this.labelSelectGenre.AutoSize = true;
+            this.labelSelectGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSelectGenre.Location = new System.Drawing.Point(27, 83);
+            this.labelSelectGenre.Name = "labelSelectGenre";
+            this.labelSelectGenre.Size = new System.Drawing.Size(190, 18);
+            this.labelSelectGenre.TabIndex = 35;
+            this.labelSelectGenre.Text = "Выберите для изменения:";
             // 
-            // textBoxGenreID
+            // comboBoxEditGenre
             // 
-            this.textBoxGenreID.Location = new System.Drawing.Point(312, 275);
-            this.textBoxGenreID.Name = "textBoxGenreID";
-            this.textBoxGenreID.Size = new System.Drawing.Size(62, 22);
-            this.textBoxGenreID.TabIndex = 32;
-            this.textBoxGenreID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxGenreID_KeyPress);
+            this.comboBoxEditGenre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEditGenre.FormattingEnabled = true;
+            this.comboBoxEditGenre.Location = new System.Drawing.Point(244, 81);
+            this.comboBoxEditGenre.Name = "comboBoxEditGenre";
+            this.comboBoxEditGenre.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxEditGenre.TabIndex = 34;
             // 
-            // label13
+            // labelEditGenre
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(130, 43);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(190, 18);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "Редактирование жанра";
+            this.labelEditGenre.AutoSize = true;
+            this.labelEditGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelEditGenre.Location = new System.Drawing.Point(112, 37);
+            this.labelEditGenre.Name = "labelEditGenre";
+            this.labelEditGenre.Size = new System.Drawing.Size(190, 18);
+            this.labelEditGenre.TabIndex = 31;
+            this.labelEditGenre.Text = "Редактирование жанра";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(85, 121);
+            this.label14.Location = new System.Drawing.Point(82, 147);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(88, 18);
             this.label14.TabIndex = 27;
@@ -431,71 +433,72 @@
             // 
             // textBoxGenresName
             // 
-            this.textBoxGenresName.Location = new System.Drawing.Point(202, 121);
+            this.textBoxGenresName.Location = new System.Drawing.Point(203, 147);
             this.textBoxGenresName.Name = "textBoxGenresName";
             this.textBoxGenresName.Size = new System.Drawing.Size(121, 22);
             this.textBoxGenresName.TabIndex = 30;
             // 
-            // buttonAddGenre
+            // buttonEditGenre
             // 
-            this.buttonAddGenre.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.buttonAddGenre.Location = new System.Drawing.Point(153, 268);
-            this.buttonAddGenre.Name = "buttonAddGenre";
-            this.buttonAddGenre.Size = new System.Drawing.Size(107, 36);
-            this.buttonAddGenre.TabIndex = 26;
-            this.buttonAddGenre.Text = "Изменить";
-            this.buttonAddGenre.UseVisualStyleBackColor = false;
-            this.buttonAddGenre.Click += new System.EventHandler(this.buttonAddGenre_Click);
+            this.buttonEditGenre.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.buttonEditGenre.Location = new System.Drawing.Point(153, 268);
+            this.buttonEditGenre.Name = "buttonEditGenre";
+            this.buttonEditGenre.Size = new System.Drawing.Size(107, 36);
+            this.buttonEditGenre.TabIndex = 26;
+            this.buttonEditGenre.Text = "Изменить";
+            this.buttonEditGenre.UseVisualStyleBackColor = false;
+            this.buttonEditGenre.Click += new System.EventHandler(this.buttonEditGenre_Click);
             // 
-            // tabPage4
+            // tabPageEditPublish
             // 
-            this.tabPage4.Controls.Add(this.label19);
-            this.tabPage4.Controls.Add(this.textBoxPublishID);
-            this.tabPage4.Controls.Add(this.label15);
-            this.tabPage4.Controls.Add(this.label16);
-            this.tabPage4.Controls.Add(this.textBoxPublishsName);
-            this.tabPage4.Controls.Add(this.buttonAddPublish);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(400, 343);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Издательства";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPageEditPublish.Controls.Add(this.labelSelectPublish);
+            this.tabPageEditPublish.Controls.Add(this.comboBoxEditPublish);
+            this.tabPageEditPublish.Controls.Add(this.labelEditPublish);
+            this.tabPageEditPublish.Controls.Add(this.label16);
+            this.tabPageEditPublish.Controls.Add(this.textBoxPublishsName);
+            this.tabPageEditPublish.Controls.Add(this.buttonEditPublish);
+            this.tabPageEditPublish.Location = new System.Drawing.Point(4, 25);
+            this.tabPageEditPublish.Name = "tabPageEditPublish";
+            this.tabPageEditPublish.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEditPublish.Size = new System.Drawing.Size(400, 343);
+            this.tabPageEditPublish.TabIndex = 3;
+            this.tabPageEditPublish.Text = "Издательства";
+            this.tabPageEditPublish.UseVisualStyleBackColor = true;
             // 
-            // label19
+            // labelSelectPublish
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label19.Location = new System.Drawing.Point(313, 252);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(29, 18);
-            this.label19.TabIndex = 37;
-            this.label19.Text = "ID:";
+            this.labelSelectPublish.AutoSize = true;
+            this.labelSelectPublish.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSelectPublish.Location = new System.Drawing.Point(26, 78);
+            this.labelSelectPublish.Name = "labelSelectPublish";
+            this.labelSelectPublish.Size = new System.Drawing.Size(190, 18);
+            this.labelSelectPublish.TabIndex = 39;
+            this.labelSelectPublish.Text = "Выберите для изменения:";
             // 
-            // textBoxPublishID
+            // comboBoxEditPublish
             // 
-            this.textBoxPublishID.Location = new System.Drawing.Point(316, 273);
-            this.textBoxPublishID.Name = "textBoxPublishID";
-            this.textBoxPublishID.Size = new System.Drawing.Size(62, 22);
-            this.textBoxPublishID.TabIndex = 36;
-            this.textBoxPublishID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPublishID_KeyPress);
+            this.comboBoxEditPublish.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEditPublish.FormattingEnabled = true;
+            this.comboBoxEditPublish.Location = new System.Drawing.Point(245, 76);
+            this.comboBoxEditPublish.Name = "comboBoxEditPublish";
+            this.comboBoxEditPublish.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxEditPublish.TabIndex = 38;
             // 
-            // label15
+            // labelEditPublish
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(81, 26);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(250, 18);
-            this.label15.TabIndex = 35;
-            this.label15.Text = "Редактирование издательства";
+            this.labelEditPublish.AutoSize = true;
+            this.labelEditPublish.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelEditPublish.Location = new System.Drawing.Point(81, 26);
+            this.labelEditPublish.Name = "labelEditPublish";
+            this.labelEditPublish.Size = new System.Drawing.Size(250, 18);
+            this.labelEditPublish.TabIndex = 35;
+            this.labelEditPublish.Text = "Редактирование издательства";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(81, 119);
+            this.label16.Location = new System.Drawing.Point(85, 137);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(88, 18);
             this.label16.TabIndex = 33;
@@ -503,21 +506,21 @@
             // 
             // textBoxPublishsName
             // 
-            this.textBoxPublishsName.Location = new System.Drawing.Point(198, 119);
+            this.textBoxPublishsName.Location = new System.Drawing.Point(202, 137);
             this.textBoxPublishsName.Name = "textBoxPublishsName";
             this.textBoxPublishsName.Size = new System.Drawing.Size(121, 22);
             this.textBoxPublishsName.TabIndex = 34;
             // 
-            // buttonAddPublish
+            // buttonEditPublish
             // 
-            this.buttonAddPublish.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.buttonAddPublish.Location = new System.Drawing.Point(149, 266);
-            this.buttonAddPublish.Name = "buttonAddPublish";
-            this.buttonAddPublish.Size = new System.Drawing.Size(107, 36);
-            this.buttonAddPublish.TabIndex = 32;
-            this.buttonAddPublish.Text = "Изменить";
-            this.buttonAddPublish.UseVisualStyleBackColor = false;
-            this.buttonAddPublish.Click += new System.EventHandler(this.buttonAddPublish_Click);
+            this.buttonEditPublish.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.buttonEditPublish.Location = new System.Drawing.Point(149, 266);
+            this.buttonEditPublish.Name = "buttonEditPublish";
+            this.buttonEditPublish.Size = new System.Drawing.Size(107, 36);
+            this.buttonEditPublish.TabIndex = 32;
+            this.buttonEditPublish.Text = "Изменить";
+            this.buttonEditPublish.UseVisualStyleBackColor = false;
+            this.buttonEditPublish.Click += new System.EventHandler(this.buttonEditPublish_Click);
             // 
             // EditForm
             // 
@@ -531,14 +534,14 @@
             this.Text = "Редактирование";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.tabPageEditBook.ResumeLayout(false);
+            this.tabPageEditBook.PerformLayout();
+            this.tabPageEditAutor.ResumeLayout(false);
+            this.tabPageEditAutor.PerformLayout();
+            this.tabPageEditGenre.ResumeLayout(false);
+            this.tabPageEditGenre.PerformLayout();
+            this.tabPageEditPublish.ResumeLayout(false);
+            this.tabPageEditPublish.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -546,9 +549,9 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button buttonAddBook;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TabPage tabPageEditBook;
+        private System.Windows.Forms.Button buttonEditBook;
+        private System.Windows.Forms.Label labelEditBook;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxBooksCount;
         private System.Windows.Forms.ComboBox comboBoxBooksPublish;
@@ -563,30 +566,30 @@
         private System.Windows.Forms.ComboBox comboBoxBooksGenre;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageEditAutor;
         private System.Windows.Forms.TextBox textBoxAutorsPatronymic;
         private System.Windows.Forms.TextBox textBoxAutorsName;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelEditAutor;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBoxAutorsSurname;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button buttonAddAutor;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button buttonEditAutor;
+        private System.Windows.Forms.TabPage tabPageEditGenre;
+        private System.Windows.Forms.Label labelEditGenre;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxGenresName;
-        private System.Windows.Forms.Button buttonAddGenre;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button buttonEditGenre;
+        private System.Windows.Forms.TabPage tabPageEditPublish;
+        private System.Windows.Forms.Label labelEditPublish;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBoxPublishsName;
-        private System.Windows.Forms.Button buttonAddPublish;
-        private System.Windows.Forms.TextBox textBoxAutorID;
-        private System.Windows.Forms.TextBox textBoxGenreID;
-        private System.Windows.Forms.TextBox textBoxPublishID;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button buttonEditPublish;
+        private System.Windows.Forms.Label labelSelectAutor;
+        private System.Windows.Forms.ComboBox comboBoxEditAutor;
+        private System.Windows.Forms.Label labelSelectGenre;
+        private System.Windows.Forms.ComboBox comboBoxEditGenre;
+        private System.Windows.Forms.Label labelSelectPublish;
+        private System.Windows.Forms.ComboBox comboBoxEditPublish;
     }
 }
