@@ -99,9 +99,9 @@ namespace DataBase
             dt.Columns.Add("Name", typeof(string));
             dt.Load(reader);
 
-            listBox1.ValueMember = "GenreID";
-            listBox1.DisplayMember = "Name";
-            listBox1.DataSource = dt;
+            listBoxBasket.ValueMember = "GenreID";
+            listBoxBasket.DisplayMember = "Name";
+            listBoxBasket.DataSource = dt;
 
             conn.Close();
         }
@@ -283,12 +283,12 @@ namespace DataBase
             {
                 DataTable dt = new DataTable();
                 dataAdapter.Fill(dt);
-                dataGridView1.DataSource = dt.DefaultView;
+                dataGridViewBooks.DataSource = dt.DefaultView;
             }
 
             conn.Close();
 
-            DataGridViewColumn column = dataGridView1.Columns[0];
+            DataGridViewColumn column = dataGridViewBooks.Columns[0];
             column.Width = 25;
         } 
 
@@ -307,13 +307,13 @@ namespace DataBase
                 string Name = textBoxLogin.Text.ToString();
                 string pass = "";
                 string Level = "";
-                string getP = "SELECT Password, Level, UserID FROM Users WHERE Name = @Name";
+                string cmd = "SELECT Password, Level, UserID FROM Users WHERE Name = @Name";
 
-                SqlCommand commandBrands = new SqlCommand(getP, conn);
+                SqlCommand sc = new SqlCommand(cmd, conn);
 
-                commandBrands.Parameters.AddWithValue("@Name", Name);
+                sc.Parameters.AddWithValue("@Name", Name);
 
-                using (SqlDataReader reader = commandBrands.ExecuteReader())
+                using (SqlDataReader reader = sc.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -351,6 +351,7 @@ namespace DataBase
             bool flag = false;
 
             conn.Open();
+
             if (textBoxLogin.Text.ToString() != "" && textBoxPass.Text.ToString() != "")
             using (SqlCommand cmd = new SqlCommand("INSERT INTO Users" +
                 "(Name,Password,Level) Values (@Name,@Password,@Level)", conn))
@@ -423,7 +424,7 @@ namespace DataBase
         {
             try
             {
-                EditForm editForm = new EditForm(dataGridView1.CurrentCell.RowIndex + 1, conn);
+                EditForm editForm = new EditForm(dataGridViewBooks.CurrentCell.RowIndex + 1, conn);
                 editForm.ShowDialog();
             }
             catch (Exception se)
@@ -443,7 +444,7 @@ namespace DataBase
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Count"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param.ParameterName = "@BookID"; param.Value = dataGridViewBooks.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                 Console.WriteLine("Изменяем запись");
                 {
@@ -474,7 +475,7 @@ namespace DataBase
             using (SqlCommand sqlout = new SqlCommand("SELECT Count FROM Books WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
-                param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; sqlout.Parameters.Add(param);
+                param.ParameterName = "@BookID"; param.Value = dataGridViewBooks.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; sqlout.Parameters.Add(param);
 
                 try
                 {
@@ -494,7 +495,7 @@ namespace DataBase
                 using (SqlCommand cmd = new SqlCommand("UPDATE Books SET Count = Count - 1 WHERE BookID = @BookID", conn))
                 {
                     SqlParameter param = new SqlParameter();
-                    param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param.ParameterName = "@BookID"; param.Value = dataGridViewBooks.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                     Console.WriteLine("Изменяем запись");
                     {
@@ -517,7 +518,7 @@ namespace DataBase
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                     param = new SqlParameter();
-                    param.ParameterName = "@BookID"; param.Value = dataGridView1.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param.ParameterName = "@BookID"; param.Value = dataGridViewBooks.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                     Console.WriteLine("Вставляем запись");
                     try
@@ -573,7 +574,7 @@ namespace DataBase
                 reader = sc.ExecuteReader();
                 DataTable dt = new DataTable();
                 dt.Load(reader);
-                dataGridView1.DataSource = dt;
+                dataGridViewBooks.DataSource = dt;
 
                 conn.Close();
             }

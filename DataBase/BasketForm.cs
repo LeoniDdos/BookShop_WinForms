@@ -85,27 +85,29 @@ namespace DataBase
         {
             conn.Open();
 
-            using (SqlCommand cmd = new SqlCommand("DELETE TOP (1) FROM Baskets" +
-                  " WHERE UserID = @UserID AND BookID = @BookID; UPDATE Books" +
-                   " SET Count = Count + 1 WHERE BookID = @BookID", conn))
-            {
-                SqlParameter param = new SqlParameter();
-                param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                param = new SqlParameter();
-                param.ParameterName = "@BookID"; param.Value = dataGridViewBasket[0, dataGridViewBasket.CurrentCell.RowIndex].Value; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                // Обработать удаление когда ничего нет
-                Console.WriteLine("Удаляем запись");
-                try
+            if (dataGridViewBasket.Rows.Count > 1)
+                using (SqlCommand cmd = new SqlCommand("DELETE TOP (1) FROM Baskets" +
+                      " WHERE UserID = @UserID AND BookID = @BookID; UPDATE Books" +
+                       " SET Count = Count + 1 WHERE BookID = @BookID", conn))
                 {
-                    cmd.ExecuteNonQuery();
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param = new SqlParameter();
+                    param.ParameterName = "@BookID"; param.Value = dataGridViewBasket[0, dataGridViewBasket.CurrentCell.RowIndex].Value; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+
+                    Console.WriteLine("Удаляем запись");
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception se)
+                    {
+                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
+                        conn.Close();
+                        return;
+                    }
                 }
-                catch (Exception se)
-                {
-                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                    conn.Close();
-                    return;
-                }
-            }
+            else MessageBox.Show("В корзине нет книг", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             conn.Close();
 
             RefreshData();

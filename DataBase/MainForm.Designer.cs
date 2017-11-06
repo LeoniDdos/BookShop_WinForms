@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.OutDataButton = new System.Windows.Forms.Button();
             this.buttonBuy = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewBooks = new System.Windows.Forms.DataGridView();
             this.книгиBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookShopDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookShopDataSet = new DataBase.BookShopDataSet();
             this.книгиTableAdapter = new DataBase.BookShopDataSetTableAdapters.КнигиTableAdapter();
             this.groupBoxBasket = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxBasket = new System.Windows.Forms.ListBox();
             this.buttonGoToBasket = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,13 +48,13 @@
             this.groupBoxSignIn = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBoxMain = new System.Windows.Forms.GroupBox();
+            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonSearch = new System.Windows.Forms.Button();
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
-            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.книгиBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSet)).BeginInit();
@@ -87,17 +87,17 @@
             this.buttonBuy.UseVisualStyleBackColor = false;
             this.buttonBuy.Click += new System.EventHandler(this.buttonBuy_Click);
             // 
-            // dataGridView1
+            // dataGridViewBooks
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 29);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(755, 292);
-            this.dataGridView1.TabIndex = 2;
+            this.dataGridViewBooks.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridViewBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewBooks.Location = new System.Drawing.Point(6, 29);
+            this.dataGridViewBooks.Name = "dataGridViewBooks";
+            this.dataGridViewBooks.ReadOnly = true;
+            this.dataGridViewBooks.RowTemplate.Height = 24;
+            this.dataGridViewBooks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewBooks.Size = new System.Drawing.Size(755, 292);
+            this.dataGridViewBooks.TabIndex = 2;
             // 
             // книгиBindingSource
             // 
@@ -120,7 +120,7 @@
             // 
             // groupBoxBasket
             // 
-            this.groupBoxBasket.Controls.Add(this.listBox1);
+            this.groupBoxBasket.Controls.Add(this.listBoxBasket);
             this.groupBoxBasket.Controls.Add(this.buttonGoToBasket);
             this.groupBoxBasket.Location = new System.Drawing.Point(786, 16);
             this.groupBoxBasket.Name = "groupBoxBasket";
@@ -129,14 +129,14 @@
             this.groupBoxBasket.TabStop = false;
             this.groupBoxBasket.Text = "Корзина";
             // 
-            // listBox1
+            // listBoxBasket
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(15, 56);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(225, 244);
-            this.listBox1.TabIndex = 1;
+            this.listBoxBasket.FormattingEnabled = true;
+            this.listBoxBasket.ItemHeight = 16;
+            this.listBoxBasket.Location = new System.Drawing.Point(15, 56);
+            this.listBoxBasket.Name = "listBoxBasket";
+            this.listBoxBasket.Size = new System.Drawing.Size(225, 244);
+            this.listBoxBasket.TabIndex = 1;
             // 
             // buttonGoToBasket
             // 
@@ -245,7 +245,7 @@
             this.groupBoxMain.Controls.Add(this.buttonEdit);
             this.groupBoxMain.Controls.Add(this.buttonAdd);
             this.groupBoxMain.Controls.Add(this.groupBoxBasket);
-            this.groupBoxMain.Controls.Add(this.dataGridView1);
+            this.groupBoxMain.Controls.Add(this.dataGridViewBooks);
             this.groupBoxMain.Controls.Add(this.buttonBuy);
             this.groupBoxMain.Location = new System.Drawing.Point(1, 2);
             this.groupBoxMain.Name = "groupBoxMain";
@@ -253,6 +253,33 @@
             this.groupBoxMain.TabIndex = 12;
             this.groupBoxMain.TabStop = false;
             this.groupBoxMain.Text = "Магазин";
+            // 
+            // comboBoxSearch
+            // 
+            this.comboBoxSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSearch.FormattingEnabled = true;
+            this.comboBoxSearch.Location = new System.Drawing.Point(261, 352);
+            this.comboBoxSearch.Name = "comboBoxSearch";
+            this.comboBoxSearch.Size = new System.Drawing.Size(103, 24);
+            this.comboBoxSearch.TabIndex = 12;
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(377, 352);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(102, 22);
+            this.textBoxSearch.TabIndex = 11;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSearch.Location = new System.Drawing.Point(485, 344);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 38);
+            this.buttonSearch.TabIndex = 10;
+            this.buttonSearch.Text = "Искать";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // buttonDelete
             // 
@@ -290,33 +317,6 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // buttonSearch
-            // 
-            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSearch.Location = new System.Drawing.Point(485, 344);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(75, 38);
-            this.buttonSearch.TabIndex = 10;
-            this.buttonSearch.Text = "Искать";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
-            // 
-            // textBoxSearch
-            // 
-            this.textBoxSearch.Location = new System.Drawing.Point(377, 352);
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(102, 22);
-            this.textBoxSearch.TabIndex = 11;
-            // 
-            // comboBoxSearch
-            // 
-            this.comboBoxSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSearch.FormattingEnabled = true;
-            this.comboBoxSearch.Location = new System.Drawing.Point(261, 352);
-            this.comboBoxSearch.Name = "comboBoxSearch";
-            this.comboBoxSearch.Size = new System.Drawing.Size(103, 24);
-            this.comboBoxSearch.TabIndex = 12;
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -329,7 +329,7 @@
             this.Name = "MainForm";
             this.Text = "BookShop";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.книгиBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSet)).EndInit();
@@ -349,9 +349,9 @@
         private BookShopDataSet bookShopDataSet;
         private System.Windows.Forms.BindingSource книгиBindingSource;
         private BookShopDataSetTableAdapters.КнигиTableAdapter книгиTableAdapter;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewBooks;
         private System.Windows.Forms.GroupBox groupBoxBasket;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxBasket;
         private System.Windows.Forms.Button buttonGoToBasket;
         private System.Windows.Forms.Button buttonBuy;
         private System.Windows.Forms.Button ButtonSignIn;
