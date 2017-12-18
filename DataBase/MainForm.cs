@@ -367,9 +367,7 @@ namespace DataBase
                 try
                 {
                     cmd.ExecuteNonQuery();
-
                     flag = true;
-
                     Login = textBoxLogin.Text;
                 }
                 catch (Exception se)
@@ -475,7 +473,7 @@ namespace DataBase
             using (SqlCommand sqlout = new SqlCommand("SELECT Count FROM Books WHERE BookID = @BookID", conn))
             {
                 SqlParameter param = new SqlParameter();
-                param.ParameterName = "@BookID"; param.Value = dataGridViewBooks.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; sqlout.Parameters.Add(param);
+                param.ParameterName = "@BookID"; param.Value = dataGridViewBooks[0, dataGridViewBooks.CurrentCell.RowIndex].Value; param.SqlDbType = SqlDbType.Int; sqlout.Parameters.Add(param);
 
                 try
                 {
@@ -495,7 +493,7 @@ namespace DataBase
                 using (SqlCommand cmd = new SqlCommand("UPDATE Books SET Count = Count - 1 WHERE BookID = @BookID", conn))
                 {
                     SqlParameter param = new SqlParameter();
-                    param.ParameterName = "@BookID"; param.Value = dataGridViewBooks.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param.ParameterName = "@BookID"; param.Value = dataGridViewBooks[0, dataGridViewBooks.CurrentCell.RowIndex].Value; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                     Console.WriteLine("Изменяем запись");
                     {
@@ -518,7 +516,7 @@ namespace DataBase
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                     param = new SqlParameter();
-                    param.ParameterName = "@BookID"; param.Value = dataGridViewBooks.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param.ParameterName = "@BookID"; param.Value = dataGridViewBooks[0, dataGridViewBooks.CurrentCell.RowIndex].Value; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                     Console.WriteLine("Вставляем запись");
                     try
@@ -536,7 +534,7 @@ namespace DataBase
             else MessageBox.Show("Книги в наличии нет", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             conn.Close();
-
+            textBoxSearch.Text = "";
             RefreshData();
             LoadToList();
         }

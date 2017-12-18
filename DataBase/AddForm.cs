@@ -111,7 +111,6 @@ namespace DataBase
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 conn.Close();
-
                 textBoxBooksName.Text = "";
                 textBoxBooksYear.Text = "";
                 textBoxBooksPrice.Text = "";
@@ -151,9 +150,7 @@ namespace DataBase
                 textBoxAutorsSurname.Text = "";
                 textBoxAutorsName.Text = "";
                 textBoxAutorsPatronymic.Text = "";
-
                 conn.Close();
-
                 DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -184,9 +181,7 @@ namespace DataBase
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                 textBoxGenresName.Text = "";
-
                 conn.Close();
-
                 DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -217,9 +212,7 @@ namespace DataBase
                 MessageBox.Show("Данные успешно введены", "Ввод", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                 textBoxPublishsName.Text = "";
-
                 conn.Close();
-
                 DataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
