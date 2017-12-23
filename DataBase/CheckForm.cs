@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,50 +15,65 @@ namespace DataBase
 {
     public partial class CheckForm : Form
     {
-        int UserID;
-        string Login;
-        int FullPrice;
-        int BookCount;
+        int userID;
+        string login;
+        int fullPrice;
+        int bookCount;
         DateTime thisDay = DateTime.Today;
+
+        private string documentContents;
+        private string stringToPrint;
 
         public CheckForm(int UserID, string Login, int FullPrice, int BookCount)
         {
             InitializeComponent();
-            this.UserID = UserID;
-            this.FullPrice = FullPrice;
-            this.BookCount = BookCount;
-            this.Login = Login;
+            this.userID = UserID;
+            this.fullPrice = FullPrice;
+            this.bookCount = BookCount;
+            this.login = Login;
         }
 
-        Bitmap memoryImage;
-
-        private void CaptureScreen()
+        private void ReadDocument()
         {
-            Graphics myGraphics = this.CreateGraphics();
-            Size s = this.Size;
-            memoryImage = new Bitmap(s.Width, s.Height, myGraphics);
-            Graphics memoryGraphics = Graphics.FromImage(memoryImage);
-            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
+            string docName = "Check.txt";
+            printDocument1.DocumentName = docName;
+            using (FileStream stream = new FileStream(docName, FileMode.Open))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                documentContents = reader.ReadToEnd();
+            }
+            stringToPrint = documentContents;
         }
 
-        private void printDocument1_PrintPage(System.Object sender,
-               System.Drawing.Printing.PrintPageEventArgs e)
+        void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
-            e.Graphics.DrawImage(memoryImage, 0, 0);
+            int charactersOnPage = 0;
+            int linesPerPage = 0;
+
+            e.Graphics.MeasureString(stringToPrint, this.Font,
+                e.MarginBounds.Size, StringFormat.GenericTypographic,
+                out charactersOnPage, out linesPerPage);
+            e.Graphics.DrawString(stringToPrint, this.Font, Brushes.Black,
+            e.MarginBounds, StringFormat.GenericTypographic);
+            stringToPrint = stringToPrint.Substring(charactersOnPage);
+            e.HasMorePages = (stringToPrint.Length > 0);
+            if (!e.HasMorePages)
+                stringToPrint = documentContents;
         }
 
         private void CheckForm_Load(object sender, EventArgs e)
         {
-            labelLogin.Text = labelLogin.Text + Login;
-            labelBookCount.Text = labelBookCount.Text + BookCount;
-            labelFullPrice.Text = labelFullPrice.Text + FullPrice;
+            labelLogin.Text = labelLogin.Text + login;
+            labelBookCount.Text = labelBookCount.Text + bookCount;
+            labelFullPrice.Text = labelFullPrice.Text + fullPrice;
             labelDate.Text = labelDate.Text + " " + thisDay.ToString("d");
         }
 
         private void buttonPrintCheck_Click(object sender, EventArgs e)
         {
-            CaptureScreen();
-            printDocument1.Print();
+            ReadDocument();
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.ShowDialog();
         }
     }
 }

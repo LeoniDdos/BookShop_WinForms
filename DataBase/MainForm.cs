@@ -15,8 +15,8 @@ namespace DataBase
 {
     public partial class MainForm : Form
     {
-        int UserID;
-        string Login;
+        int userID;
+        string login;
 
         SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
 
@@ -83,14 +83,14 @@ namespace DataBase
             return true;
         }
 
-        private void LoadToList()
+        private void loadToList()
         {
             conn.Open();
 
             SqlCommand sc = new SqlCommand("SELECT Books.Name FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID", conn);
 
             SqlParameter param = new SqlParameter();
-            param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; sc.Parameters.Add(param);
+            param.ParameterName = "@UserID"; param.Value = userID; param.SqlDbType = SqlDbType.Int; sc.Parameters.Add(param);
 
             SqlDataReader reader;
             reader = sc.ExecuteReader();
@@ -106,7 +106,7 @@ namespace DataBase
             conn.Close();
         }
 
-        private static void InsertToTable(SqlConnection conn)
+        private static void insertToTable(SqlConnection conn)
         {
             conn.Open();
 
@@ -192,7 +192,7 @@ namespace DataBase
             conn.Close();
         }
 
-        private static void CreateNewTable(SqlConnection conn)
+        private static void createNewTable(SqlConnection conn)
         {
             conn.Open();
 
@@ -255,8 +255,8 @@ namespace DataBase
                     connection.Close();
                     connection.Dispose();
 
-                    CreateNewTable(conn);
-                    InsertToTable(conn);
+                    createNewTable(conn);
+                    insertToTable(conn);
                 }
             }
             finally
@@ -265,15 +265,15 @@ namespace DataBase
                 conn.Close();
             }
 
-            RefreshData();
-            LoadToList();
+            refreshData();
+            loadToList();
 
             comboBoxSearch.Items.Add("Название");
             comboBoxSearch.Items.Add("Автор");
             comboBoxSearch.SelectedIndex = 0;
         }
 
-        private void RefreshData()
+        private void refreshData()
         {
             conn.Open();
 
@@ -294,8 +294,8 @@ namespace DataBase
 
         private void OutDataButton_Click(object sender, EventArgs e)
         {
-            RefreshData();
-            LoadToList();
+            refreshData();
+            loadToList();
         }
 
         private void ButtonSignIn_Click(object sender, EventArgs e)
@@ -319,12 +319,12 @@ namespace DataBase
                     {
                         pass = reader["Password"].ToString();
                         Level = reader["Level"].ToString();
-                        UserID = Convert.ToInt32(reader["UserID"]);
+                        userID = Convert.ToInt32(reader["UserID"]);
                     }
                 }
                 if (VerifyHashedPassword(pass, textBoxPass.Text.ToString()))
                 {
-                    Login = textBoxLogin.Text;
+                    login = textBoxLogin.Text;
 
                     groupBoxSignIn.Visible = false;
                     groupBoxMain.Visible = true;
@@ -368,7 +368,7 @@ namespace DataBase
                 {
                     cmd.ExecuteNonQuery();
                     flag = true;
-                    Login = textBoxLogin.Text;
+                    login = textBoxLogin.Text;
                 }
                 catch (Exception se)
                 {
@@ -396,7 +396,7 @@ namespace DataBase
                         return;
                     }
 
-                    UserID = (int)sqlout.ExecuteScalar();
+                    userID = (int)sqlout.ExecuteScalar();
                 }
 
             conn.Close();
@@ -514,7 +514,7 @@ namespace DataBase
                 using (SqlCommand cmd = new SqlCommand("INSERT INTO Baskets (UserID, BookID) Values (@UserID, @BookID)", conn))
                 {
                     SqlParameter param = new SqlParameter();
-                    param.ParameterName = "@UserID"; param.Value = UserID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param.ParameterName = "@UserID"; param.Value = userID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                     param = new SqlParameter();
                     param.ParameterName = "@BookID"; param.Value = dataGridViewBooks[0, dataGridViewBooks.CurrentCell.RowIndex].Value; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
@@ -535,13 +535,13 @@ namespace DataBase
 
             conn.Close();
             textBoxSearch.Text = "";
-            RefreshData();
-            LoadToList();
+            refreshData();
+            loadToList();
         }
 
         private void buttonGoToBasket_Click(object sender, EventArgs e)
         {
-            BasketForm basketForm = new BasketForm(UserID, Login, conn);
+            BasketForm basketForm = new BasketForm(userID, login, conn);
             basketForm.ShowDialog();
         }
 

@@ -20,7 +20,7 @@ namespace DataBase
             this.conn = conn;
         }
 
-        private void DataRefresh()
+        private void dataRefresh()
         {
             conn.Open();
 
@@ -68,7 +68,7 @@ namespace DataBase
 
         private void AddForm_Load(object sender, EventArgs e)
         {
-            DataRefresh();
+            dataRefresh();
         }
 
         private void buttonAddBook_Click(object sender, EventArgs e)
@@ -151,7 +151,7 @@ namespace DataBase
                 textBoxAutorsName.Text = "";
                 textBoxAutorsPatronymic.Text = "";
                 conn.Close();
-                DataRefresh();
+                dataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -182,7 +182,7 @@ namespace DataBase
                 
                 textBoxGenresName.Text = "";
                 conn.Close();
-                DataRefresh();
+                dataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -213,7 +213,7 @@ namespace DataBase
                 
                 textBoxPublishsName.Text = "";
                 conn.Close();
-                DataRefresh();
+                dataRefresh();
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

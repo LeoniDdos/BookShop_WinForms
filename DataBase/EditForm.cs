@@ -13,17 +13,17 @@ namespace DataBase
 {
     public partial class EditForm : Form
     {
-        int BookID;
+        int bookID;
         SqlConnection conn;
 
         public EditForm(int BookID, SqlConnection conn)
         {
             InitializeComponent();
-            this.BookID = BookID;
+            this.bookID = BookID;
             this.conn = conn;
         }
 
-        private void DataRefresh()
+        private void dataRefresh()
         {
             conn.Open();
 
@@ -70,7 +70,7 @@ namespace DataBase
 
             SqlCommand commandBrands = new SqlCommand(getP, conn);
 
-            commandBrands.Parameters.AddWithValue("@BookID", BookID);
+            commandBrands.Parameters.AddWithValue("@BookID", bookID);
 
             using (SqlDataReader reader4 = commandBrands.ExecuteReader())
             {
@@ -131,7 +131,7 @@ namespace DataBase
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            DataRefresh();   
+            dataRefresh();   
         }
 
         private void buttonEditBook_Click(object sender, EventArgs e)
@@ -156,7 +156,7 @@ namespace DataBase
                 param = new SqlParameter();
                 param.ParameterName = "@Count"; param.Value = Convert.ToInt32(textBoxBooksCount.Text); param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                 param = new SqlParameter();
-                param.ParameterName = "@BookID"; param.Value = BookID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                param.ParameterName = "@BookID"; param.Value = bookID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
                 
                 Console.WriteLine("Изменяем запись");
                 {
