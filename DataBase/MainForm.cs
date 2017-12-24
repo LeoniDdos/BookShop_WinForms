@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Threading;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace DataBase
 {
@@ -17,8 +18,9 @@ namespace DataBase
     {
         int userID;
         string login;
+        string serverName;
 
-        SqlConnection conn = new SqlConnection(@"Server=LAPTOP-8BSFAANR\SQLEXPRESS;Database=BookShop;Trusted_Connection=Yes;");
+        SqlConnection conn;
 
         public MainForm()
         {
@@ -229,15 +231,38 @@ namespace DataBase
             this.MaximumSize = new System.Drawing.Size(353, 404);
             this.MinimumSize = new System.Drawing.Size(353, 404);
 
-            groupBoxSignIn.Visible = true;
+            groupBoxSignIn.Visible = false;
             groupBoxMain.Visible = false;
+            groupBoxServerName.Visible = false;
 
             groupBoxSignIn.Size = new System.Drawing.Size(334, 356);
+            groupBoxServerName.Size = new System.Drawing.Size(334, 356);
             groupBoxMain.Size = new System.Drawing.Size(1079, 415);
 
             groupBoxSignIn.Location = new Point(1, 2);
             groupBoxMain.Location = new Point(1, 2);
+            groupBoxServerName.Location = new Point(1, 2);
 
+            if (!File.Exists("DataSource.txt"))
+            {
+                groupBoxServerName.Visible = true;
+            }
+            else
+            {
+                groupBoxSignIn.Visible = true;
+
+                FileStream fileRead = new FileStream("DataSource.txt", FileMode.Open);
+                StreamReader reader = new StreamReader(fileRead);
+                serverName = reader.ReadToEnd();
+                reader.Close();
+                Console.ReadLine();
+                conn = new SqlConnection(@"Server=" + serverName + ";Database=BookShop;Trusted_Connection=Yes;");
+                firstConnect();
+            }
+        }
+
+        private void firstConnect()
+        {
             try
             {
                 conn.Open();
@@ -246,7 +271,7 @@ namespace DataBase
             {
                 if (se.Number == 4060)
                 {
-                    SqlConnection connection = new SqlConnection(@"Data Source=LAPTOP-8BSFAANR\SQLEXPRESS;Integrated Security=True");
+                    SqlConnection connection = new SqlConnection(@"Data Source=" + serverName + ";Integrated Security=True");
                     SqlCommand cmdCreateDataBase = new SqlCommand(string.Format("CREATE DATABASE [{0}]", "BookShop"), connection);
                     connection.Open();
                     Console.WriteLine("Создаем Базу Данных");
@@ -275,7 +300,8 @@ namespace DataBase
 
         private void refreshData()
         {
-            conn.Open();
+            try { conn.Open(); }
+            catch (SqlException se) { Console.WriteLine("Error: " + se.Message); }
 
             var selectBooks = "SELECT BookID as ID, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Count as Количество FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
 
@@ -577,6 +603,29 @@ namespace DataBase
                 conn.Close();
             }
             else MessageBox.Show("Заполните поле поиска", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void buttonServerIn_Click(object sender, EventArgs e)
+        {
+            labelStatus.Visible = true;
+
+            try
+            {
+                StreamWriter sw = new StreamWriter("DataSource.txt");
+                sw.WriteLine(textBoxInputServer.Text);
+                serverName = textBoxInputServer.Text;
+                conn = new SqlConnection(@"Server=" + serverName + ";Database=BookShop;Trusted_Connection=Yes;");
+                sw.Close();
+            }
+            catch (Exception ef)
+            {
+                Console.WriteLine("Ошибка: " + ef.Message);
+            }
+
+            firstConnect();
+
+            groupBoxServerName.Visible = false;
+            groupBoxSignIn.Visible = true;
         }
     }
 }

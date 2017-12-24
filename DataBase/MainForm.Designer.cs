@@ -39,8 +39,8 @@
             this.groupBoxBasket = new System.Windows.Forms.GroupBox();
             this.listBoxBasket = new System.Windows.Forms.ListBox();
             this.buttonGoToBasket = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelLogin = new System.Windows.Forms.Label();
+            this.labelPassword = new System.Windows.Forms.Label();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.ButtonSignIn = new System.Windows.Forms.Button();
@@ -54,6 +54,11 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
+            this.groupBoxServerName = new System.Windows.Forms.GroupBox();
+            this.textBoxInputServer = new System.Windows.Forms.TextBox();
+            this.buttonServerIn = new System.Windows.Forms.Button();
+            this.labelInput = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.книгиBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookShopDataSetBindingSource)).BeginInit();
@@ -62,6 +67,7 @@
             this.groupBoxSignIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxMain.SuspendLayout();
+            this.groupBoxServerName.SuspendLayout();
             this.SuspendLayout();
             // 
             // OutDataButton
@@ -150,25 +156,25 @@
             this.buttonGoToBasket.UseVisualStyleBackColor = false;
             this.buttonGoToBasket.Click += new System.EventHandler(this.buttonGoToBasket_Click);
             // 
-            // label1
+            // labelLogin
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(54, 115);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 20);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Логин:";
+            this.labelLogin.AutoSize = true;
+            this.labelLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelLogin.Location = new System.Drawing.Point(54, 115);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(70, 20);
+            this.labelLogin.TabIndex = 5;
+            this.labelLogin.Text = "Логин:";
             // 
-            // label2
+            // labelPassword
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(40, 163);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Пароль:";
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPassword.Location = new System.Drawing.Point(40, 163);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(84, 20);
+            this.labelPassword.TabIndex = 6;
+            this.labelPassword.Text = "Пароль:";
             // 
             // textBoxLogin
             // 
@@ -216,8 +222,8 @@
             this.groupBoxSignIn.Controls.Add(this.textBoxLogin);
             this.groupBoxSignIn.Controls.Add(this.ButtonSignIn);
             this.groupBoxSignIn.Controls.Add(this.textBoxPass);
-            this.groupBoxSignIn.Controls.Add(this.label1);
-            this.groupBoxSignIn.Controls.Add(this.label2);
+            this.groupBoxSignIn.Controls.Add(this.labelLogin);
+            this.groupBoxSignIn.Controls.Add(this.labelPassword);
             this.groupBoxSignIn.Location = new System.Drawing.Point(852, 433);
             this.groupBoxSignIn.Name = "groupBoxSignIn";
             this.groupBoxSignIn.Size = new System.Drawing.Size(334, 356);
@@ -317,11 +323,64 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
+            // groupBoxServerName
+            // 
+            this.groupBoxServerName.Controls.Add(this.labelStatus);
+            this.groupBoxServerName.Controls.Add(this.textBoxInputServer);
+            this.groupBoxServerName.Controls.Add(this.buttonServerIn);
+            this.groupBoxServerName.Controls.Add(this.labelInput);
+            this.groupBoxServerName.Location = new System.Drawing.Point(502, 433);
+            this.groupBoxServerName.Name = "groupBoxServerName";
+            this.groupBoxServerName.Size = new System.Drawing.Size(334, 356);
+            this.groupBoxServerName.TabIndex = 13;
+            this.groupBoxServerName.TabStop = false;
+            this.groupBoxServerName.Text = "Название сервера";
+            // 
+            // textBoxInputServer
+            // 
+            this.textBoxInputServer.Location = new System.Drawing.Point(60, 158);
+            this.textBoxInputServer.Name = "textBoxInputServer";
+            this.textBoxInputServer.Size = new System.Drawing.Size(217, 22);
+            this.textBoxInputServer.TabIndex = 1;
+            // 
+            // buttonServerIn
+            // 
+            this.buttonServerIn.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.buttonServerIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonServerIn.Location = new System.Drawing.Point(82, 220);
+            this.buttonServerIn.Name = "buttonServerIn";
+            this.buttonServerIn.Size = new System.Drawing.Size(174, 41);
+            this.buttonServerIn.TabIndex = 3;
+            this.buttonServerIn.Text = "Ввод";
+            this.buttonServerIn.UseVisualStyleBackColor = false;
+            this.buttonServerIn.Click += new System.EventHandler(this.buttonServerIn_Click);
+            // 
+            // labelInput
+            // 
+            this.labelInput.AutoSize = true;
+            this.labelInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelInput.Location = new System.Drawing.Point(48, 115);
+            this.labelInput.Name = "labelInput";
+            this.labelInput.Size = new System.Drawing.Size(271, 20);
+            this.labelInput.TabIndex = 5;
+            this.labelInput.Text = "Введите название сервера:";
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(43, 276);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(276, 17);
+            this.labelStatus.TabIndex = 6;
+            this.labelStatus.Text = "Идёт настройка, пожалуйста подождите";
+            this.labelStatus.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1177, 735);
+            this.Controls.Add(this.groupBoxServerName);
             this.Controls.Add(this.groupBoxMain);
             this.Controls.Add(this.groupBoxSignIn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -339,6 +398,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBoxMain.ResumeLayout(false);
             this.groupBoxMain.PerformLayout();
+            this.groupBoxServerName.ResumeLayout(false);
+            this.groupBoxServerName.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -355,8 +416,8 @@
         private System.Windows.Forms.Button buttonGoToBasket;
         private System.Windows.Forms.Button buttonBuy;
         private System.Windows.Forms.Button ButtonSignIn;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelLogin;
+        private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.TextBox textBoxLogin;
         private System.Windows.Forms.TextBox textBoxPass;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -369,6 +430,11 @@
         private System.Windows.Forms.ComboBox comboBoxSearch;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.GroupBox groupBoxServerName;
+        private System.Windows.Forms.TextBox textBoxInputServer;
+        private System.Windows.Forms.Button buttonServerIn;
+        private System.Windows.Forms.Label labelInput;
+        private System.Windows.Forms.Label labelStatus;
     }
 }
 
