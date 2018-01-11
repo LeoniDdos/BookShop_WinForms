@@ -66,13 +66,11 @@ namespace DataBase
             comboBoxBooksPublish.DisplayMember = "Name";
             comboBoxBooksPublish.DataSource = dt3;
 
-            string getP = "SELECT Name, GenreID, AutorID, Year, PublishID, Price, Count FROM Books WHERE BookID = @BookID";
+            SqlCommand sc4 = new SqlCommand("SELECT Name, GenreID, AutorID, Year, PublishID, Price, Count FROM Books WHERE BookID = @BookID", conn);
 
-            SqlCommand commandBrands = new SqlCommand(getP, conn);
+            sc4.Parameters.AddWithValue("@BookID", bookID);
 
-            commandBrands.Parameters.AddWithValue("@BookID", bookID);
-
-            using (SqlDataReader reader4 = commandBrands.ExecuteReader())
+            using (SqlDataReader reader4 = sc4.ExecuteReader())
             {
                 while (reader4.Read())
                 {
@@ -138,9 +136,9 @@ namespace DataBase
         {
             conn.Open();
 
-            using (SqlCommand cmd = new SqlCommand("UPDATE Books" +
-                   " SET Name = @Name, GenreID = @GenreID, AutorID = @AutorID, Year = @Year, PublishID = @PublishID, Price = @Price, Count = @Count WHERE BookID = @BookID", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_EditBook", conn))
             {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Name"; param.Value = textBoxBooksName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();
@@ -208,9 +206,9 @@ namespace DataBase
         {
             conn.Open();
 
-            using (SqlCommand cmd = new SqlCommand("UPDATE Autors" +
-                   " SET Name = @Name, Surname = @Surname, Patronymic = @Patronymic WHERE AutorID = @AutorID", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_EditAutor", conn))
             {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Name"; param.Value = textBoxAutorsName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();
@@ -243,8 +241,9 @@ namespace DataBase
         {
             conn.Open();
 
-            using (SqlCommand cmd = new SqlCommand("UPDATE Genres SET Name = @Name WHERE GenreID = @GenreID", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_EditGenre", conn))
             {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter();
 
                 param.ParameterName = "@Name"; param.Value = textBoxGenresName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
@@ -274,8 +273,9 @@ namespace DataBase
         {
             conn.Open();
 
-            using (SqlCommand cmd = new SqlCommand("UPDATE Publishs SET Name = @Name WHERE PublishID = @PublishID", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_EditPublish", conn))
             {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Name"; param.Value = textBoxPublishsName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                 param = new SqlParameter();

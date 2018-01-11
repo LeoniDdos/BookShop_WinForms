@@ -89,7 +89,8 @@ namespace DataBase
         {
             conn.Open();
 
-            SqlCommand sc = new SqlCommand("SELECT Books.Name FROM Baskets INNER JOIN Books ON Books.BookID = Baskets.BookID WHERE Baskets.UserID = @UserID", conn);
+            SqlCommand sc = new SqlCommand("sp_BasketSelect", conn);
+            sc.CommandType = System.Data.CommandType.StoredProcedure;
 
             SqlParameter param = new SqlParameter();
             param.ParameterName = "@UserID"; param.Value = userID; param.SqlDbType = SqlDbType.Int; sc.Parameters.Add(param);
@@ -112,77 +113,14 @@ namespace DataBase
         {
             conn.Open();
 
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO Users" +
-                        "(Name,Password,Level) Values (@Name,@Password,@Level)", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_InsertStartToTable", conn))
             {
-                SqlParameter param = new SqlParameter();
-                param.ParameterName = "@Name"; param.Value = "admin"; param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
-                param = new SqlParameter();
-                param.ParameterName = "@Password"; param.Value = HashPassword("admin"); param.SqlDbType = SqlDbType.Text; cmd.Parameters.Add(param);
-                param = new SqlParameter();
-                param.ParameterName = "@Level"; param.Value = 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 Console.WriteLine("Вставляем запись");
                 try
                 {
                     cmd.ExecuteNonQuery();
-                }
-                catch (SqlException se)
-                {
-                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                    conn.Close();
-                    return;
-                }
-            }
-            using (SqlCommand cmd2 = new SqlCommand("INSERT INTO Genres" +
-        "(Name) Values (@Name)", conn))
-            {
-                SqlParameter param2 = new SqlParameter();
-                param2.ParameterName = "@Name"; param2.Value = "Фантастика"; param2.SqlDbType = SqlDbType.VarChar; cmd2.Parameters.Add(param2);
-
-                Console.WriteLine("Вставляем запись");
-                try
-                {
-                    cmd2.ExecuteNonQuery();
-                }
-                catch (SqlException se)
-                {
-                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                    conn.Close();
-                    return;
-                }
-            }
-            using (SqlCommand cmd3 = new SqlCommand("INSERT INTO Publishs" +
-        "(Name) Values (@Name)", conn))
-            {
-                SqlParameter param3 = new SqlParameter();
-                param3.ParameterName = "@Name"; param3.Value = "Миф"; param3.SqlDbType = SqlDbType.VarChar; cmd3.Parameters.Add(param3);
-
-                Console.WriteLine("Вставляем запись");
-                try
-                {
-                    cmd3.ExecuteNonQuery();
-                }
-                catch (SqlException se)
-                {
-                    Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                    return;
-                }
-            }
-            using (SqlCommand cmd4 = new SqlCommand("INSERT INTO Autors" +
-            "(Surname,Name,Patronymic) Values (@Surname,@Name,@Patronymic)", conn))
-            {
-                SqlParameter param4 = new SqlParameter();
-                param4.ParameterName = "@SurName"; param4.Value = "Пушкин"; param4.SqlDbType = SqlDbType.VarChar; cmd4.Parameters.Add(param4);
-                param4 = new SqlParameter();
-                param4.ParameterName = "@Name"; param4.Value = "Александр"; param4.SqlDbType = SqlDbType.VarChar; cmd4.Parameters.Add(param4);
-                param4 = new SqlParameter();
-                param4.ParameterName = "@Patronymic"; param4.Value = "Сергеевич"; param4.SqlDbType = SqlDbType.VarChar; cmd4.Parameters.Add(param4);
-
-                Console.WriteLine("Вставляем запись");
-                try
-                {
-                    cmd4.ExecuteNonQuery();
                 }
                 catch (SqlException se)
                 {
@@ -303,9 +241,7 @@ namespace DataBase
             try { conn.Open(); }
             catch (SqlException se) { Console.WriteLine("Error: " + se.Message); }
 
-            var selectBooks = "SELECT BookID as ID, Books.Name as Название, CONCAT (Autors.Surname, ' ', Left (Autors.Name,1), '. ', Left (Autors.Patronymic,1), '.') as Автор, Year as Год, Genres.Name as Жанр, Publishs.Name as Издательство, Books.Price as Стоимость, Books.Count as Количество FROM Books INNER JOIN Autors ON Books.AutorID = Autors.AutorID INNER JOIN Genres ON Books.GenreID=Genres.GenreID INNER JOIN Publishs ON Publishs.PublishID=Books.PublishID";
-
-            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(selectBooks, conn))
+            using (SqlDataAdapter dataAdapter = new SqlDataAdapter("sp_BookTableSelect", conn))
             {
                 DataTable dt = new DataTable();
                 dataAdapter.Fill(dt);
@@ -327,7 +263,7 @@ namespace DataBase
         private void ButtonSignIn_Click(object sender, EventArgs e)
         {
             conn.Open();
-
+       
             if (textBoxLogin.Text.ToString() != "" && textBoxPass.Text.ToString() != "")
             {
                 string Name = textBoxLogin.Text.ToString();
@@ -374,14 +310,12 @@ namespace DataBase
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
         {
-            bool flag = false;
-
             conn.Open();
 
             if (textBoxLogin.Text.ToString() != "" && textBoxPass.Text.ToString() != "")
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO Users" +
-                "(Name,Password,Level) Values (@Name,@Password,@Level)", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_SignUp", conn))
             {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@Name"; param.Value = textBoxLogin.Text.ToString(); param.SqlDbType = SqlDbType.Text; cmd.Parameters.Add(param);
                 param = new SqlParameter();
@@ -392,9 +326,9 @@ namespace DataBase
                 Console.WriteLine("Вставляем запись");
                 try
                 {
-                    cmd.ExecuteNonQuery();
-                    flag = true;
+                    var result = cmd.ExecuteScalar();
                     login = textBoxLogin.Text;
+                    userID = Convert.ToInt32(result);
                 }
                 catch (Exception se)
                 {
@@ -404,26 +338,6 @@ namespace DataBase
                 }
             }
             else MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            if (flag == true)
-                using (SqlCommand sqlout = new SqlCommand("SELECT UserID FROM Users WHERE Name = @Name", conn))
-                {
-                    SqlParameter param2 = new SqlParameter();
-                    param2.ParameterName = "@Name"; param2.Value = textBoxLogin.Text.ToString(); param2.SqlDbType = SqlDbType.VarChar; sqlout.Parameters.Add(param2);
-
-                    try
-                    {
-                        sqlout.ExecuteNonQuery();
-                    }
-                    catch (Exception se)
-                    {
-                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                        conn.Close();
-                        return;
-                    }
-
-                    userID = (int)sqlout.ExecuteScalar();
-                }
 
             conn.Close();
             groupBoxSignIn.Visible = false;
@@ -463,11 +377,10 @@ namespace DataBase
         {
             conn.Open();
 
-            using (SqlCommand cmd = new SqlCommand("UPDATE Books SET Count = @Count WHERE BookID = @BookID", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_DeleteBook", conn))
             {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter();
-                param.ParameterName = "@Count"; param.Value = 0; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                param = new SqlParameter();
                 param.ParameterName = "@BookID"; param.Value = dataGridViewBooks.CurrentCell.RowIndex + 1; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                 Console.WriteLine("Изменяем запись");
@@ -516,9 +429,12 @@ namespace DataBase
             }
             if (count > 0)
             {
-                using (SqlCommand cmd = new SqlCommand("UPDATE Books SET Count = Count - 1 WHERE BookID = @BookID", conn))
+                using (SqlCommand cmd = new SqlCommand("sp_BuyBook", conn))
                 {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@UserID"; param.Value = userID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
+                    param = new SqlParameter();
                     param.ParameterName = "@BookID"; param.Value = dataGridViewBooks[0, dataGridViewBooks.CurrentCell.RowIndex].Value; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
 
                     Console.WriteLine("Изменяем запись");
@@ -534,26 +450,6 @@ namespace DataBase
                             conn.Close();
                             return;
                         }
-                    }
-                }
-
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Baskets (UserID, BookID) Values (@UserID, @BookID)", conn))
-                {
-                    SqlParameter param = new SqlParameter();
-                    param.ParameterName = "@UserID"; param.Value = userID; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-                    param = new SqlParameter();
-                    param.ParameterName = "@BookID"; param.Value = dataGridViewBooks[0, dataGridViewBooks.CurrentCell.RowIndex].Value; param.SqlDbType = SqlDbType.Int; cmd.Parameters.Add(param);
-
-                    Console.WriteLine("Вставляем запись");
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception se)
-                    {
-                        Console.WriteLine("Ошибка подключения: {0}", se.Message);
-                        conn.Close();
-                        return;
                     }
                 }
             }

@@ -77,9 +77,9 @@ namespace DataBase
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("Insert into Books" +
-                            "(Name,GenreID,AutorID,Year,PublishID,Price,Count) Values (@Name,@GenreID,@AutorID,@Year,@PublishID,@Price,@Count)", conn))
+                using (SqlCommand cmd = new SqlCommand("sp_InsertBook", conn))
                 {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Name"; param.Value = textBoxBooksName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                     param = new SqlParameter();
@@ -125,8 +125,9 @@ namespace DataBase
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("Insert into Autors (Surname,Name,Patronymic) Values (@Surname,@Name,@Patronymic)", conn))
+                using (SqlCommand cmd = new SqlCommand("sp_InsertAutor", conn))
                 {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Surname"; param.Value = textBoxAutorsSurname.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                     param = new SqlParameter();
@@ -162,8 +163,9 @@ namespace DataBase
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("Insert into Genres (Name) Values (@Name)", conn))
+                using (SqlCommand cmd = new SqlCommand("sp_InsertGenre", conn))
                 {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Name"; param.Value = textBoxGenresName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                     Console.WriteLine("Вставляем запись");
@@ -193,8 +195,9 @@ namespace DataBase
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("Insert into Publishs (Name) Values (@Name)", conn))
+                using (SqlCommand cmd = new SqlCommand("sp_InsertPublish", conn))
                 {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@Name"; param.Value = textBoxPublishsName.Text.ToString(); param.SqlDbType = SqlDbType.VarChar; cmd.Parameters.Add(param);
                     Console.WriteLine("Вставляем запись");

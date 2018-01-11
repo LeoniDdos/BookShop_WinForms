@@ -158,7 +158,11 @@ namespace DataBase
                 
                 sw.WriteLine("====BookShop====");
                 sw.WriteLine("Дата: " + thisDay.Day + "." + thisDay.Month + "." + thisDay.Year);
+                sw.WriteLine("");
                 sw.WriteLine("______ЧЕК______");
+                sw.WriteLine("Логин: " + login);
+                sw.WriteLine("");
+                sw.WriteLine("Книги:");
                 foreach (DataGridViewRow row in dataGridViewBasket.Rows)
                 {
                     sw.WriteLine(dataGridViewBasket[1, row.Index].Value + " - " + dataGridViewBasket[2, row.Index].Value);
